@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://uihovayec0m6"]
+
+[ext_resource type="Script" uid="uid://dy0ge6ys1lija" path="res://scripts/multiplayer_spawner.gd" id="1_n5j3d"]
+[ext_resource type="PackedScene" uid="uid://blsmjbxgnok3h" path="res://scenes/player-online.tscn" id="2_casmp"]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner"]
+spawn_limit = 2
+script = ExtResource("1_n5j3d")
+network_player = ExtResource("2_casmp")

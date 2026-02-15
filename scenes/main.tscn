@@ -1,0 +1,167 @@
+[gd_scene load_steps=15 format=3 uid="uid://bklgr2fwnq6n"]
+
+[ext_resource type="Texture2D" uid="uid://rlf8wec0ftug" path="res://assets/sprites/fondo1-con-titulo3-aplanado3.png" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://b1rn24m7csdld" path="res://scripts/main.gd" id="1_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://cq23tnbiossgk" path="res://assets/sprites/boton1-play4.png" id="2_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://boulmdtqabu3h" path="res://assets/sprites/boton1-settings3.png" id="3_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://8ej7qrpckypj" path="res://assets/sprites/boton1-exit3.png" id="4_tefeu"]
+[ext_resource type="Texture2D" uid="uid://twyvx855qf4d" path="res://assets/sprites/boton1-jam.png" id="6_tipki"]
+[ext_resource type="Texture2D" uid="uid://crsrwjofd7wuq" path="res://assets/sprites/boton1-scored.png" id="7_85g3d"]
+[ext_resource type="Texture2D" uid="uid://5mufbfwrliec" path="res://assets/sprites/boton1-back.png" id="8_choun"]
+[ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bbx6a0ndanad7" path="res://assets/sprites/boton1-local.png" id="9_eb6dy"]
+[ext_resource type="AudioStream" uid="uid://oc1sctssq5x5" path="res://assets/sounds/moodmode-level-ix-211054.mp3" id="10_choun"]
+[ext_resource type="Texture2D" uid="uid://b4j5kmmgk0fpu" path="res://assets/sprites/boton1-online.png" id="10_trceg"]
+[ext_resource type="Texture2D" uid="uid://cijobw177ck4l" path="res://assets/sprites/boton1-host.png" id="11_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://cjreikn8xj03n" path="res://assets/sprites/boton1-join.png" id="12_jkv2x"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tbgi4")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_jyhfs")
+centered = false
+
+[node name="Main_menu" type="CanvasLayer" parent="."]
+
+[node name="Play_button" type="TextureButton" parent="Main_menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 407.0
+offset_right = 2471.0
+offset_bottom = 817.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("2_jyhfs")
+
+[node name="Settings_button" type="TextureButton" parent="Main_menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 584.0
+offset_right = 2471.0
+offset_bottom = 994.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_tbgi4")
+
+[node name="Main_exit_button" type="TextureButton" parent="Main_menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 760.0
+offset_right = 2471.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("4_tefeu")
+
+[node name="Play_menu" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Jam_button" type="TextureButton" parent="Play_menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 407.0
+offset_right = 2471.0
+offset_bottom = 817.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("6_tipki")
+
+[node name="Scored_button" type="TextureButton" parent="Play_menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 584.0
+offset_right = 2471.0
+offset_bottom = 994.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("7_85g3d")
+
+[node name="Back_button" type="TextureButton" parent="Play_menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 760.0
+offset_right = 2471.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_choun")
+
+[node name="Settings_menu" type="CanvasLayer" parent="."]
+
+[node name="Mode_menu_jam" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Local_jam_button" type="TextureButton" parent="Mode_menu_jam"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 407.0
+offset_right = 2471.0
+offset_bottom = 817.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("9_eb6dy")
+
+[node name="Online_jam_button" type="TextureButton" parent="Mode_menu_jam"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 584.0
+offset_right = 2471.0
+offset_bottom = 994.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("10_trceg")
+
+[node name="Back_button" type="TextureButton" parent="Mode_menu_jam"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 760.0
+offset_right = 2471.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_choun")
+
+[node name="Online_menu_jam" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Host_button" type="TextureButton" parent="Online_menu_jam"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 407.0
+offset_right = 2471.0
+offset_bottom = 817.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("11_a8y0u")
+
+[node name="Join_button" type="TextureButton" parent="Online_menu_jam"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 584.0
+offset_right = 2471.0
+offset_bottom = 994.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("12_jkv2x")
+
+[node name="Back_button" type="TextureButton" parent="Online_menu_jam"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 760.0
+offset_right = 2471.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_choun")
+
+[node name="Online_menu_scored" type="CanvasLayer" parent="."]
+
+[node name="Click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_85g3d")
+volume_db = -10.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_choun")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="Main_menu/Play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Main_menu/Main_exit_button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Play_menu/Jam_button" to="." method="_on_jam_button_pressed"]
+[connection signal="pressed" from="Play_menu/Back_button" to="." method="_on_play_back_button_pressed"]
+[connection signal="pressed" from="Mode_menu_jam/Local_jam_button" to="." method="_on_local_jam_button_pressed"]
+[connection signal="pressed" from="Mode_menu_jam/Online_jam_button" to="." method="_on_online_jam_button_pressed"]
+[connection signal="pressed" from="Mode_menu_jam/Back_button" to="." method="_on_jam_menu_back_button_pressed"]
+[connection signal="pressed" from="Online_menu_jam/Host_button" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="Online_menu_jam/Join_button" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="Online_menu_jam/Back_button" to="." method="_on_online_jam_menu_back_button_pressed"]

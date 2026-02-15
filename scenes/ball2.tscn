@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://buscdf3mhohsg"]
+
+[ext_resource type="Texture2D" uid="uid://uofhsclk48do" path="res://assets/sprites/balon-probando.png" id="1_t5qwa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d1vh7"]
+radius = 253.03162
+
+[node name="Ball" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_t5qwa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_d1vh7")
