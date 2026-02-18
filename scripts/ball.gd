@@ -19,7 +19,11 @@ func _physics_process(delta: float) -> void:
 	#			global_position = get_parent().get_node("Player2/BallSpawn").global_position
 	#	else:
 	#		global_position = get_parent().get_node("Player/BallSpawn").global_position
-	pass
+	
+	if !served:
+		freeze = true
+	else:
+		freeze = false
 
 func hit(direction: Vector2, force: float):
 	linear_velocity = Vector2.ZERO
@@ -35,3 +39,6 @@ func serve():
 	
 func spawn(position: Vector2):
 	global_position = position
+
+func _on_body_entered(body: Node) -> void:
+	$Hit_sound.play()

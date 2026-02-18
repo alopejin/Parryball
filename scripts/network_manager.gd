@@ -25,9 +25,18 @@ func _on_peer_connected(id: int = 1):
 	var player_scene = load("res://scenes/player-online.tscn")
 	var player = player_scene.instantiate()
 	player.name = str(id)
-	if player.is_multiplayer_authority():
+	add_child(player, true)
+	if id == 1:
 		player.global_position = Vector2(562, 903)
 	else:
 		player.global_position = Vector2(1373, 903)
-	add_child(player, true)
+	
+	if multiplayer.get_peers().size() == 1:
+		player.get_parent().player1 = player
+		player.global_position = Vector2(562, 903)
+	else:
+		player.get_parent().player2 = player
+		player.global_position = Vector2(1373, 903)
+		player.get_parent().start_game()
+	
 	print("joder")

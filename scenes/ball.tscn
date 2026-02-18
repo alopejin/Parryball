@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmarg3phjv7qp"]
+[gd_scene load_steps=7 format=3 uid="uid://cmarg3phjv7qp"]
 
 [ext_resource type="Texture2D" uid="uid://uofhsclk48do" path="res://assets/sprites/balon-probando.png" id="1_7s4qf"]
 [ext_resource type="Script" uid="uid://b6qtwsamyp5gq" path="res://scripts/ball.gd" id="1_cxlvu"]
+[ext_resource type="AudioStream" uid="uid://fhwyiwgionj6" path="res://assets/sounds/freesound_community-soccer-kick-6235.mp3" id="3_f7cbr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7s4qf"]
 friction = 0.0
@@ -33,6 +34,8 @@ collision_mask = 3
 mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_7s4qf")
 gravity_scale = 0.7
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_cxlvu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -46,3 +49,9 @@ shape = SubResource("CircleShape2D_cxlvu")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_cxlvu")
+
+[node name="Hit_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_f7cbr")
+volume_db = -10.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

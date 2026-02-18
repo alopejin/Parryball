@@ -18,6 +18,9 @@ func alternate_jam_menu():
 func alternate_jam_online_menu():
 	$Online_menu_jam.visible = !$Online_menu_jam.visible
 
+func alternate_scored_menu():
+	$Mode_menu_scored.visible = !$Mode_menu_scored.visible
+
 func _on_play_button_pressed() -> void:
 	$Click_sound.play()
 	alternate_main_menu()
@@ -34,6 +37,7 @@ func _on_play_back_button_pressed() -> void:
 	alternate_play_menu()
 
 func _on_jam_button_pressed() -> void:
+	$Click_sound.play()
 	alternate_play_menu()
 	alternate_jam_menu()
 
@@ -43,21 +47,43 @@ func _on_local_jam_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/local_jam.tscn")
 
 func _on_online_jam_button_pressed() -> void:
+	$Click_sound.play()
 	alternate_jam_online_menu()
 	alternate_jam_menu()
 
 func _on_jam_menu_back_button_pressed() -> void:
+	$Click_sound.play()
 	alternate_jam_menu()
 	alternate_play_menu()
 
 func _on_online_jam_menu_back_button_pressed() -> void:
+	$Click_sound.play()
 	alternate_jam_online_menu()
 	alternate_jam_menu()
 
 func _on_host_button_pressed() -> void:
+	$Click_sound.play()
 	NetworkManager.start_server()
 	get_tree().change_scene_to_file("res://scenes/online_jam.tscn")
 
 func _on_join_button_pressed() -> void:
+	$Click_sound.play()
 	NetworkManager.start_client()
 	get_tree().change_scene_to_file("res://scenes/online_jam.tscn")
+
+func _on_scored_button_pressed() -> void:
+	$Click_sound.play()
+	alternate_play_menu()
+	alternate_scored_menu()
+
+func _on_local_scored_button_pressed() -> void:
+	$Click_sound.play()
+	get_tree().change_scene_to_file("res://scenes/local_multiplayer.tscn")
+
+func _on_scored_menu_back_button_pressed() -> void:
+	$Click_sound.play()
+	alternate_scored_menu()
+	alternate_play_menu()
+
+func _on_online_scored_button_pressed() -> void:
+	$Click_sound.play()

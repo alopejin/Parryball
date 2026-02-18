@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2vpux6fnnj6t"]
+
+[ext_resource type="Script" uid="uid://cpce66xut0kr2" path="res://scripts/pause.gd" id="1_r1fnm"]
+[ext_resource type="Texture2D" uid="uid://jitty2w6lchj" path="res://assets/sprites/boton1-resume.png" id="2_wen6a"]
+[ext_resource type="Texture2D" uid="uid://8ej7qrpckypj" path="res://assets/sprites/boton1-exit3.png" id="3_cml1b"]
+[ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="4_1xtef"]
+[ext_resource type="Texture2D" uid="uid://cu6bjvn4wtthf" path="res://assets/sprites/boton_sonido1-ajustado.png" id="5_xmhi0"]
+[ext_resource type="Texture2D" uid="uid://yacjb3eguusc" path="res://assets/sprites/boton_sonido2-ajustado.png" id="6_xw83q"]
+
+[node name="Pause" type="Node"]
+process_mode = 3
+script = ExtResource("1_r1fnm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="Resume_button" type="TextureButton" parent="CanvasLayer"]
+process_mode = 3
+texture_filter = 1
+offset_left = 368.0
+offset_top = 475.99997
+offset_right = 2138.0
+offset_bottom = 886.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("2_wen6a")
+
+[node name="Exit_button" type="TextureButton" parent="CanvasLayer"]
+process_mode = 3
+texture_filter = 1
+offset_left = 1035.0
+offset_top = 474.0
+offset_right = 2805.0
+offset_bottom = 884.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_cml1b")
+
+[node name="Pause_label" type="Label" parent="CanvasLayer"]
+offset_left = 743.0
+offset_top = 150.0
+offset_right = 1257.0
+offset_bottom = 226.0
+theme_override_fonts/font = ExtResource("4_1xtef")
+theme_override_font_sizes/font_size = 76
+text = "Game paused"
+
+[node name="Sound_button" type="TextureButton" parent="CanvasLayer"]
+offset_left = 76.0
+offset_top = 841.0
+offset_right = 786.0
+offset_bottom = 1591.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("5_xmhi0")
+texture_pressed = ExtResource("6_xw83q")
+
+[connection signal="pressed" from="CanvasLayer/Resume_button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Exit_button" to="." method="_on_exit_button_pressed"]

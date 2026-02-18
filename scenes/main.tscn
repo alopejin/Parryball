@@ -82,6 +82,7 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_choun")
 
 [node name="Settings_menu" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Mode_menu_jam" type="CanvasLayer" parent="."]
 visible = false
@@ -143,6 +144,36 @@ offset_bottom = 1170.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_choun")
 
+[node name="Mode_menu_scored" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Local_scored_button" type="TextureButton" parent="Mode_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 407.0
+offset_right = 2471.0
+offset_bottom = 817.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("9_eb6dy")
+
+[node name="Online_scored_button" type="TextureButton" parent="Mode_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 584.0
+offset_right = 2471.0
+offset_bottom = 994.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("10_trceg")
+
+[node name="Back_button" type="TextureButton" parent="Mode_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 760.0
+offset_right = 2471.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_choun")
+
 [node name="Online_menu_scored" type="CanvasLayer" parent="."]
 
 [node name="Click_sound" type="AudioStreamPlayer" parent="."]
@@ -158,6 +189,7 @@ parameters/looping = true
 [connection signal="pressed" from="Main_menu/Play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main_menu/Main_exit_button" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="Play_menu/Jam_button" to="." method="_on_jam_button_pressed"]
+[connection signal="pressed" from="Play_menu/Scored_button" to="." method="_on_scored_button_pressed"]
 [connection signal="pressed" from="Play_menu/Back_button" to="." method="_on_play_back_button_pressed"]
 [connection signal="pressed" from="Mode_menu_jam/Local_jam_button" to="." method="_on_local_jam_button_pressed"]
 [connection signal="pressed" from="Mode_menu_jam/Online_jam_button" to="." method="_on_online_jam_button_pressed"]
@@ -165,3 +197,6 @@ parameters/looping = true
 [connection signal="pressed" from="Online_menu_jam/Host_button" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Join_button" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Back_button" to="." method="_on_online_jam_menu_back_button_pressed"]
+[connection signal="pressed" from="Mode_menu_scored/Local_scored_button" to="." method="_on_local_scored_button_pressed"]
+[connection signal="pressed" from="Mode_menu_scored/Online_scored_button" to="." method="_on_online_scored_button_pressed"]
+[connection signal="pressed" from="Mode_menu_scored/Back_button" to="." method="_on_scored_menu_back_button_pressed"]

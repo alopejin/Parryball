@@ -1,10 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7ptu66x3wpxi"]
+[gd_scene load_steps=21 format=3 uid="uid://c7ptu66x3wpxi"]
 
 [ext_resource type="Script" uid="uid://dpo2lqw01hrdr" path="res://scripts/local_multiplayer.gd" id="1_ukc0w"]
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="1_yr7aq"]
 [ext_resource type="PackedScene" uid="uid://ckirk23gwa5mm" path="res://scenes/player.tscn" id="2_a3agf"]
 [ext_resource type="Texture2D" uid="uid://fbowbyxqkch" path="res://assets/sprites/valla4-recortada.png" id="4_moa44"]
 [ext_resource type="PackedScene" uid="uid://0cg3joh34hra" path="res://scenes/player2.tscn" id="5_a3agf"]
+[ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="5_ukc0w"]
+[ext_resource type="Texture2D" uid="uid://d80r5qtst1ay" path="res://assets/sprites/boton1-play_again.png" id="7_p4dmd"]
+[ext_resource type="Texture2D" uid="uid://8ej7qrpckypj" path="res://assets/sprites/boton1-exit3.png" id="8_oaywk"]
+[ext_resource type="AudioStream" uid="uid://4u42glwsrwnn" path="res://assets/sounds/eaglaxle-gaming-victory-464016.mp3" id="9_oaywk"]
+[ext_resource type="AudioStream" uid="uid://bse3ojjqgy2jd" path="res://assets/sounds/floraphonic-classic-game-action-positive-5-224402.mp3" id="10_rckw6"]
+[ext_resource type="AudioStream" uid="uid://dua5oxiidrf5n" path="res://assets/sounds/moodmode-level-iii-294428.mp3" id="11_ad65b"]
+[ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="12_r1k2h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(50, 930)
@@ -28,7 +35,7 @@ size = Vector2(30, 180)
 size = Vector2(16.99974, 533.22815)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukc0w"]
-size = Vector2(1876, 118)
+size = Vector2(2182, 118)
 
 [node name="Local_multiplayer" type="Node2D"]
 script = ExtResource("1_ukc0w")
@@ -87,10 +94,11 @@ shape = SubResource("RectangleShape2D_gee14")
 
 [node name="Score_P1" type="Label" parent="."]
 texture_filter = 1
-offset_left = 102.0
-offset_top = 114.0
-offset_right = 145.0
-offset_bottom = 217.0
+offset_left = 140.0
+offset_top = 145.0
+offset_right = 183.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("5_ukc0w")
 theme_override_font_sizes/font_size = 75
 text = "0"
 
@@ -100,6 +108,7 @@ offset_left = 1744.0
 offset_top = 145.0
 offset_right = 1787.0
 offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("5_ukc0w")
 theme_override_font_sizes/font_size = 75
 text = "0"
 
@@ -129,7 +138,55 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score_counter"]
-position = Vector2(961, 1008)
+position = Vector2(937, 1008)
 shape = SubResource("RectangleShape2D_ukc0w")
 
+[node name="Winner_label" type="Label" parent="."]
+offset_left = 743.0
+offset_top = 150.0
+offset_right = 1257.0
+offset_bottom = 226.0
+theme_override_fonts/font = ExtResource("5_ukc0w")
+theme_override_font_sizes/font_size = 76
+
+[node name="Play_again_button" type="TextureButton" parent="."]
+process_mode = 3
+texture_filter = 1
+offset_left = 368.0
+offset_top = 475.99997
+offset_right = 2138.0
+offset_bottom = 886.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("7_p4dmd")
+
+[node name="Exit_button" type="TextureButton" parent="."]
+process_mode = 3
+texture_filter = 1
+offset_left = 1035.0
+offset_top = 474.0
+offset_right = 2805.0
+offset_bottom = 884.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_oaywk")
+
+[node name="Victory_sound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("9_oaywk")
+
+[node name="Score_sound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("10_rckw6")
+volume_db = -15.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("11_ad65b")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[node name="Pause" parent="." instance=ExtResource("12_r1k2h")]
+
 [connection signal="body_entered" from="Score_counter" to="." method="_on_score_counter_body_entered"]
+[connection signal="pressed" from="Play_again_button" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="Exit_button" to="." method="_on_exit_button_pressed"]
