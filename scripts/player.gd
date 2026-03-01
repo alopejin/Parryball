@@ -6,42 +6,45 @@ const JUMP_VELOCITY = -1200.0
 
 var parry_on = false
 
+func _ready() -> void:
+	$Skins.play(Global.local_player1_skin[Global.index])
+	$Name.text = Global.local_player1_name
+
 func _physics_process(delta: float) -> void:
-	if !is_multiplayer_authority():
-		if not is_on_floor():
-			velocity += get_gravity() * delta
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
 			
-		if Input.is_action_just_released("jump") and velocity.y < 0:
-			await get_tree().create_timer(0.1).timeout
-			velocity.y *= 0
+	if Input.is_action_just_released("jump") and velocity.y < 0:
+		await get_tree().create_timer(0.1).timeout
+		velocity.y *= 0
 
-		var direction := Input.get_axis("left", "right")
-		if direction:
-			velocity.x = direction * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+	var direction := Input.get_axis("left", "right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-		if Input.is_action_just_pressed("parry") and !is_on_floor():
-			parry_on = true
+	if Input.is_action_just_pressed("parry") and !is_on_floor():
+		parry_on = true
 			
-			if global_position.x > get_parent().get_node("Net/Sprite2D").global_position.x:
-				$AnimationPlayer.play("parry_reverse")
-			else:
-				$AnimationPlayer.play("parry")
-				
-			await $AnimationPlayer.animation_finished
-			parry_on = false
+		if global_position.x > get_parent().get_node("Net/Sprite2D").global_position.x:
+			$AnimationPlayer.play("parry_reverse")
+		else:
+			$AnimationPlayer.play("parry")
+			
+		await $AnimationPlayer.animation_finished
+		parry_on = false
 
-		move_and_slide()
+	move_and_slide()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("serve"):
 		if get_parent().name == "Local_multiplayer":
 			var ball = get_parent().active_ball
-			if ball and !ball.served:
+			if ball and !ball.served and get_parent().player1_serves:
 				ball.serve()
 		else:
 			if !get_parent().get_node("Ball").served:

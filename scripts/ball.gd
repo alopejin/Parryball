@@ -19,11 +19,15 @@ func _physics_process(delta: float) -> void:
 	#			global_position = get_parent().get_node("Player2/BallSpawn").global_position
 	#	else:
 	#		global_position = get_parent().get_node("Player/BallSpawn").global_position
+	if !is_multiplayer_authority():
+		return
 	
-	if !served:
-		freeze = true
-	else:
-		freeze = false
+	freeze = !served
+	
+	#if !served:
+	#	freeze = true
+	#else:
+	#	freeze = false
 
 func hit(direction: Vector2, force: float):
 	linear_velocity = Vector2.ZERO
@@ -42,3 +46,18 @@ func spawn(position: Vector2):
 
 func _on_body_entered(body: Node) -> void:
 	$Hit_sound.play()
+
+@rpc("any_peer", "call_local")
+func request_serve(id):
+	if !is_multiplayer_authority() or served:
+		return
+		
+	if (id == 1 and NetworkManager.player1_serves) or (id != 1 and !NetworkManager.player1_serves):
+		if !served:
+			served = true
+			apply_impulse(Vector2.UP * 150000)
+			print("HA FUNCIONADO")
+
+func _enter_tree():
+	set_multiplayer_authority(1) 
+	

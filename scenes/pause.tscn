@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2vpux6fnnj6t"]
 
 [ext_resource type="Script" uid="uid://cpce66xut0kr2" path="res://scripts/pause.gd" id="1_r1fnm"]
-[ext_resource type="Texture2D" uid="uid://jitty2w6lchj" path="res://assets/sprites/boton1-resume.png" id="2_wen6a"]
+[ext_resource type="Texture2D" uid="uid://ct1amsp1aas5d" path="res://assets/sprites/boton1-resume.png" id="2_wen6a"]
 [ext_resource type="Texture2D" uid="uid://8ej7qrpckypj" path="res://assets/sprites/boton1-exit3.png" id="3_cml1b"]
 [ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="4_1xtef"]
 [ext_resource type="Texture2D" uid="uid://cu6bjvn4wtthf" path="res://assets/sprites/boton_sonido1-ajustado.png" id="5_xmhi0"]
@@ -55,3 +55,4 @@ texture_pressed = ExtResource("6_xw83q")
 
 [connection signal="pressed" from="CanvasLayer/Resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Exit_button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sound_button" to="." method="_on_sound_button_pressed"]

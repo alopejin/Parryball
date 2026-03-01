@@ -1,42 +1,70 @@
 extends Node
 
 
-const IP_ADRESS = "192.168.56.1"
-const PORT = 22022
+var ip_adress = "192.168.56.1"
+var port = 22022
 
 var peer :ENetMultiplayerPeer
-
+var players = {}
+var player_name : String
+var player_skin : String
+var player1_serves : bool
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.connected_to_server.connect(_on_client_connected)
+	multiplayer.peer_disconnected.connect(quit_game)
+
+func host_game(ip, p):
+	ip_adress = ip
+	port = p.to_int()
+	start_server()
+
+func join_game(ip, p):
+	ip_adress = ip
+	port = p.to_int()
+	start_client()
 
 func start_server():
 	peer = ENetMultiplayerPeer.new()
-	peer.create_server(PORT, 2)
+	peer.create_server(port, 2)
 	multiplayer.multiplayer_peer = peer
 	print("Host connected")
+	send_player_info(player_name, player_skin, multiplayer.get_unique_id())
 
 func start_client():
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(IP_ADRESS, PORT)
+	peer.create_client(ip_adress, port)
 	multiplayer.multiplayer_peer = peer
 
+func receive_player_info(n : String, s : String):
+	player_name = n
+	player_skin = s
+
 func _on_peer_connected(id: int = 1):
-	var player_scene = load("res://scenes/player-online.tscn")
-	var player = player_scene.instantiate()
-	player.name = str(id)
-	add_child(player, true)
-	if id == 1:
-		player.global_position = Vector2(562, 903)
-	else:
-		player.global_position = Vector2(1373, 903)
+	print("Player connected: " + str(id))
+
+func _on_client_connected():
+	print("Connected to server")
+	send_player_info.rpc_id(1, player_name, player_skin, multiplayer.get_unique_id())
 	
-	if multiplayer.get_peers().size() == 1:
-		player.get_parent().player1 = player
-		player.global_position = Vector2(562, 903)
-	else:
-		player.get_parent().player2 = player
-		player.global_position = Vector2(1373, 903)
-		player.get_parent().start_game()
+
+@rpc("any_peer", "call_local")
+func start_game():
+	get_tree().change_scene_to_file("res://scenes/online_jam.tscn")
+
+@rpc("any_peer")
+func send_player_info(name, skin, id):
+	if !players.has(id):
+		players[id] = {
+			"name" : name,
+			"skin" : skin,
+			"id" : id
+		}
 	
-	print("joder")
+	if multiplayer.is_server():
+		for i in players:
+			send_player_info.rpc(players[i].name, players[i].skin, i)
+
+func quit_game():
+	get_tree().change_scene_to_file("res://scenes/main.tscn")

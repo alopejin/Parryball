@@ -1,0 +1,113 @@
+[gd_scene load_steps=12 format=3 uid="uid://dtpoq3ffe7vsv"]
+
+[ext_resource type="Script" uid="uid://dcm1r1jv764gh" path="res://scripts/online_customizer.gd" id="1_ewh4m"]
+[ext_resource type="Texture2D" uid="uid://cexlf068w0avc" path="res://assets/sprites/player2-black.png" id="2_uhwid"]
+[ext_resource type="Texture2D" uid="uid://i6ywjcviowua" path="res://assets/sprites/player2-azul.png" id="3_3ymrx"]
+[ext_resource type="Texture2D" uid="uid://df43hfs4nmwjf" path="res://assets/sprites/player2-aplanado-bigt.png" id="4_h3qh1"]
+[ext_resource type="Texture2D" uid="uid://dvsptwyda0unf" path="res://assets/sprites/player2-verde.png" id="5_1hm3b"]
+[ext_resource type="Texture2D" uid="uid://b00cb1bld81in" path="res://assets/sprites/player2-rosa.png" id="6_imru3"]
+[ext_resource type="Texture2D" uid="uid://4qyedsg6jpgx" path="res://assets/sprites/player2-red.png" id="7_3ymrx"]
+[ext_resource type="Texture2D" uid="uid://x73sjo0s0q82" path="res://assets/sprites/player2-yellow2.png" id="7_lb8ma"]
+[ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="8_lnf02"]
+[ext_resource type="Texture2D" uid="uid://dfgacro1ac278" path="res://assets/sprites/boton_seleccion-export.png" id="9_uhwid"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h1xhg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uhwid")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_3ymrx")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_h3qh1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_1hm3b")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_imru3")
+}],
+"loop": true,
+"name": &"pink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_3ymrx")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_lb8ma")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[node name="Online_customizer" type="Node"]
+script = ExtResource("1_ewh4m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Skins" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(1531, 512)
+scale = Vector2(0.08, 0.08)
+sprite_frames = SubResource("SpriteFrames_h1xhg")
+animation = &"red"
+
+[node name="Label" type="Label" parent="CanvasLayer/Skins"]
+texture_filter = 1
+offset_left = -1200.0
+offset_top = -1300.0002
+offset_right = -1001.0
+offset_bottom = -1240.0002
+scale = Vector2(12.5, 12.5)
+theme_override_fonts/font = ExtResource("8_lnf02")
+theme_override_font_sizes/font_size = 59
+text = "Colour:"
+
+[node name="Left_button" type="TextureButton" parent="CanvasLayer"]
+offset_left = 1377.0
+offset_top = 584.0
+offset_right = 1737.0
+offset_bottom = 954.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("9_uhwid")
+
+[node name="right_button" type="TextureButton" parent="CanvasLayer"]
+offset_left = 1565.0
+offset_top = 585.0
+offset_right = 1925.0
+offset_bottom = 955.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("9_uhwid")
+flip_h = true
+
+[connection signal="pressed" from="CanvasLayer/Left_button" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/right_button" to="." method="_on_right_button_pressed"]

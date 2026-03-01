@@ -1,10 +1,14 @@
 extends Node2D
 
 
+var is_host = false
+var player1_skin = Global.local_player1_skin[Global.index]
+var player2_skin = Global.local_player2_skin[Global.index]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	$Music.play()
+	$Background.texture = preload("res://assets/sprites/fondo1-con-titulo3-aplanado3.png")
 
 func alternate_main_menu():
 	$Main_menu.visible = !$Main_menu.visible
@@ -40,50 +44,107 @@ func _on_jam_button_pressed() -> void:
 	$Click_sound.play()
 	alternate_play_menu()
 	alternate_jam_menu()
+	$Label_gamemode.text = "   Jam:"
 
 func _on_local_jam_button_pressed() -> void:
 	$Click_sound.play()
-	await get_tree().create_timer(0.2)
+	$Label_gamemode.visible = false
+	$Background.texture = load("res://assets/sprites/fondo1-ajustado.png")
+	$Local_menu_jam.visible = !$Local_menu_jam.visible
+	$Local_menu_jam/Local_customizer.show()
+	alternate_jam_menu()
+
+func _on_local_jam_back_button_pressed() -> void:
+	$Local_menu_jam.visible = !$Local_menu_jam.visible
+	$Local_menu_jam/Local_customizer.hide()
+	$Background.texture = load("res://assets/sprites/fondo1-con-titulo3-aplanado3.png")
+	$Label_gamemode.visible = true
+	alternate_jam_menu()
+
+func _on_start_local_jam_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/local_jam.tscn")
 
 func _on_online_jam_button_pressed() -> void:
 	$Click_sound.play()
 	alternate_jam_online_menu()
 	alternate_jam_menu()
-
-func _on_jam_menu_back_button_pressed() -> void:
-	$Click_sound.play()
-	alternate_jam_menu()
-	alternate_play_menu()
+	$Online_menu_jam/Online_customizer.show()
 
 func _on_online_jam_menu_back_button_pressed() -> void:
 	$Click_sound.play()
 	alternate_jam_online_menu()
 	alternate_jam_menu()
+	$Online_menu_jam/Online_customizer.hide()
 
 func _on_host_button_pressed() -> void:
+	is_host = true
 	$Click_sound.play()
-	NetworkManager.start_server()
-	get_tree().change_scene_to_file("res://scenes/online_jam.tscn")
+	NetworkManager.receive_player_info($Online_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
+	
+	if $Online_menu_jam/Ip_adress.text == "":
+		$Online_menu_jam/Ip_adress.text = "192.168.56.1"
+	
+	if $Online_menu_jam/Port.text == "":
+		$Online_menu_jam/Port.text = "22022"
+	
+	NetworkManager.host_game($Online_menu_jam/Ip_adress.text, $Online_menu_jam/Port.text)
+
 
 func _on_join_button_pressed() -> void:
 	$Click_sound.play()
-	NetworkManager.start_client()
-	get_tree().change_scene_to_file("res://scenes/online_jam.tscn")
+	NetworkManager.receive_player_info($Online_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
+	
+	if $Online_menu_jam/Ip_adress.text == "":
+		$Online_menu_jam/Ip_adress.text = "192.168.56.1"
+	
+	if $Online_menu_jam/Port.text == "":
+		$Online_menu_jam/Port.text = "22022"
+	
+	NetworkManager.join_game($Online_menu_jam/Ip_adress.text, $Online_menu_jam/Port.text)
+
+func _on_start_jam_game_button_pressed() -> void:
+	if !is_host: # or multiplayer.get_peers().size() != 2
+		return
+	NetworkManager.start_game.rpc()
+	self.hide.rpc()
+	$Music.stop.rpc()
+
+func _on_jam_menu_back_button_pressed() -> void:
+	$Click_sound.play()
+	alternate_jam_menu()
+	alternate_play_menu()
+	$Label_gamemode.text = ""
 
 func _on_scored_button_pressed() -> void:
 	$Click_sound.play()
 	alternate_play_menu()
 	alternate_scored_menu()
+	$Label_gamemode.text = " Scored:"
 
 func _on_local_scored_button_pressed() -> void:
 	$Click_sound.play()
+	$Label_gamemode.visible = false
+	$Background.texture = load("res://assets/sprites/fondo1-ajustado.png")
+	$Local_menu_scored.visible = !$Local_menu_scored.visible
+	$Local_menu_jam/Local_customizer.show()
+	alternate_scored_menu()
+
+func _on_local_scored_menu_back_button_pressed() -> void:
+	$Click_sound.play()
+	$Label_gamemode.visible = true
+	$Background.texture = load("res://assets/sprites/fondo1-con-titulo3-aplanado3.png")
+	$Local_menu_scored.visible = !$Local_menu_scored.visible
+	$Local_menu_jam/Local_customizer.hide()
+	alternate_scored_menu()
+
+func _on_start_local_scored_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/local_multiplayer.tscn")
+
+func _on_online_scored_button_pressed() -> void:
+	$Click_sound.play()
 
 func _on_scored_menu_back_button_pressed() -> void:
 	$Click_sound.play()
 	alternate_scored_menu()
 	alternate_play_menu()
-
-func _on_online_scored_button_pressed() -> void:
-	$Click_sound.play()
+	$Label_gamemode.text = ""

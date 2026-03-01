@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4vsl0rrobxka"]
+[gd_scene load_steps=13 format=3 uid="uid://c4vsl0rrobxka"]
 
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="1_bhsmp"]
 [ext_resource type="Script" uid="uid://c14krmla1ky4m" path="res://scripts/online_jam.gd" id="1_oj7v2"]
-[ext_resource type="PackedScene" uid="uid://cmarg3phjv7qp" path="res://scenes/ball.tscn" id="3_koleo"]
 [ext_resource type="Texture2D" uid="uid://fbowbyxqkch" path="res://assets/sprites/valla4-recortada.png" id="4_u0xcr"]
+[ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="5_bhsmp"]
 [ext_resource type="PackedScene" uid="uid://cftlyhb3flg5u" path="res://scenes/network_manager.tscn" id="6_koleo"]
-[ext_resource type="PackedScene" uid="uid://uihovayec0m6" path="res://scenes/multiplayer_spawner.tscn" id="7_u0xcr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(50, 930)
@@ -57,9 +56,6 @@ shape = SubResource("RectangleShape2D_lnu2h")
 collision_layer = 5
 collision_mask = 5
 
-[node name="Ball" parent="." instance=ExtResource("3_koleo")]
-position = Vector2(537, 595)
-
 [node name="Net" type="StaticBody2D" parent="."]
 position = Vector2(389.00003, 369)
 scale = Vector2(0.6, 0.6)
@@ -99,14 +95,12 @@ metadata/_edit_group_ = true
 position = Vector2(-0.5630493, -256.56393)
 shape = SubResource("RectangleShape2D_0tnpc")
 
-[node name="SpawnHost" type="Marker2D" parent="."]
+[node name="0" type="Marker2D" parent="." groups=["Spawn"]]
 position = Vector2(562, 903)
 
-[node name="SpawnClient" type="Marker2D" parent="."]
+[node name="1" type="Marker2D" parent="." groups=["Spawn"]]
 position = Vector2(1373, 903)
 
 [node name="NetworkManager" parent="." instance=ExtResource("6_koleo")]
 
-[node name="MultiplayerSpawner" parent="." instance=ExtResource("7_u0xcr")]
-_spawnable_scenes = PackedStringArray("uid://blsmjbxgnok3h")
-spawn_path = NodePath("..")
+[node name="Pause" parent="." instance=ExtResource("5_bhsmp")]

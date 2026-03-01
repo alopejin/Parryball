@@ -8,6 +8,10 @@ const JUMP_VELOCITY = -1200.0
 
 var parry_on = false
 
+func _ready() -> void:
+	$Skins.play(Global.local_player2_skin[Global.index_player2])
+	$Name.text = Global.local_player2_name
+
 func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():

@@ -66,6 +66,7 @@ func check_victory():
 			$Winner_label.text = "Player 1 wins !"
 		else:
 			$Winner_label.text = "Player 2 wins !"
+	
 		$Pause.PROCESS_MODE_DISABLED
 		$Victory_sound.play()
 		get_tree().paused = true

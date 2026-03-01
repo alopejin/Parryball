@@ -104,9 +104,9 @@ text = "0"
 
 [node name="Score_P2" type="Label" parent="."]
 texture_filter = 1
-offset_left = 1744.0
+offset_left = 1726.0
 offset_top = 145.0
-offset_right = 1787.0
+offset_right = 1769.0
 offset_bottom = 248.0
 theme_override_fonts/font = ExtResource("5_ukc0w")
 theme_override_font_sizes/font_size = 75
@@ -183,6 +183,7 @@ process_mode = 3
 stream = ExtResource("11_ad65b")
 volume_db = -15.0
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="Pause" parent="." instance=ExtResource("12_r1k2h")]
