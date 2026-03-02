@@ -19,8 +19,8 @@ func alternate_play_menu():
 func alternate_jam_menu():
 	$Mode_menu_jam.visible = !$Mode_menu_jam.visible
 
-func alternate_jam_online_menu():
-	$Online_menu_jam.visible = !$Online_menu_jam.visible
+func alternate_jam_lan_menu():
+	$LAN_menu_jam.visible = !$LAN_menu_jam.visible
 
 func alternate_scored_menu():
 	$Mode_menu_scored.visible = !$Mode_menu_scored.visible
@@ -64,43 +64,44 @@ func _on_local_jam_back_button_pressed() -> void:
 func _on_start_local_jam_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/local_jam.tscn")
 
-func _on_online_jam_button_pressed() -> void:
+func _on_lan_jam_button_pressed() -> void:
 	$Click_sound.play()
-	alternate_jam_online_menu()
+	alternate_jam_lan_menu()
 	alternate_jam_menu()
-	$Online_menu_jam/Online_customizer.show()
+	$LAN_menu_jam/Online_customizer.show()
 
 func _on_online_jam_menu_back_button_pressed() -> void:
 	$Click_sound.play()
-	alternate_jam_online_menu()
+	alternate_jam_lan_menu()
 	alternate_jam_menu()
-	$Online_menu_jam/Online_customizer.hide()
+	$LAN_menu_jam/Online_customizer.hide()
 
 func _on_host_button_pressed() -> void:
 	is_host = true
 	$Click_sound.play()
-	NetworkManager.receive_player_info($Online_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
+	NetworkManager.receive_player_info($LAN_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
 	
-	if $Online_menu_jam/Ip_adress.text == "":
-		$Online_menu_jam/Ip_adress.text = "192.168.56.1"
+	if $LAN_menu_jam/Ip_adress.text == "":
+		$LAN_menu_jam/Ip_adress.text = "192.168.56.1"
 	
-	if $Online_menu_jam/Port.text == "":
-		$Online_menu_jam/Port.text = "22022"
+	if $LAN_menu_jam/Port.text == "":
+		$LAN_menu_jam/Port.text = "22022"
 	
-	NetworkManager.host_game($Online_menu_jam/Ip_adress.text, $Online_menu_jam/Port.text)
+	NetworkManager.is_hosting = true
+	NetworkManager.host_game($LAN_menu_jam/Ip_adress.text, $LAN_menu_jam/Port.text)
 
 
 func _on_join_button_pressed() -> void:
 	$Click_sound.play()
-	NetworkManager.receive_player_info($Online_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
+	NetworkManager.receive_player_info($LAN_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
 	
-	if $Online_menu_jam/Ip_adress.text == "":
-		$Online_menu_jam/Ip_adress.text = "192.168.56.1"
+	if $LAN_menu_jam/Ip_adress.text == "":
+		$LAN_menu_jam/Ip_adress.text = "192.168.56.1"
 	
 	if $Online_menu_jam/Port.text == "":
-		$Online_menu_jam/Port.text = "22022"
+		$LAN_menu_jam/Port.text = "22022"
 	
-	NetworkManager.join_game($Online_menu_jam/Ip_adress.text, $Online_menu_jam/Port.text)
+	NetworkManager.join_game($LAN_menu_jam/Ip_adress.text, $LAN_menu_jam/Port.text)
 
 func _on_start_jam_game_button_pressed() -> void:
 	if !is_host: # or multiplayer.get_peers().size() != 2
@@ -108,6 +109,9 @@ func _on_start_jam_game_button_pressed() -> void:
 	NetworkManager.start_game.rpc()
 	self.hide.rpc()
 	$Music.stop.rpc()
+
+func _on_online_jam_button_pressed() -> void:
+	$Click_sound.play()
 
 func _on_jam_menu_back_button_pressed() -> void:
 	$Click_sound.play()

@@ -2,6 +2,8 @@ extends Node
 
 
 func _ready() -> void:
+	$Player1_canvas/Player1_name.text = Global.local_player1_name
+	$Player2_canvas/Player2_name.text = Global.local_player2_name
 	show_skin()
 	hide()
 

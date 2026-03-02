@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bklgr2fwnq6n"]
+[gd_scene load_steps=20 format=3 uid="uid://bklgr2fwnq6n"]
 
 [ext_resource type="Texture2D" uid="uid://rlf8wec0ftug" path="res://assets/sprites/fondo1-con-titulo3-aplanado3.png" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://b1rn24m7csdld" path="res://scripts/main.gd" id="1_tbgi4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://5mufbfwrliec" path="res://assets/sprites/boton1-back.png" id="8_choun"]
 [ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="9_85g3d"]
 [ext_resource type="Texture2D" uid="uid://bbx6a0ndanad7" path="res://assets/sprites/boton1-local.png" id="9_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://6x8icrd117j4" path="res://assets/sprites/boton1-LAN.png" id="10_0ld40"]
 [ext_resource type="AudioStream" uid="uid://oc1sctssq5x5" path="res://assets/sounds/moodmode-level-ix-211054.mp3" id="10_choun"]
 [ext_resource type="Texture2D" uid="uid://b4j5kmmgk0fpu" path="res://assets/sprites/boton1-online.png" id="10_trceg"]
 [ext_resource type="Texture2D" uid="uid://cijobw177ck4l" path="res://assets/sprites/boton1-host.png" id="11_a8y0u"]
@@ -95,27 +96,36 @@ visible = false
 [node name="Local_jam_button" type="TextureButton" parent="Mode_menu_jam"]
 texture_filter = 1
 offset_left = 701.0
-offset_top = 407.0
+offset_top = 379.0
 offset_right = 2471.0
-offset_bottom = 817.0
+offset_bottom = 789.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("9_eb6dy")
+
+[node name="LAN_jam_button" type="TextureButton" parent="Mode_menu_jam"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 536.0
+offset_right = 2471.0
+offset_bottom = 946.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("10_0ld40")
 
 [node name="Online_jam_button" type="TextureButton" parent="Mode_menu_jam"]
 texture_filter = 1
 offset_left = 701.0
-offset_top = 584.0
+offset_top = 695.0
 offset_right = 2471.0
-offset_bottom = 994.0
+offset_bottom = 1105.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("10_trceg")
 
 [node name="Back_button" type="TextureButton" parent="Mode_menu_jam"]
 texture_filter = 1
 offset_left = 701.0
-offset_top = 760.0
+offset_top = 883.0
 offset_right = 2471.0
-offset_bottom = 1170.0
+offset_bottom = 1293.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_choun")
 
@@ -142,10 +152,10 @@ offset_bottom = 1252.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_choun")
 
-[node name="Online_menu_jam" type="CanvasLayer" parent="."]
+[node name="LAN_menu_jam" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Host_button" type="TextureButton" parent="Online_menu_jam"]
+[node name="Host_button" type="TextureButton" parent="LAN_menu_jam"]
 texture_filter = 1
 offset_left = 701.0
 offset_top = 408.0
@@ -154,7 +164,7 @@ offset_bottom = 818.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("11_a8y0u")
 
-[node name="Join_button" type="TextureButton" parent="Online_menu_jam"]
+[node name="Join_button" type="TextureButton" parent="LAN_menu_jam"]
 texture_filter = 1
 offset_left = 701.0
 offset_top = 585.0
@@ -163,7 +173,7 @@ offset_bottom = 995.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("12_jkv2x")
 
-[node name="Start_game_button" type="TextureButton" parent="Online_menu_jam"]
+[node name="Start_game_button" type="TextureButton" parent="LAN_menu_jam"]
 texture_filter = 1
 offset_left = 1269.0
 offset_top = 760.0
@@ -172,7 +182,7 @@ offset_bottom = 1170.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("13_jbj1t")
 
-[node name="Back_button" type="TextureButton" parent="Online_menu_jam"]
+[node name="Back_button" type="TextureButton" parent="LAN_menu_jam"]
 texture_filter = 1
 offset_left = 701.0
 offset_top = 760.0
@@ -181,7 +191,7 @@ offset_bottom = 1170.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_choun")
 
-[node name="Player_name" type="LineEdit" parent="Online_menu_jam"]
+[node name="Player_name" type="LineEdit" parent="LAN_menu_jam"]
 texture_filter = 1
 offset_left = 254.0
 offset_top = 467.0
@@ -192,7 +202,7 @@ theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 30
 max_length = 10
 
-[node name="Label" type="Label" parent="Online_menu_jam/Player_name"]
+[node name="Label" type="Label" parent="LAN_menu_jam/Player_name"]
 texture_filter = 1
 layout_mode = 0
 offset_top = -76.36364
@@ -202,9 +212,9 @@ theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 59
 text = "Name:"
 
-[node name="Online_customizer" parent="Online_menu_jam" instance=ExtResource("15_muem4")]
+[node name="Online_customizer" parent="LAN_menu_jam" instance=ExtResource("15_muem4")]
 
-[node name="Ip_adress" type="LineEdit" parent="Online_menu_jam"]
+[node name="Ip_adress" type="LineEdit" parent="LAN_menu_jam"]
 texture_filter = 1
 offset_left = 254.0
 offset_top = 633.0
@@ -216,7 +226,7 @@ theme_override_font_sizes/font_size = 30
 placeholder_text = "192.168.56.1"
 max_length = 15
 
-[node name="Label" type="Label" parent="Online_menu_jam/Ip_adress"]
+[node name="Label" type="Label" parent="LAN_menu_jam/Ip_adress"]
 texture_filter = 1
 layout_mode = 0
 offset_top = -72.72725
@@ -226,7 +236,7 @@ theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 59
 text = "IP:"
 
-[node name="Port" type="LineEdit" parent="Online_menu_jam"]
+[node name="Port" type="LineEdit" parent="LAN_menu_jam"]
 texture_filter = 1
 offset_left = 254.0
 offset_top = 804.99994
@@ -238,7 +248,7 @@ theme_override_font_sizes/font_size = 30
 placeholder_text = "22022"
 max_length = 5
 
-[node name="Label" type="Label" parent="Online_menu_jam/Port"]
+[node name="Label" type="Label" parent="LAN_menu_jam/Port"]
 texture_filter = 1
 layout_mode = 0
 offset_top = -76.36356
@@ -254,27 +264,36 @@ visible = false
 [node name="Local_scored_button" type="TextureButton" parent="Mode_menu_scored"]
 texture_filter = 1
 offset_left = 701.0
-offset_top = 407.0
+offset_top = 379.0
 offset_right = 2471.0
-offset_bottom = 817.0
+offset_bottom = 789.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("9_eb6dy")
+
+[node name="Lan_scored_button" type="TextureButton" parent="Mode_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 536.0
+offset_right = 2471.0
+offset_bottom = 946.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("10_0ld40")
 
 [node name="Online_scored_button" type="TextureButton" parent="Mode_menu_scored"]
 texture_filter = 1
 offset_left = 701.0
-offset_top = 584.0
+offset_top = 695.0
 offset_right = 2471.0
-offset_bottom = 994.0
+offset_bottom = 1105.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("10_trceg")
 
 [node name="Back_button" type="TextureButton" parent="Mode_menu_scored"]
 texture_filter = 1
 offset_left = 701.0
-offset_top = 760.0
+offset_top = 883.0
 offset_right = 2471.0
-offset_bottom = 1170.0
+offset_bottom = 1293.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_choun")
 
@@ -302,6 +321,7 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_choun")
 
 [node name="Online_menu_scored" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_85g3d")
@@ -314,12 +334,15 @@ parameters/looping = true
 
 [node name="Label_gamemode" type="Label" parent="."]
 texture_filter = 1
-offset_left = 835.0
-offset_top = 315.0
-offset_right = 1128.0
-offset_bottom = 383.0
+offset_left = 828.0
+offset_top = 299.0
+offset_right = 1079.0
+offset_bottom = 367.0
 theme_override_fonts/font = ExtResource("14_muem4")
-theme_override_font_sizes/font_size = 67
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [connection signal="pressed" from="Main_menu/Play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main_menu/Main_exit_button" to="." method="_on_exit_button_pressed"]
@@ -327,14 +350,15 @@ theme_override_font_sizes/font_size = 67
 [connection signal="pressed" from="Play_menu/Scored_button" to="." method="_on_scored_button_pressed"]
 [connection signal="pressed" from="Play_menu/Back_button" to="." method="_on_play_back_button_pressed"]
 [connection signal="pressed" from="Mode_menu_jam/Local_jam_button" to="." method="_on_local_jam_button_pressed"]
+[connection signal="pressed" from="Mode_menu_jam/LAN_jam_button" to="." method="_on_lan_jam_button_pressed"]
 [connection signal="pressed" from="Mode_menu_jam/Online_jam_button" to="." method="_on_online_jam_button_pressed"]
 [connection signal="pressed" from="Mode_menu_jam/Back_button" to="." method="_on_jam_menu_back_button_pressed"]
 [connection signal="pressed" from="Local_menu_jam/Start_local_jam_button" to="." method="_on_start_local_jam_button_pressed"]
 [connection signal="pressed" from="Local_menu_jam/Back_button" to="." method="_on_local_jam_back_button_pressed"]
-[connection signal="pressed" from="Online_menu_jam/Host_button" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="Online_menu_jam/Join_button" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="Online_menu_jam/Start_game_button" to="." method="_on_start_jam_game_button_pressed"]
-[connection signal="pressed" from="Online_menu_jam/Back_button" to="." method="_on_online_jam_menu_back_button_pressed"]
+[connection signal="pressed" from="LAN_menu_jam/Host_button" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="LAN_menu_jam/Join_button" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="LAN_menu_jam/Start_game_button" to="." method="_on_start_jam_game_button_pressed"]
+[connection signal="pressed" from="LAN_menu_jam/Back_button" to="." method="_on_online_jam_menu_back_button_pressed"]
 [connection signal="pressed" from="Mode_menu_scored/Local_scored_button" to="." method="_on_local_scored_button_pressed"]
 [connection signal="pressed" from="Mode_menu_scored/Online_scored_button" to="." method="_on_online_scored_button_pressed"]
 [connection signal="pressed" from="Mode_menu_scored/Back_button" to="." method="_on_scored_menu_back_button_pressed"]

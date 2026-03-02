@@ -10,6 +10,8 @@ var player_name : String
 var player_skin : String
 var player1_serves : bool
 
+var is_hosting = false
+
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.connected_to_server.connect(_on_client_connected)

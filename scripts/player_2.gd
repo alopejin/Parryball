@@ -42,7 +42,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("serve-p2"):
 		if get_parent().name == "Local_multiplayer":
 			var ball = get_parent().active_ball
-			if ball and !ball.served:
+			if ball and !ball.served and !get_parent().player1_serves:
 				ball.serve()
 		else:
 			if !get_parent().get_node("Ball").served:
