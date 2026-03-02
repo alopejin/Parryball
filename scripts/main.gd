@@ -98,7 +98,7 @@ func _on_join_button_pressed() -> void:
 	if $LAN_menu_jam/Ip_adress.text == "":
 		$LAN_menu_jam/Ip_adress.text = "192.168.56.1"
 	
-	if $Online_menu_jam/Port.text == "":
+	if $LAN_menu_jam/Port.text == "":
 		$LAN_menu_jam/Port.text = "22022"
 	
 	NetworkManager.join_game($LAN_menu_jam/Ip_adress.text, $LAN_menu_jam/Port.text)

@@ -13,7 +13,7 @@ config_version=5
 config/name="Parryball"
 run/main_scene="uid://bklgr2fwnq6n"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://cc0jpe8eo8kkn"
 
 [autoload]
 
