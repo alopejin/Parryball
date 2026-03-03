@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var ball = preload("res://scenes/ball.tscn")
+@onready var ball = preload("res://scenes/ball_online.tscn")
 
 var player1_serves
 var active_ball
@@ -14,8 +14,6 @@ var player_online = preload("res://scenes/player-online.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var index = 0
-	
-	#$MultiplayerSynchronizer.set_multiplayer_authority(str(multiplayer.get_unique_id()).to_int())
 	
 	for player in NetworkManager.players:
 		var current_player = player_online.instantiate()
@@ -35,7 +33,9 @@ func _ready() -> void:
 			if spawn.name == str(index):
 				current_player.global_position = spawn.global_position
 		index += 1
-		
+	
+	print("Players size: " + str(NetworkManager.players.size()))
+	#if NetworkManager.players.size() == 2:
 	start_game.rpc()
 
 @rpc("any_peer")
@@ -43,7 +43,7 @@ func start_game():
 	active_ball = ball.instantiate()
 	add_child(active_ball)
 	if multiplayer.is_server():
-		print("SERVE")
+		print("Game on")
 		if randf() > 0.5:
 			active_ball.spawn(player2.global_position + Vector2(0, -50))
 			NetworkManager.player1_serves = false

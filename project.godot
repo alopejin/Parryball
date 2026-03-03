@@ -17,10 +17,11 @@ config/icon="uid://cc0jpe8eo8kkn"
 
 [autoload]
 
-NetworkManager="*res://scripts/network_manager.gd"
 Global="*res://scripts/global.gd"
 Noray="*res://addons/netfox.noray/noray.gd"
 PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
+NetworkManager="*res://scripts/network_manager.gd"
+LANNetworkManager="*res://scripts/LAN_network_manager.gd"
 
 [display]
 

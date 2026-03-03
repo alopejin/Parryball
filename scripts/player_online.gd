@@ -65,4 +65,3 @@ func _enter_tree() -> void:
 #		get_parent().player2 = self
 	print (str(get_multiplayer_authority()))
 	print(name)
-	print("hhh")
