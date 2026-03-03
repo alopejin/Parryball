@@ -1,18 +1,18 @@
 Instructions for Online Jam Multiplayer with Noray:
+
 One player clicks Host button and then shares the OID code generated automatically when the game runs, then the other
 player must paste it on the OID box (after deleting his) and click Join button, since there are still no notifications whether the connection
-has succeded or not it is recommended to run the game through the console to check there if it happened or the 
-two attemps to Handshake have failed.
+has succeeded or not it is recommended to run the game through the console to check there if it happened or the 
+two attemps to Handshake have failed. If the Handshake succeeds the Host can press Start button to start the game.
 
 Warning: the server which provides the Handshake between the players is a free open server to test small projects like this one,
 meaning it is very unstable and sometimes it requires a few tries to Handshake succesfully.
 
 Instructions for LAN Jam Multiplayer:
 
-Check your local IP with cmd command "ipconfig" on Windows
-or "ipa"/"ipconfig" on Linux Shell, enter that IP on the LAN Jam menu, choose a desired Port (starting at 1000 advised),
-and click Host button, then the other player must enter same IP and Port and click Join button. After the player joins, 
-Host must press Start button.
+Check your local IP with cmd command "ipconfig" on Windows or "ipa"/"ipconfig" on Linux Shell, enter that IP on the LAN Jam menu, 
+choose a desired Port (starting at 1000 advised), and click Host button, then the other player must enter same IP and Port and click Join button. 
+After the player joins, Host must press Start button.
 
 Windows may ask you for root password in order to allow that connection, which is necessary
 otherwise its Firewall will reject it.
