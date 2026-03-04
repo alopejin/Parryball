@@ -13,8 +13,12 @@ func _ready() -> void:
 	$Background.texture = preload("res://assets/sprites/fondo1-con-titulo3-aplanado3.png")
 	
 	await NetworkManager.noray_connected
-	$Online_menu_jam/OID_input.text = Noray.oid
-	noray_copy = Noray.oid
+	
+	if !NetworkManager.noray_copied:
+		NetworkManager.noray_copy = Noray.oid
+		NetworkManager.noray_copied = true
+	
+	$Online_menu_jam/OID_input.text = NetworkManager.noray_copy
 
 func alternate_main_menu():
 	$Main_menu.visible = !$Main_menu.visible
@@ -118,6 +122,7 @@ func _on_start_jam_game_button_pressed() -> void:
 
 func _on_online_jam_button_pressed() -> void:
 	$Click_sound.play()
+	$Online_menu_jam/OID_input.text = NetworkManager.noray_copy
 	$Mode_menu_jam.visible = !$Mode_menu_jam.visible
 	$Online_menu_jam.visible = !$Online_menu_jam.visible
 	$Online_customizer.show()
@@ -203,4 +208,4 @@ func _on_online_menu_jam_delete_button_pressed() -> void:
 	$Online_menu_jam/OID_input.text = ""
 
 func _on_online_menu_jam_recover_button_pressed() -> void:
-	$Online_menu_jam/OID_input.text = noray_copy
+	$Online_menu_jam/OID_input.text = NetworkManager.noray_copy

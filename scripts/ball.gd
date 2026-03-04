@@ -47,7 +47,7 @@ func spawn(position: Vector2):
 func _on_body_entered(body: Node) -> void:
 	$Hit_sound.play()
 
-
+@rpc("any_peer","call_local")
 func request_serve(id):
 	if !is_multiplayer_authority() or served:
 		return

@@ -44,10 +44,15 @@ func _input(event: InputEvent) -> void:
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		#if (multiplayer.get_unique_id() == 1 and NetworkManager.player1_serves) or (multiplayer.get_unique_id() != 1 and !NetworkManager.player1_serves):
 		if Input.is_action_just_pressed("serve"):
+			print(str(multiplayer.get_unique_id()))
+			
 			var ball = get_parent().active_ball
-			if ball:
-				ball.rpc_id(1, "request_serve", multiplayer.get_unique_id())
-				print("Served")
+			if ball and !ball.served:
+				#ball.rpc_id(1, "request_serve", multiplayer.get_unique_id())
+				print("Trying to serve")
+				#ball.request_serve.rpc(multiplayer.get_unique_id())
+				ball.request_serve.rpc_id(1, multiplayer.get_unique_id())
+				#ball.request_serve(multiplayer.get_unique_id())
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.name == "Ball" and parry_on:

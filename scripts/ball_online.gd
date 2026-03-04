@@ -7,6 +7,7 @@ var served = false
 func _ready() -> void:
 	#global_position = get_parent().get_node("Player/BallSpawn").global_position
 	pass
+	freeze = true
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,10 +20,12 @@ func _physics_process(delta: float) -> void:
 	#			global_position = get_parent().get_node("Player2/BallSpawn").global_position
 	#	else:
 	#		global_position = get_parent().get_node("Player/BallSpawn").global_position
-	if !is_multiplayer_authority():
-		return
+	#if !is_multiplayer_authority():
+	#	return
 	
-	freeze = !served
+	#freeze = !served
+	
+	pass
 	
 	#if !served:
 	#	freeze = true
@@ -47,18 +50,40 @@ func spawn(position: Vector2):
 func _on_body_entered(body: Node) -> void:
 	$Hit_sound.play()
 
+#@rpc("authority")
 @rpc("any_peer", "call_local")
 func request_serve(id):
-	if !is_multiplayer_authority() or served:
-		return
-		
-	if (id == 1 and LANNetworkManager.player1_serves) or (id != 1 and !LANNetworkManager.player1_serves):
-		if !served:
+	print("Player tring to serve " + str(id))
+	print(str(LANNetworkManager.player1_serves))
+	#if !is_multiplayer_authority() or served:
+	#	return
+	if get_parent().name == "LAN_jam":
+		if (id == 1 and LANNetworkManager.player1_serves) or (id != 1 and !LANNetworkManager.player1_serves):
+			#freeze = false
+			print("Condition")
+			print(str(served))
+			#if !served:
+				#freeze = false
 			served = true
+			freeze = false
 			linear_velocity = Vector2.ZERO
-			apply_impulse(Vector2.UP.normalized() * 150000)
-			print("HA FUNCIONADO")
+			apply_impulse(Vector2.UP.normalized() * 15000)
+		
+	elif get_parent().name == "Online_jam":
+		if (id == 1 and NetworkManager.player1_serves) or (id != 1 and !NetworkManager.player1_serves):
+			#freeze = false
+			print("Condition")
+			print(str(served))
+			#if !served:
+				#freeze = false
+			served = true
+			freeze = false
+			linear_velocity = Vector2.ZERO
+			apply_impulse(Vector2.UP.normalized() * 15000)
+
 
 func _enter_tree():
-	set_multiplayer_authority(1) 
+	#set_multiplayer_authority(1) 
+	pass
+	
 	

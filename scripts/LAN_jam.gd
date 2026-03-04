@@ -37,21 +37,41 @@ func _ready() -> void:
 		index += 1
 		
 	start_game.rpc()
+	#if multiplayer.is_server():
+	#	start_game()
+	#	print("Starting")
+	
 
 @rpc("any_peer")
 func start_game():
 	active_ball = ball.instantiate()
 	add_child(active_ball)
-	if multiplayer.is_server():
-		print("SERVE")
-		if randf() > 0.5:
-			active_ball.spawn(player2.global_position + Vector2(0, -50))
-			LANNetworkManager.player1_serves = false
-		else:
-			active_ball.spawn(player1.global_position + Vector2(0, -50))
-			LANNetworkManager.player1_serves = true
+	#active_ball.set_multiplayer_authority(multiplayer.get_unique_id())
+	#if multiplayer.is_server():
+		
 		
 	game_active = true
+	decide_serve.rpc()
+
+@rpc("any_peer")
+func decide_serve():
+	if randf() > 0.5:
+		print("Deciding")
+		active_ball.spawn(player2.global_position + Vector2(0, -50))
+		LANNetworkManager.player1_serves = false
+		#p2_serves.rpc()
+	else:
+		active_ball.spawn(player1.global_position + Vector2(0, -50))
+		LANNetworkManager.player1_serves = true
+		#p1_serves.rpc()
+	
+	if is_multiplayer_authority():
+		sync_serve.rpc(LANNetworkManager.player1_serves)
+
+@rpc("any_peer")
+func sync_serve(value):
+	LANNetworkManager.player1_serves = value
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -62,3 +82,11 @@ func _process(delta: float) -> void:
 		#	else:
 		#		active_ball.global_position = player2.global_position
 		pass
+
+@rpc("any_peer")
+func p1_serves():
+	LANNetworkManager.player1_serves = true
+
+@rpc("any_peer")
+func p2_serves():
+	LANNetworkManager.player1_serves = false

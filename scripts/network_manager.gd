@@ -15,6 +15,9 @@ var player1_serves : bool
 var is_host = false
 var external_oid = ""
 
+var noray_copied = false
+var noray_copy = ""
+
 func _ready() -> void:
 	
 	Noray.on_connect_to_host.connect(on_noray_connected)
