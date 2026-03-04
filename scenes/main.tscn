@@ -465,7 +465,7 @@ autowrap_mode = 3
 [connection signal="pressed" from="Local_menu_jam/Back_button" to="." method="_on_local_jam_back_button_pressed"]
 [connection signal="pressed" from="LAN_menu_jam/Host_button" to="." method="_on_lan_jam_host_button_pressed"]
 [connection signal="pressed" from="LAN_menu_jam/Join_button" to="." method="_on_lan_jam_join_button_pressed"]
-[connection signal="pressed" from="LAN_menu_jam/Start_game_button" to="." method="_on_start_jam_game_button_pressed"]
+[connection signal="pressed" from="LAN_menu_jam/Start_game_button" to="." method="_on_start_lan_jam_game_button_pressed"]
 [connection signal="pressed" from="LAN_menu_jam/Back_button" to="." method="_on_lan_jam_menu_back_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Host_button" to="." method="_on_online_jam_host_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Join_button" to="." method="_on_online_jam_join_button_pressed"]

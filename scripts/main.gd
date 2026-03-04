@@ -97,11 +97,12 @@ func _on_lan_jam_host_button_pressed() -> void:
 	if $LAN_menu_jam/Port.text == "":
 		$LAN_menu_jam/Port.text = "22022"
 	
-	LANNetworkManager.is_hosting = true
+	#LANNetworkManager.is_hosting = true
 	LANNetworkManager.host_game($LAN_menu_jam/Ip_adress.text, $LAN_menu_jam/Port.text)
 
 
 func _on_lan_jam_join_button_pressed() -> void:
+	is_host = false
 	$Click_sound.play()
 	LANNetworkManager.receive_player_info($LAN_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
 	
@@ -113,12 +114,10 @@ func _on_lan_jam_join_button_pressed() -> void:
 	
 	LANNetworkManager.join_game($LAN_menu_jam/Ip_adress.text, $LAN_menu_jam/Port.text)
 
-func _on_start_jam_game_button_pressed() -> void:
-	if !is_host: # or multiplayer.get_peers().size() != 2
+func _on_start_lan_jam_game_button_pressed() -> void:
+	if !is_host or LANNetworkManager.players.size() != 2: # or multiplayer.get_peers().size() != 2
 		return
 	LANNetworkManager.start_game.rpc()
-	self.hide.rpc()
-	$Music.stop.rpc()
 
 func _on_online_jam_button_pressed() -> void:
 	$Click_sound.play()
@@ -129,6 +128,7 @@ func _on_online_jam_button_pressed() -> void:
 
 func _on_online_jam_host_button_pressed():
 	$Click_sound.play()
+	is_host = true
 	NetworkManager.receive_player_info($Online_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
 	NetworkManager.host()
 	#await  multiplayer.connected_to_server
@@ -143,6 +143,7 @@ func _on_online_jam_host_button_pressed():
 	)
 
 func _on_online_jam_join_button_pressed():
+	is_host = false
 	$Click_sound.play()
 	NetworkManager.join($Online_menu_jam/OID_input.text)
 	await multiplayer.connected_to_server
@@ -150,8 +151,8 @@ func _on_online_jam_join_button_pressed():
 	NetworkManager.send_player_info.rpc($Online_menu_jam/Player_name.text, Global.local_player1_skin[Global.index], multiplayer.get_unique_id())
 
 func _on_online_jam_start_button_pressed():
-	#if !is_host: # or multiplayer.get_peers().size() != 2
-	#	return
+	if !is_host or NetworkManager.players.size() != 2: # or multiplayer.get_peers().size() != 2
+		return
 	NetworkManager.start_game.rpc()
 	print("Start")
 
