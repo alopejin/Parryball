@@ -1,0 +1,196 @@
+[gd_scene load_steps=20 format=3 uid="uid://oi5chmlyvjhf"]
+
+[ext_resource type="Script" uid="uid://cr275u412xcyx" path="res://scripts/LAN_scored.gd" id="1_wgth5"]
+[ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="2_yw0f4"]
+[ext_resource type="Texture2D" uid="uid://fbowbyxqkch" path="res://assets/sprites/valla4-recortada.png" id="3_b51ue"]
+[ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="4_n7qrd"]
+[ext_resource type="Texture2D" uid="uid://d80r5qtst1ay" path="res://assets/sprites/boton1-play_again.png" id="5_uje23"]
+[ext_resource type="Texture2D" uid="uid://8ej7qrpckypj" path="res://assets/sprites/boton1-exit3.png" id="6_gga77"]
+[ext_resource type="AudioStream" uid="uid://4u42glwsrwnn" path="res://assets/sounds/eaglaxle-gaming-victory-464016.mp3" id="7_k1ei4"]
+[ext_resource type="AudioStream" uid="uid://bse3ojjqgy2jd" path="res://assets/sounds/floraphonic-classic-game-action-positive-5-224402.mp3" id="8_nej07"]
+[ext_resource type="AudioStream" uid="uid://dua5oxiidrf5n" path="res://assets/sounds/moodmode-level-iii-294428.mp3" id="9_6tdhf"]
+[ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="10_njiu7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
+size = Vector2(50, 930)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(1920, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
+size = Vector2(1921, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
+size = Vector2(51, 242)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(10, 198)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
+size = Vector2(30, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
+size = Vector2(16.99974, 533.22815)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ukc0w"]
+size = Vector2(2182, 118)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wgth5"]
+
+[node name="LAN_scored" type="Node2D"]
+script = ExtResource("1_wgth5")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_yw0f4")
+centered = false
+
+[node name="Border" type="StaticBody2D" parent="."]
+
+[node name="Left_wall" type="CollisionShape2D" parent="Border"]
+position = Vector2(-4, 465)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="Right_wall" type="CollisionShape2D" parent="Border"]
+position = Vector2(1928, 465)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="Top" type="CollisionShape2D" parent="Border"]
+position = Vector2(968, -13)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="Floor" type="CollisionShape2D" parent="Floor"]
+position = Vector2(961.5, 1005)
+shape = SubResource("RectangleShape2D_lnu2h")
+
+[node name="Net" type="StaticBody2D" parent="."]
+position = Vector2(389.00003, 369)
+scale = Vector2(0.6, 0.6)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Net"]
+position = Vector2(966, 620)
+texture = ExtResource("3_b51ue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Net"]
+position = Vector2(966.5, 809)
+shape = SubResource("RectangleShape2D_p57ef")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Net"]
+position = Vector2(966, 589)
+shape = SubResource("RectangleShape2D_u5sy4")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Net"]
+position = Vector2(965.99994, 400)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_gee14")
+
+[node name="Score_P1" type="Label" parent="."]
+texture_filter = 1
+offset_left = 140.0
+offset_top = 145.0
+offset_right = 183.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("4_n7qrd")
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="Score_P2" type="Label" parent="."]
+texture_filter = 1
+offset_left = 1726.0
+offset_top = 145.0
+offset_right = 1769.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("4_n7qrd")
+theme_override_font_sizes/font_size = 75
+text = "0"
+
+[node name="Air_wall" type="StaticBody2D" parent="."]
+position = Vector2(969.00006, 545)
+rotation = -0.0062832204
+collision_layer = 8
+collision_mask = 8
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Air_wall"]
+position = Vector2(-0.5630493, -256.56393)
+shape = SubResource("RectangleShape2D_0tnpc")
+
+[node name="SpawnHost" type="Marker2D" parent="."]
+position = Vector2(562, 903)
+
+[node name="SpawnClient" type="Marker2D" parent="."]
+position = Vector2(1373, 903)
+
+[node name="Score_counter" type="Area2D" parent="."]
+position = Vector2(0, 87)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_counter"]
+position = Vector2(937, 1008)
+shape = SubResource("RectangleShape2D_ukc0w")
+
+[node name="Winner_label" type="Label" parent="."]
+offset_left = 743.0
+offset_top = 150.0
+offset_right = 1257.0
+offset_bottom = 226.0
+theme_override_fonts/font = ExtResource("4_n7qrd")
+theme_override_font_sizes/font_size = 76
+
+[node name="Play_again_button" type="TextureButton" parent="."]
+process_mode = 3
+texture_filter = 1
+offset_left = 368.0
+offset_top = 475.99997
+offset_right = 2138.0
+offset_bottom = 886.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("5_uje23")
+
+[node name="Exit_button" type="TextureButton" parent="."]
+process_mode = 3
+texture_filter = 1
+offset_left = 1035.0
+offset_top = 474.0
+offset_right = 2805.0
+offset_bottom = 884.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("6_gga77")
+
+[node name="Victory_sound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_k1ei4")
+
+[node name="Score_sound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("8_nej07")
+volume_db = -15.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("9_6tdhf")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="Pause" parent="." instance=ExtResource("10_njiu7")]
+
+[node name="0" type="Marker2D" parent="." groups=["Spawn"]]
+position = Vector2(562, 903)
+
+[node name="1" type="Marker2D" parent="." groups=["Spawn"]]
+position = Vector2(1373, 903)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wgth5")
+
+[connection signal="body_entered" from="Score_counter" to="." method="_on_score_counter_body_entered"]
+[connection signal="pressed" from="Play_again_button" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="Exit_button" to="." method="_on_exit_button_pressed"]

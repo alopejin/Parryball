@@ -4,8 +4,9 @@ extends Node2D
 var is_host = false
 var player1_skin = Global.local_player1_skin[Global.index]
 var player2_skin = Global.local_player2_skin[Global.index]
+var sound_on = true
 
-var noray_copy
+#var noray_copy
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,6 +20,7 @@ func _ready() -> void:
 		NetworkManager.noray_copied = true
 	
 	$Online_menu_jam/OID_input.text = NetworkManager.noray_copy
+	$Online_menu_scored/OID_input.text = NetworkManager.noray_copy
 
 func alternate_main_menu():
 	$Main_menu.visible = !$Main_menu.visible
@@ -117,7 +119,7 @@ func _on_lan_jam_join_button_pressed() -> void:
 func _on_start_lan_jam_game_button_pressed() -> void:
 	if !is_host or LANNetworkManager.players.size() != 2: # or multiplayer.get_peers().size() != 2
 		return
-	LANNetworkManager.start_game.rpc()
+	LANNetworkManager.start_lan_jam.rpc()
 
 func _on_online_jam_button_pressed() -> void:
 	$Click_sound.play()
@@ -153,8 +155,17 @@ func _on_online_jam_join_button_pressed():
 func _on_online_jam_start_button_pressed():
 	if !is_host or NetworkManager.players.size() != 2: # or multiplayer.get_peers().size() != 2
 		return
-	NetworkManager.start_game.rpc()
+	NetworkManager.start_online_jam.rpc()
 	print("Start")
+
+func _on_online_jam_menu_copy_button_pressed():
+	DisplayServer.clipboard_set(Noray.oid)
+
+func _on_online_jam_menu_delete_button_pressed() -> void:
+	$Online_menu_jam/OID_input.text = ""
+
+func _on_online_jam_menu_recover_button_pressed() -> void:
+	$Online_menu_jam/OID_input.text = NetworkManager.noray_copy
 
 func _on_online_jam_menu_back_button_pressed():
 	$Click_sound.play()
@@ -172,7 +183,7 @@ func _on_scored_button_pressed() -> void:
 	$Click_sound.play()
 	alternate_play_menu()
 	alternate_scored_menu()
-	$Label_gamemode.text = " Scored:"
+	$Label_gamemode.text = "   Scored:"
 
 func _on_local_scored_button_pressed() -> void:
 	$Click_sound.play()
@@ -193,8 +204,97 @@ func _on_local_scored_menu_back_button_pressed() -> void:
 func _on_start_local_scored_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/local_multiplayer.tscn")
 
+func _on_lan_scored_button_pressed() -> void:
+	$Click_sound.play()
+	alternate_scored_menu()
+	$LAN_menu_scored.visible = !$LAN_menu_scored.visible
+	$Online_customizer.show()
+
+func _on_lan_scored_menu_back_button_pressed() -> void:
+	$Click_sound.play()
+	alternate_scored_menu()
+	$LAN_menu_scored.visible = !$LAN_menu_scored.visible
+	$Online_customizer.hide()
+
+func _on_lan_scored_host_button_pressed() -> void:
+	is_host = true
+	$Click_sound.play()
+	LANNetworkManager.receive_player_info($LAN_menu_scored/Player_name.text, Global.local_player1_skin[Global.index])
+	
+	if $LAN_menu_scored/Ip_adress.text == "":
+		$LAN_menu_scored/Ip_adress.text = "192.168.56.1"
+	
+	if $LAN_menu_scored/Port.text == "":
+		$LAN_menu_scored/Port.text = "22022"
+	
+	LANNetworkManager.host_game($LAN_menu_scored/Ip_adress.text, $LAN_menu_scored/Port.text)
+
+
+func _on_lan_scored_join_button_pressed() -> void:
+	is_host = false
+	$Click_sound.play()
+	LANNetworkManager.receive_player_info($LAN_menu_scored/Player_name.text, Global.local_player1_skin[Global.index])
+	
+	if $LAN_menu_scored/Ip_adress.text == "":
+		$LAN_menu_scored/Ip_adress.text = "192.168.56.1"
+	
+	if $LAN_menu_scored/Port.text == "":
+		$LAN_menu_scored/Port.text = "22022"
+	
+	LANNetworkManager.join_game($LAN_menu_scored/Ip_adress.text, $LAN_menu_scored/Port.text)
+
+func _on_start_lan_scored_game_button_pressed() -> void:
+	if !is_host or LANNetworkManager.players.size() != 2:
+		return
+	LANNetworkManager.start_lan_scored.rpc()
+
 func _on_online_scored_button_pressed() -> void:
 	$Click_sound.play()
+	$Online_menu_scored/OID_input.text = NetworkManager.noray_copy
+	$Mode_menu_scored.visible = !$Mode_menu_scored.visible
+	$Online_menu_scored.visible = !$Online_menu_scored.visible
+	$Online_customizer.show()
+
+func _on_online_scored_host_button_pressed() -> void:
+	$Click_sound.play()
+	is_host = true
+	NetworkManager.receive_player_info($Online_menu_scored/Player_name.text, Global.local_player1_skin[Global.index])
+	NetworkManager.host()
+
+	multiplayer.peer_connected.connect(
+		func(pid):
+			print("Peer " + str(pid) + " has joined")
+	)
+
+func _on_online_scored_join_button_pressed() -> void:
+	is_host = false
+	$Click_sound.play()
+	NetworkManager.join($Online_menu_scored/OID_input.text)
+	print("Awaiting connected_to_server...")
+	await multiplayer.connected_to_server
+	print("Conected!")
+	
+	NetworkManager.send_player_info.rpc($Online_menu_scored/Player_name.text, Global.local_player1_skin[Global.index], multiplayer.get_unique_id())
+
+func _on_online_scored_start_button_pressed() -> void:
+	if !is_host or NetworkManager.players.size() != 2:
+		return
+	NetworkManager.start_online_scored.rpc()
+
+func _on_online_scored_menu_copy_button_pressed() -> void:
+	DisplayServer.clipboard_set(Noray.oid)
+
+func _on_online_scored_menu_delete_button_pressed() -> void:
+	$Online_menu_scored/OID_input.text = ""
+
+func _on_online_scored_menu_recover_button_pressed() -> void:
+	$Online_menu_scored/OID_input.text = NetworkManager.noray_copy
+
+func _on_online_scored_menu_back_button_pressed() -> void:
+	$Click_sound.play()
+	$Mode_menu_scored.visible = !$Mode_menu_scored.visible
+	$Online_menu_scored.visible = !$Online_menu_scored.visible
+	$Online_customizer.hide()
 
 func _on_scored_menu_back_button_pressed() -> void:
 	$Click_sound.play()
@@ -202,11 +302,12 @@ func _on_scored_menu_back_button_pressed() -> void:
 	alternate_play_menu()
 	$Label_gamemode.text = ""
 
-func _on_online_menu_jam_copy_button_pressed():
-	DisplayServer.clipboard_set(Noray.oid)
-
-func _on_online_menu_jam_delete_button_pressed() -> void:
-	$Online_menu_jam/OID_input.text = ""
-
-func _on_online_menu_jam_recover_button_pressed() -> void:
-	$Online_menu_jam/OID_input.text = NetworkManager.noray_copy
+func _on_sound_button_pressed() -> void:
+	if sound_on:
+		AudioServer.set_bus_mute(1, true)
+		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido2-ajustado.png")
+	else:
+		AudioServer.set_bus_mute(1, false)
+		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido1-ajustado.png")
+	
+	sound_on = !sound_on

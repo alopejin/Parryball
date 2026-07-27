@@ -6,7 +6,7 @@ var served = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#global_position = get_parent().get_node("Player/BallSpawn").global_position
-	pass
+	freeze = true
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,6 +23,8 @@ func _physics_process(delta: float) -> void:
 	#	return
 	
 	freeze = !served
+	
+	
 	
 	#if !served:
 	#	freeze = true
@@ -46,6 +48,8 @@ func spawn(position: Vector2):
 
 func _on_body_entered(body: Node) -> void:
 	$Hit_sound.play()
+	if body.is_in_group("ball"):
+		hit(Vector2.ZERO, 10000)
 
 @rpc("any_peer","call_local")
 func request_serve(id):

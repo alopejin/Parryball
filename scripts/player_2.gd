@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@onready var ball = get_parent().get_node("Ball")
+#@onready var ball = get_parent().get_node("Ball")
 
 const SPEED = 600.0
 const JUMP_VELOCITY = -1200.0
@@ -51,4 +51,4 @@ func _input(event: InputEvent) -> void:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.name == "Ball":
 		var dir = transform.x.normalized()
-		ball.hit(dir, 15000)
+		body.hit(dir, 15000)

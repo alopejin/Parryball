@@ -40,7 +40,6 @@ func _ready() -> void:
 	#if multiplayer.is_server():
 	#	start_game()
 	#	print("Starting")
-	
 
 @rpc("any_peer")
 func start_game():

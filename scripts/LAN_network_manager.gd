@@ -45,16 +45,20 @@ func receive_player_info(n : String, s : String):
 	player_skin = s
 
 func _on_peer_connected(id: int = 1):
-	print("Player connected: " + str(id))
+	print("Player connectedd: " + str(id))
 
 func _on_client_connected():
-	print("Connected to server")
+	print("Connected to serverr")
 	send_player_info.rpc_id(1, player_name, player_skin, multiplayer.get_unique_id())
 	
 
 @rpc("any_peer", "call_local")
-func start_game():
+func start_lan_jam():
 	get_tree().change_scene_to_file("res://scenes/LAN_jam.tscn")
+
+@rpc("any_peer", "call_local")
+func start_lan_scored():
+	get_tree().change_scene_to_file("res://scenes/LAN_scored.tscn")
 
 @rpc("any_peer")
 func send_player_info(name, skin, id):

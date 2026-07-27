@@ -68,5 +68,5 @@ func _enter_tree() -> void:
 		
 #	else: 
 #		get_parent().player2 = self
-	print (str(get_multiplayer_authority()))
-	print(name)
+	print ("Player authority: " + str(get_multiplayer_authority()))
+	print("Player name: " + name)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bklgr2fwnq6n"]
+[gd_scene load_steps=22 format=3 uid="uid://bklgr2fwnq6n"]
 
 [ext_resource type="Texture2D" uid="uid://rlf8wec0ftug" path="res://assets/sprites/fondo1-con-titulo3-aplanado3.png" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://b1rn24m7csdld" path="res://scripts/main.gd" id="1_tbgi4"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://bkkryet88a4y7" path="res://assets/sprites/boton1-start.png" id="13_jbj1t"]
 [ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="14_muem4"]
 [ext_resource type="PackedScene" uid="uid://dtpoq3ffe7vsv" path="res://scenes/online_customizer.tscn" id="15_muem4"]
+[ext_resource type="Texture2D" uid="uid://cu6bjvn4wtthf" path="res://assets/sprites/boton_sonido1-ajustado.png" id="20_yc10j"]
+[ext_resource type="Texture2D" uid="uid://yacjb3eguusc" path="res://assets/sprites/boton_sonido2-ajustado.png" id="21_jscy8"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tbgi4")
@@ -424,8 +426,219 @@ offset_bottom = 1252.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_choun")
 
+[node name="LAN_menu_scored" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Host_button" type="TextureButton" parent="LAN_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 408.0
+offset_right = 2471.0
+offset_bottom = 818.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("11_a8y0u")
+
+[node name="Join_button" type="TextureButton" parent="LAN_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 585.0
+offset_right = 2471.0
+offset_bottom = 995.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("12_jkv2x")
+
+[node name="Start_game_button" type="TextureButton" parent="LAN_menu_scored"]
+texture_filter = 1
+offset_left = 1269.0
+offset_top = 760.0
+offset_right = 3039.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("13_jbj1t")
+
+[node name="Back_button" type="TextureButton" parent="LAN_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 760.0
+offset_right = 2471.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_choun")
+
+[node name="Player_name" type="LineEdit" parent="LAN_menu_scored"]
+texture_filter = 1
+offset_left = 254.0
+offset_top = 467.0
+offset_right = 559.0
+offset_bottom = 523.0
+scale = Vector2(1.1, 1.1)
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 30
+max_length = 10
+
+[node name="Label" type="Label" parent="LAN_menu_scored/Player_name"]
+texture_filter = 1
+layout_mode = 0
+offset_top = -76.36364
+offset_right = 181.0
+offset_bottom = -16.36364
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 59
+text = "Name:"
+
+[node name="Ip_adress" type="LineEdit" parent="LAN_menu_scored"]
+texture_filter = 1
+offset_left = 254.0
+offset_top = 633.0
+offset_right = 559.0
+offset_bottom = 689.0
+scale = Vector2(1.1, 1.1)
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "192.168.56.1"
+max_length = 15
+
+[node name="Label" type="Label" parent="LAN_menu_scored/Ip_adress"]
+texture_filter = 1
+layout_mode = 0
+offset_top = -72.72725
+offset_right = 181.0
+offset_bottom = -12.727249
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 59
+text = "IP:"
+
+[node name="Port" type="LineEdit" parent="LAN_menu_scored"]
+texture_filter = 1
+offset_left = 254.0
+offset_top = 804.99994
+offset_right = 559.0
+offset_bottom = 860.99994
+scale = Vector2(1.1, 1.1)
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "22022"
+max_length = 5
+
+[node name="Label" type="Label" parent="LAN_menu_scored/Port"]
+texture_filter = 1
+layout_mode = 0
+offset_top = -76.36356
+offset_right = 181.0
+offset_bottom = -16.363564
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 59
+text = "Port:"
+
 [node name="Online_menu_scored" type="CanvasLayer" parent="."]
 visible = false
+
+[node name="Host_button" type="TextureButton" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 408.0
+offset_right = 2471.0
+offset_bottom = 818.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("11_a8y0u")
+
+[node name="Join_button" type="TextureButton" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 585.0
+offset_right = 2471.0
+offset_bottom = 995.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("12_jkv2x")
+
+[node name="Start_game_button" type="TextureButton" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 1269.0
+offset_top = 760.0
+offset_right = 3039.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("13_jbj1t")
+
+[node name="Back_button" type="TextureButton" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 760.0
+offset_right = 2471.0
+offset_bottom = 1170.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_choun")
+
+[node name="Player_name" type="LineEdit" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 254.0
+offset_top = 467.0
+offset_right = 559.0
+offset_bottom = 523.0
+scale = Vector2(1.1, 1.1)
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 30
+max_length = 10
+
+[node name="Label" type="Label" parent="Online_menu_scored/Player_name"]
+texture_filter = 1
+layout_mode = 0
+offset_top = -76.36364
+offset_right = 181.0
+offset_bottom = -16.36364
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 59
+text = "Name:"
+
+[node name="OID_input" type="LineEdit" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 254.0
+offset_top = 633.0
+offset_right = 559.0
+offset_bottom = 689.0
+scale = Vector2(1.1, 1.1)
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Host's OID"
+max_length = 50
+
+[node name="Label" type="Label" parent="Online_menu_scored/OID_input"]
+texture_filter = 1
+layout_mode = 0
+offset_top = -72.72725
+offset_right = 181.0
+offset_bottom = -12.727249
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 59
+text = "Noray OID:"
+
+[node name="Copy_button" type="Button" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 254.0
+offset_top = 708.0
+offset_right = 334.0
+offset_bottom = 739.0
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 20
+text = "Copy"
+
+[node name="Recover_button" type="Button" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 350.0
+offset_top = 708.0
+offset_right = 430.0
+offset_bottom = 739.0
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 20
+text = "Get OID"
+
+[node name="Delete_button" type="Button" parent="Online_menu_scored"]
+offset_left = 603.0
+offset_top = 644.0
+offset_right = 647.0
+offset_bottom = 675.0
+theme_override_fonts/font = ExtResource("14_muem4")
+text = "X"
 
 [node name="Click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_85g3d")
@@ -434,6 +647,7 @@ volume_db = -10.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_choun")
 volume_db = -20.0
+bus = &"Music"
 parameters/looping = true
 
 [node name="Label_gamemode" type="Label" parent="."]
@@ -451,6 +665,15 @@ autowrap_mode = 3
 [node name="Local_customizer" parent="." instance=ExtResource("11_dp3eg")]
 
 [node name="Online_customizer" parent="." instance=ExtResource("15_muem4")]
+
+[node name="Sound_button" type="TextureButton" parent="."]
+offset_left = 76.0
+offset_top = 841.0
+offset_right = 786.0
+offset_bottom = 1591.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("20_yc10j")
+texture_pressed = ExtResource("21_jscy8")
 
 [connection signal="pressed" from="Main_menu/Play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main_menu/Main_exit_button" to="." method="_on_exit_button_pressed"]
@@ -471,12 +694,25 @@ autowrap_mode = 3
 [connection signal="pressed" from="Online_menu_jam/Join_button" to="." method="_on_online_jam_join_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Start_game_button" to="." method="_on_online_jam_start_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Back_button" to="." method="_on_online_jam_menu_back_button_pressed"]
-[connection signal="pressed" from="Online_menu_jam/Copy_button" to="." method="_on_online_menu_jam_copy_button_pressed"]
-[connection signal="pressed" from="Online_menu_jam/Recover_button" to="." method="_on_online_menu_jam_recover_button_pressed"]
-[connection signal="pressed" from="Online_menu_jam/Delete_button" to="." method="_on_online_menu_jam_delete_button_pressed"]
+[connection signal="pressed" from="Online_menu_jam/Copy_button" to="." method="_on_online_jam_menu_copy_button_pressed"]
+[connection signal="pressed" from="Online_menu_jam/Recover_button" to="." method="_on_online_jam_menu_recover_button_pressed"]
+[connection signal="pressed" from="Online_menu_jam/Delete_button" to="." method="_on_online_jam_menu_delete_button_pressed"]
 [connection signal="pressed" from="Mode_menu_scored/Local_scored_button" to="." method="_on_local_scored_button_pressed"]
+[connection signal="pressed" from="Mode_menu_scored/Lan_scored_button" to="." method="_on_lan_scored_button_pressed"]
 [connection signal="pressed" from="Mode_menu_scored/Online_scored_button" to="." method="_on_online_scored_button_pressed"]
 [connection signal="pressed" from="Mode_menu_scored/Back_button" to="." method="_on_scored_menu_back_button_pressed"]
 [connection signal="renamed" from="Mode_menu_scored/Back_button" to="." method="_on_scored_menu_back_button_pressed"]
 [connection signal="pressed" from="Local_menu_scored/Start_game_button" to="." method="_on_start_local_scored_button_pressed"]
 [connection signal="pressed" from="Local_menu_scored/Back_button" to="." method="_on_local_scored_menu_back_button_pressed"]
+[connection signal="pressed" from="LAN_menu_scored/Host_button" to="." method="_on_lan_scored_host_button_pressed"]
+[connection signal="pressed" from="LAN_menu_scored/Join_button" to="." method="_on_lan_scored_join_button_pressed"]
+[connection signal="pressed" from="LAN_menu_scored/Start_game_button" to="." method="_on_start_lan_scored_game_button_pressed"]
+[connection signal="pressed" from="LAN_menu_scored/Back_button" to="." method="_on_lan_scored_menu_back_button_pressed"]
+[connection signal="pressed" from="Online_menu_scored/Host_button" to="." method="_on_online_scored_host_button_pressed"]
+[connection signal="pressed" from="Online_menu_scored/Join_button" to="." method="_on_online_scored_join_button_pressed"]
+[connection signal="pressed" from="Online_menu_scored/Start_game_button" to="." method="_on_online_scored_start_button_pressed"]
+[connection signal="pressed" from="Online_menu_scored/Back_button" to="." method="_on_online_scored_menu_back_button_pressed"]
+[connection signal="pressed" from="Online_menu_scored/Copy_button" to="." method="_on_online_scored_menu_copy_button_pressed"]
+[connection signal="pressed" from="Online_menu_scored/Recover_button" to="." method="_on_online_scored_menu_recover_button_pressed"]
+[connection signal="pressed" from="Online_menu_scored/Delete_button" to="." method="_on_online_scored_menu_delete_button_pressed"]
+[connection signal="pressed" from="Sound_button" to="." method="_on_sound_button_pressed"]

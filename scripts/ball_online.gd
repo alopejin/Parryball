@@ -5,8 +5,6 @@ var served = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#global_position = get_parent().get_node("Player/BallSpawn").global_position
-	pass
 	freeze = true
 	
 
@@ -23,9 +21,9 @@ func _physics_process(delta: float) -> void:
 	#if !is_multiplayer_authority():
 	#	return
 	
-	#freeze = !served
+	freeze = !served
 	
-	pass
+	#pass
 	
 	#if !served:
 	#	freeze = true
@@ -40,9 +38,12 @@ func hit(direction: Vector2, force: float):
 
 func serve():
 	served = true
+	freeze = false
+	linear_velocity = Vector2.ZERO
 	await get_tree().create_timer(0.1).timeout
 	#global_position = get_parent().get_node("Player/BallSpawn").global_position
 	hit(Vector2.UP, 15000)
+	sync_served.rpc(true)
 	
 func spawn(position: Vector2):
 	global_position = position
@@ -59,31 +60,20 @@ func request_serve(id):
 	#	return
 	if get_parent().name == "LAN_jam":
 		if (id == 1 and LANNetworkManager.player1_serves) or (id != 1 and !LANNetworkManager.player1_serves):
-			#freeze = false
-			print("Condition")
-			print(str(served))
-			#if !served:
-				#freeze = false
-			served = true
-			freeze = false
-			linear_velocity = Vector2.ZERO
-			apply_impulse(Vector2.UP.normalized() * 15000)
-		
+			serve()
+	
 	elif get_parent().name == "Online_jam":
 		if (id == 1 and NetworkManager.player1_serves) or (id != 1 and !NetworkManager.player1_serves):
-			#freeze = false
-			print("Condition")
-			print(str(served))
-			#if !served:
-				#freeze = false
-			served = true
-			freeze = false
-			linear_velocity = Vector2.ZERO
-			apply_impulse(Vector2.UP.normalized() * 15000)
-
-
-func _enter_tree():
-	#set_multiplayer_authority(1) 
-	pass
+			serve()
 	
+	elif get_parent().name == "LAN_scored":
+		if (id == 1 and LANNetworkManager.player1_serves) or (id != 1 and !LANNetworkManager.player1_serves):
+			serve()
 	
+	elif get_parent().name == "Online_scored":
+		if (id == 1 and NetworkManager.player1_serves) or (id != 1 and !NetworkManager.player1_serves):
+			serve()
+
+@rpc("authority", "call_local")
+func sync_served(value):
+	served = value

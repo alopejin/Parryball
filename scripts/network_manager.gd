@@ -3,10 +3,9 @@ extends Node
 
 signal noray_connected
 
-const NORAY_ADDRESS = "tomfol.io"
+const NORAY_ADDRESS = "51.170.42.210"
 const PORT = 8890
 
-#var peer :ENetMultiplayerPeer
 var players = {}
 var player_name : String
 var player_skin : String
@@ -70,6 +69,7 @@ func connect_to_server(address, port):
 		udp.set_dest_address(address, port)
 		
 		err = await PacketHandshake.over_packet_peer(udp)
+
 		udp.close()
 		
 		if err != OK:
@@ -81,6 +81,7 @@ func connect_to_server(address, port):
 		
 		var peer = ENetMultiplayerPeer.new()
 		err = peer.create_client(address, port, 0, 0, 0, Noray.local_port)
+		print("create_client returns: " + str(err))
 		
 		if err != OK:
 			return err
@@ -108,8 +109,12 @@ func send_player_info(name, skin, id):
 			send_player_info.rpc(players[i].name, players[i].skin, i)
 
 @rpc("any_peer", "call_local")
-func start_game():
+func start_online_jam():
 	get_tree().change_scene_to_file("res://scenes/online_jam.tscn")
+
+@rpc("any_peer", "call_local")
+func start_online_scored():
+	get_tree().change_scene_to_file("res://scenes/online_scored.tscn")
 
 func receive_player_info(n : String, s : String):
 	player_name = n
