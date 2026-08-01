@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2vpux6fnnj6t"]
+[gd_scene load_steps=8 format=3 uid="uid://d2vpux6fnnj6t"]
 
 [ext_resource type="Script" uid="uid://cpce66xut0kr2" path="res://scripts/pause.gd" id="1_r1fnm"]
 [ext_resource type="Texture2D" uid="uid://ct1amsp1aas5d" path="res://assets/sprites/boton1-resume.png" id="2_wen6a"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="4_1xtef"]
 [ext_resource type="Texture2D" uid="uid://cu6bjvn4wtthf" path="res://assets/sprites/boton_sonido1-ajustado.png" id="5_xmhi0"]
 [ext_resource type="Texture2D" uid="uid://yacjb3eguusc" path="res://assets/sprites/boton_sonido2-ajustado.png" id="6_xw83q"]
+[ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="7_wen6a"]
 
 [node name="Pause" type="Node"]
 process_mode = 3
@@ -52,6 +53,10 @@ offset_bottom = 1591.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("5_xmhi0")
 texture_pressed = ExtResource("6_xw83q")
+
+[node name="Click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_wen6a")
+volume_db = -18.0
 
 [connection signal="pressed" from="CanvasLayer/Resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Exit_button" to="." method="_on_exit_button_pressed"]

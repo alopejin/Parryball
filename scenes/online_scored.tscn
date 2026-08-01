@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c1ps0dy86kwu8"]
+[gd_scene load_steps=24 format=3 uid="uid://c1ps0dy86kwu8"]
 
 [ext_resource type="Script" uid="uid://x4bbloao61cl" path="res://scripts/online_scored.gd" id="1_ga6be"]
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="2_4royq"]
@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://d80r5qtst1ay" path="res://assets/sprites/boton1-play_again.png" id="7_dcqe5"]
 [ext_resource type="Texture2D" uid="uid://8ej7qrpckypj" path="res://assets/sprites/boton1-exit3.png" id="8_l3mx0"]
 [ext_resource type="AudioStream" uid="uid://4u42glwsrwnn" path="res://assets/sounds/eaglaxle-gaming-victory-464016.mp3" id="9_x8r6s"]
+[ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="10_5hvj8"]
 [ext_resource type="AudioStream" uid="uid://bse3ojjqgy2jd" path="res://assets/sounds/floraphonic-classic-game-action-positive-5-224402.mp3" id="10_84ocs"]
 [ext_resource type="AudioStream" uid="uid://dua5oxiidrf5n" path="res://assets/sounds/moodmode-level-iii-294428.mp3" id="11_hgvh5"]
+[ext_resource type="PackedScene" uid="uid://bc8wc5m07q833" path="res://scenes/notifications.tscn" id="12_0mfhe"]
 [ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="12_43vk7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
@@ -34,6 +36,42 @@ size = Vector2(16.99974, 533.22815)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukc0w"]
 size = Vector2(2182, 118)
+
+[sub_resource type="Animation" id="Animation_0mfhe"]
+resource_name = "rematch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label_player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.5, 0.73333335, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(386, 386.99997), Vector2(386, 250), Vector2(386, 386.99997), Vector2(386, 250), Vector2(386, 386.99997)]
+}
+
+[sub_resource type="Animation" id="Animation_4royq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label_player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(386, 386.99997)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_50ahl"]
+_data = {
+&"RESET": SubResource("Animation_4royq"),
+&"rematch": SubResource("Animation_0mfhe")
+}
 
 [node name="Online_scored" type="Node2D"]
 script = ExtResource("1_ga6be")
@@ -161,6 +199,30 @@ offset_bottom = 884.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("8_l3mx0")
 
+[node name="Label_player" type="Label" parent="."]
+offset_left = 386.0
+offset_top = 387.0
+offset_right = 1384.0
+offset_bottom = 462.99988
+theme_override_fonts/font = ExtResource("5_mjx1w")
+theme_override_font_sizes/font_size = 40
+text = "WWWW"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 504.0
+offset_top = 387.0
+offset_right = 1502.0
+offset_bottom = 463.0
+theme_override_fonts/font = ExtResource("5_mjx1w")
+theme_override_font_sizes/font_size = 40
+text = "wants to"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_50ahl")
+}
+
 [node name="Victory_sound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("9_x8r6s")
@@ -178,7 +240,14 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
+[node name="Click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_5hvj8")
+volume_db = -18.0
+
 [node name="Pause" parent="." instance=ExtResource("12_43vk7")]
+
+[node name="Notifications" parent="." instance=ExtResource("12_0mfhe")]
+process_mode = 3
 
 [connection signal="body_entered" from="Score_counter" to="." method="_on_score_counter_body_entered"]
 [connection signal="pressed" from="Play_again_button" to="." method="_on_play_again_button_pressed"]

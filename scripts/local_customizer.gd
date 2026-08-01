@@ -15,20 +15,32 @@ func _on_player1_left_button_pressed() -> void:
 	if Global.index > 0:
 		Global.index -= 1
 		show_skin()
+	else:
+		Global.index = Global.local_player1_skin.size() - 1
+		show_skin()
 
 func _on_player1_right_button_pressed() -> void:
 	if Global.index < Global.local_player1_skin.size() - 1:
 		Global.index += 1
+		show_skin()
+	else:
+		Global.index = 0
 		show_skin()
 
 func _on_player2_left_button_pressed() -> void:
 	if Global.index_player2 > 0:
 		Global.index_player2 -= 1
 		show_skin()
+	else:
+		Global.index_player2 = Global.local_player2_skin.size() - 1
+		show_skin()
 
 func _on_player2_right_button_pressed() -> void:
 	if Global.index_player2 < Global.local_player2_skin.size() - 1:
 		Global.index_player2 += 1
+		show_skin()
+	else:
+		Global.index_player2 = 0
 		show_skin()
 
 func _on_player_1_name_text_changed(new_text: String) -> void:

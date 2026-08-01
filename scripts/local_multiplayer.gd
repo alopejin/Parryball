@@ -56,7 +56,6 @@ func _on_score_counter_body_entered(body: RigidBody2D) -> void:
 		#body.queue_free()
 		body.call_deferred("queue_free")
 		check_victory()
-		print(player1.global_position)
 
 func spawn_ball_p1():
 	active_ball = ball.instantiate()

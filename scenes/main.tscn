@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bklgr2fwnq6n"]
+[gd_scene load_steps=25 format=3 uid="uid://bklgr2fwnq6n"]
 
 [ext_resource type="Texture2D" uid="uid://rlf8wec0ftug" path="res://assets/sprites/fondo1-con-titulo3-aplanado3.png" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://b1rn24m7csdld" path="res://scripts/main.gd" id="1_tbgi4"]
@@ -19,8 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://bkkryet88a4y7" path="res://assets/sprites/boton1-start.png" id="13_jbj1t"]
 [ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="14_muem4"]
 [ext_resource type="PackedScene" uid="uid://dtpoq3ffe7vsv" path="res://scenes/online_customizer.tscn" id="15_muem4"]
+[ext_resource type="Texture2D" uid="uid://231i85ierli7" path="res://assets/sprites/boton1-start-blocked.png" id="16_pm3ni"]
+[ext_resource type="PackedScene" uid="uid://bc8wc5m07q833" path="res://scenes/notifications.tscn" id="20_jscy8"]
 [ext_resource type="Texture2D" uid="uid://cu6bjvn4wtthf" path="res://assets/sprites/boton_sonido1-ajustado.png" id="20_yc10j"]
 [ext_resource type="Texture2D" uid="uid://yacjb3eguusc" path="res://assets/sprites/boton_sonido2-ajustado.png" id="21_jscy8"]
+[ext_resource type="PackedScene" uid="uid://cblrjm7do50w4" path="res://scenes/lobby_ui.tscn" id="24_y6deb"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tbgi4")
@@ -37,16 +40,16 @@ texture_filter = 1
 offset_left = 701.0
 offset_top = 407.0
 offset_right = 2471.0
-offset_bottom = 817.0
+offset_bottom = 817.0063
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("2_jyhfs")
 
 [node name="Settings_button" type="TextureButton" parent="Main_menu"]
 texture_filter = 1
 offset_left = 701.0
-offset_top = 584.0
+offset_top = 583.0
 offset_right = 2471.0
-offset_bottom = 994.0
+offset_bottom = 993.00024
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("3_tbgi4")
 
@@ -55,7 +58,7 @@ texture_filter = 1
 offset_left = 701.0
 offset_top = 760.0
 offset_right = 2471.0
-offset_bottom = 1170.0
+offset_bottom = 1170.0002
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("4_tefeu")
 
@@ -182,6 +185,14 @@ offset_bottom = 1170.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("13_jbj1t")
 
+[node name="Label" type="Label" parent="LAN_menu_jam/Start_game_button"]
+layout_mode = 0
+offset_top = 466.66675
+offset_right = 212.0
+offset_bottom = 489.66675
+scale = Vector2(9, 9)
+theme_override_fonts/font = ExtResource("14_muem4")
+
 [node name="Back_button" type="TextureButton" parent="LAN_menu_jam"]
 texture_filter = 1
 offset_left = 701.0
@@ -200,7 +211,7 @@ offset_bottom = 523.0
 scale = Vector2(1.1, 1.1)
 theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 30
-max_length = 10
+max_length = 7
 
 [node name="Label" type="Label" parent="LAN_menu_jam/Player_name"]
 texture_filter = 1
@@ -284,7 +295,15 @@ offset_top = 760.0
 offset_right = 3039.0
 offset_bottom = 1170.0
 scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("13_jbj1t")
+texture_normal = ExtResource("16_pm3ni")
+
+[node name="Label" type="Label" parent="Online_menu_jam/Start_game_button"]
+layout_mode = 0
+offset_top = 466.66675
+offset_right = 212.0
+offset_bottom = 489.66675
+scale = Vector2(9, 9)
+theme_override_fonts/font = ExtResource("14_muem4")
 
 [node name="Back_button" type="TextureButton" parent="Online_menu_jam"]
 texture_filter = 1
@@ -304,7 +323,7 @@ offset_bottom = 523.0
 scale = Vector2(1.1, 1.1)
 theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 30
-max_length = 10
+max_length = 7
 
 [node name="Label" type="Label" parent="Online_menu_jam/Player_name"]
 texture_filter = 1
@@ -358,6 +377,16 @@ theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 20
 text = "Get OID"
 
+[node name="Reset_noray_button" type="Button" parent="Online_menu_jam"]
+texture_filter = 1
+offset_left = 451.0
+offset_top = 708.0
+offset_right = 580.0
+offset_bottom = 739.0
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 20
+text = "Reset Noray"
+
 [node name="Delete_button" type="Button" parent="Online_menu_jam"]
 offset_left = 603.0
 offset_top = 644.0
@@ -365,6 +394,40 @@ offset_right = 647.0
 offset_bottom = 675.0
 theme_override_fonts/font = ExtResource("14_muem4")
 text = "X"
+
+[node name="CheckButton" type="CheckButton" parent="Online_menu_jam"]
+texture_filter = 1
+offset_left = 254.00002
+offset_top = 778.00006
+offset_right = 497.0
+offset_bottom = 802.00006
+scale = Vector2(1.5, 1.5)
+theme_override_fonts/font = ExtResource("14_muem4")
+text = "Alternative Noray server"
+
+[node name="Label" type="Label" parent="Online_menu_jam/CheckButton"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.0172526e-05
+offset_top = 35.99996
+offset_right = 317.64706
+offset_bottom = 89.333336
+scale = Vector2(0.85, 0.85)
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 16
+text = "*Both players must choose same server 
+or game may crash :D*"
+
+[node name="Label_start" type="Label" parent="Online_menu_jam"]
+texture_filter = 1
+offset_left = 1269.0
+offset_top = 900.0
+offset_right = 1481.0
+offset_bottom = 923.0
+scale = Vector2(2.5, 2.5)
+theme_override_fonts/font = ExtResource("14_muem4")
+text = "Waiting for the host to start"
+horizontal_alignment = 1
 
 [node name="Mode_menu_scored" type="CanvasLayer" parent="."]
 visible = false
@@ -456,6 +519,14 @@ offset_bottom = 1170.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("13_jbj1t")
 
+[node name="Label" type="Label" parent="LAN_menu_scored/Start_game_button"]
+layout_mode = 0
+offset_top = 466.66675
+offset_right = 212.0
+offset_bottom = 489.66675
+scale = Vector2(9, 9)
+theme_override_fonts/font = ExtResource("14_muem4")
+
 [node name="Back_button" type="TextureButton" parent="LAN_menu_scored"]
 texture_filter = 1
 offset_left = 701.0
@@ -474,7 +545,7 @@ offset_bottom = 523.0
 scale = Vector2(1.1, 1.1)
 theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 30
-max_length = 10
+max_length = 7
 
 [node name="Label" type="Label" parent="LAN_menu_scored/Player_name"]
 texture_filter = 1
@@ -558,7 +629,7 @@ offset_top = 760.0
 offset_right = 3039.0
 offset_bottom = 1170.0
 scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("13_jbj1t")
+texture_normal = ExtResource("16_pm3ni")
 
 [node name="Back_button" type="TextureButton" parent="Online_menu_scored"]
 texture_filter = 1
@@ -578,7 +649,7 @@ offset_bottom = 523.0
 scale = Vector2(1.1, 1.1)
 theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 30
-max_length = 10
+max_length = 7
 
 [node name="Label" type="Label" parent="Online_menu_scored/Player_name"]
 texture_filter = 1
@@ -632,6 +703,16 @@ theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 20
 text = "Get OID"
 
+[node name="Reset_noray_button" type="Button" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 451.0
+offset_top = 708.0
+offset_right = 537.0
+offset_bottom = 739.0
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 20
+text = "Reset Noray"
+
 [node name="Delete_button" type="Button" parent="Online_menu_scored"]
 offset_left = 603.0
 offset_top = 644.0
@@ -640,9 +721,46 @@ offset_bottom = 675.0
 theme_override_fonts/font = ExtResource("14_muem4")
 text = "X"
 
+[node name="CheckButton" type="CheckButton" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 254.00002
+offset_top = 778.00006
+offset_right = 497.0
+offset_bottom = 802.00006
+scale = Vector2(1.5, 1.5)
+theme_override_fonts/font = ExtResource("14_muem4")
+text = "Alternative Noray server
+"
+
+[node name="Label" type="Label" parent="Online_menu_scored/CheckButton"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.0172526e-05
+offset_top = 35.99996
+offset_right = 317.64706
+offset_bottom = 89.333336
+scale = Vector2(0.85, 0.85)
+theme_override_fonts/font = ExtResource("14_muem4")
+theme_override_font_sizes/font_size = 16
+text = "*Both players must choose same server 
+or game may crash :D*"
+
+[node name="Label_start" type="Label" parent="Online_menu_scored"]
+texture_filter = 1
+offset_left = 1269.0
+offset_top = 900.0
+offset_right = 1481.0
+offset_bottom = 923.0
+scale = Vector2(2.5, 2.5)
+theme_override_fonts/font = ExtResource("14_muem4")
+text = "Waiting for the host to start"
+horizontal_alignment = 1
+
+[node name="Notifications" parent="." instance=ExtResource("20_jscy8")]
+
 [node name="Click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_85g3d")
-volume_db = -10.0
+volume_db = -18.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_choun")
@@ -666,6 +784,8 @@ autowrap_mode = 3
 
 [node name="Online_customizer" parent="." instance=ExtResource("15_muem4")]
 
+[node name="Lobby_UI" parent="." instance=ExtResource("24_y6deb")]
+
 [node name="Sound_button" type="TextureButton" parent="."]
 offset_left = 76.0
 offset_top = 841.0
@@ -676,6 +796,7 @@ texture_normal = ExtResource("20_yc10j")
 texture_pressed = ExtResource("21_jscy8")
 
 [connection signal="pressed" from="Main_menu/Play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Main_menu/Settings_button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Main_menu/Main_exit_button" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="Play_menu/Jam_button" to="." method="_on_jam_button_pressed"]
 [connection signal="pressed" from="Play_menu/Scored_button" to="." method="_on_scored_button_pressed"]
@@ -696,7 +817,9 @@ texture_pressed = ExtResource("21_jscy8")
 [connection signal="pressed" from="Online_menu_jam/Back_button" to="." method="_on_online_jam_menu_back_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Copy_button" to="." method="_on_online_jam_menu_copy_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Recover_button" to="." method="_on_online_jam_menu_recover_button_pressed"]
+[connection signal="pressed" from="Online_menu_jam/Reset_noray_button" to="." method="_on_reset_noray_button_pressed"]
 [connection signal="pressed" from="Online_menu_jam/Delete_button" to="." method="_on_online_jam_menu_delete_button_pressed"]
+[connection signal="toggled" from="Online_menu_jam/CheckButton" to="." method="_on_noray_server_check_button_toggled"]
 [connection signal="pressed" from="Mode_menu_scored/Local_scored_button" to="." method="_on_local_scored_button_pressed"]
 [connection signal="pressed" from="Mode_menu_scored/Lan_scored_button" to="." method="_on_lan_scored_button_pressed"]
 [connection signal="pressed" from="Mode_menu_scored/Online_scored_button" to="." method="_on_online_scored_button_pressed"]
@@ -714,5 +837,7 @@ texture_pressed = ExtResource("21_jscy8")
 [connection signal="pressed" from="Online_menu_scored/Back_button" to="." method="_on_online_scored_menu_back_button_pressed"]
 [connection signal="pressed" from="Online_menu_scored/Copy_button" to="." method="_on_online_scored_menu_copy_button_pressed"]
 [connection signal="pressed" from="Online_menu_scored/Recover_button" to="." method="_on_online_scored_menu_recover_button_pressed"]
+[connection signal="pressed" from="Online_menu_scored/Reset_noray_button" to="." method="_on_reset_noray_button_pressed"]
 [connection signal="pressed" from="Online_menu_scored/Delete_button" to="." method="_on_online_scored_menu_delete_button_pressed"]
+[connection signal="toggled" from="Online_menu_scored/CheckButton" to="." method="_on_noray_server_check_button_toggled"]
 [connection signal="pressed" from="Sound_button" to="." method="_on_sound_button_pressed"]

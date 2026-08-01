@@ -11,12 +11,13 @@ var player_skin : String
 var player1_serves : bool
 
 #var is_hosting = false
+var connecting : bool = false
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
-	multiplayer.connected_to_server.connect(_on_client_connected)
-	multiplayer.server_disconnected.connect(quit_game)
-	multiplayer.peer_disconnected.connect(quit_game)
+	#multiplayer.connected_to_server.connect(_on_client_connected)
+	#multiplayer.server_disconnected.connect(quit_game)
+	#multiplayer.peer_disconnected.connect(quit_game)
 
 func host_game(ip, p):
 	ip_adress = ip
@@ -45,10 +46,10 @@ func receive_player_info(n : String, s : String):
 	player_skin = s
 
 func _on_peer_connected(id: int = 1):
-	print("Player connectedd: " + str(id))
+	print("Player connected: " + str(id))
 
 func _on_client_connected():
-	print("Connected to serverr")
+	print("Connected to server")
 	send_player_info.rpc_id(1, player_name, player_skin, multiplayer.get_unique_id())
 	
 
@@ -73,5 +74,6 @@ func send_player_info(name, skin, id):
 		for i in players:
 			send_player_info.rpc(players[i].name, players[i].skin, i)
 
-func quit_game():
+func quit_game(id = 1):
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene_to_file("res://scenes/main.tscn")

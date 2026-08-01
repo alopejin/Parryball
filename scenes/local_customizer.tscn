@@ -102,7 +102,7 @@ offset_bottom = 323.0
 scale = Vector2(1.1, 1.1)
 theme_override_fonts/font = ExtResource("2_uk2xi")
 theme_override_font_sizes/font_size = 30
-max_length = 10
+max_length = 7
 
 [node name="Player1_label" type="Label" parent="Player1_canvas"]
 offset_left = 333.0
@@ -157,7 +157,7 @@ offset_bottom = 638.0
 scale = Vector2(1.1, 1.1)
 theme_override_fonts/font = ExtResource("2_uk2xi")
 theme_override_font_sizes/font_size = 30
-max_length = 10
+max_length = 7
 
 [node name="Player1_label2" type="Label" parent="Player2_canvas"]
 offset_left = 333.0

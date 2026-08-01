@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://cblrjm7do50w4"]
+
+[ext_resource type="Script" uid="uid://dcskjkq8v6uq8" path="res://scripts/lobby_ui.gd" id="1_avaex"]
+[ext_resource type="Texture2D" uid="uid://cl34a2h1aqvqv" path="res://assets/sprites/mark.png" id="1_tp4qy"]
+[ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="2_avaex"]
+
+[node name="Lobby_UI" type="Node"]
+script = ExtResource("1_avaex")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(1749.0001, 126.00001)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_tp4qy")
+
+[node name="Label_title" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 1486.0
+offset_top = 40.0
+offset_right = 1548.0
+offset_bottom = 75.0
+scale = Vector2(3.5, 3.5)
+theme_override_fonts/font = ExtResource("2_avaex")
+text = "Players:
+"
+
+[node name="Label_host" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 1486.9999
+offset_top = 161.0
+offset_right = 1569.9999
+offset_bottom = 196.0
+scale = Vector2(3.5, 3.5)
+theme_override_fonts/font = ExtResource("2_avaex")
+text = "Alex - Host
+"
+
+[node name="Label_client" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 1487.9999
+offset_top = 266.0
+offset_right = 1570.9999
+offset_bottom = 301.0
+scale = Vector2(3.5, 3.5)
+theme_override_fonts/font = ExtResource("2_avaex")
+text = "Paco
+"

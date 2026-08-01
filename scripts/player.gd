@@ -55,9 +55,6 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		var dir = transform.x.normalized()
 		var ball = get_parent().active_ball
 		ball.hit(dir, 20000)
-		print("golpea")
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
-	print (str(get_multiplayer_authority()))
-	print(name)
