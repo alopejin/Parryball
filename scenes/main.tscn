@@ -770,14 +770,13 @@ parameters/looping = true
 
 [node name="Label_gamemode" type="Label" parent="."]
 texture_filter = 1
-offset_left = 828.0
+offset_left = 851.0
 offset_top = 299.0
-offset_right = 1079.0
+offset_right = 1102.0
 offset_bottom = 367.0
 theme_override_fonts/font = ExtResource("14_muem4")
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Local_customizer" parent="." instance=ExtResource("11_dp3eg")]

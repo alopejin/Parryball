@@ -83,7 +83,7 @@ func _on_jam_button_pressed() -> void:
 	await button_press_animation($Play_menu/Jam_button)
 	alternate_play_menu()
 	alternate_jam_menu()
-	$Label_gamemode.text = "   Jam:"
+	$Label_gamemode.text = "Jam:"
 
 func _on_local_jam_button_pressed() -> void:
 	$Click_sound.play()
@@ -236,6 +236,8 @@ func _on_online_jam_menu_recover_button_pressed() -> void:
 
 func _on_online_jam_menu_back_button_pressed():
 	is_host = false
+	
+	lobby_ui.reset_ui()
 	NetworkManager.reset_connections()
 	disable_start_buttons()
 	enable_join_buttons()
@@ -257,7 +259,7 @@ func _on_scored_button_pressed() -> void:
 	await button_press_animation($Play_menu/Scored_button)
 	alternate_play_menu()
 	alternate_scored_menu()
-	$Label_gamemode.text = "   Scored:"
+	$Label_gamemode.text = "Scored:"
 
 func _on_local_scored_button_pressed() -> void:
 	$Click_sound.play()
