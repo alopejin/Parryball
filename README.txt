@@ -9,8 +9,8 @@ and click Join button. If the Handshake succeeds the Host can press Start button
 Warnings: 
 
 -There are two servers available for Noray connection, both players must be Noray connected on SAME server or the game will probably crash. This is due to a Noray error
-than still hasn´t been fixed. Default server may be slower but is usually always on, on the other side alternative server is a bit faster but needs to be
-restarted frecuently, so sometimes it's off. If the OID box is empty it means the server is down.
+that still hasn´t been fixed. The default server is a bit faster and has a better Handshake success rate but it is sometimes down, while the alternative server is a bit slower but is almost always on. 
+If the OID box is empty it means the server is down.
 
 -If the NAT type of either player's network is Symetric NAT (very common on mobile networks), it is very unlikely the Handshake will succeed, so it is 
 recommended that both players be connected to local home networks. You can check yor NAT type at sites like https://natchecker.com/

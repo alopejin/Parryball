@@ -1,16 +1,41 @@
 extends RigidBody2D
 
 
+@onready var main_trail = $Main_trail
+@onready var left_trail = $Left_trail_alt
+@onready var right_trail = $Right_trail_alt
+
 var served = false
+var trail_active = false
+var trail_fast = false
+var trail_following = false
+var trail_min_speed = 800.0
+var fading_out = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	main_trail.modulate.a = 0.0
 	freeze = true
-	
+	main_trail.clear_points()
+	#left_trail.clear_points()
+	#right_trail.clear_points()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	freeze = !served
+	
+	trail_fast = linear_velocity.length() > trail_min_speed
+	
+	if trail_fast and !trail_following:
+		trail_following = true
+		fade_in()
+	elif !trail_fast and trail_following and !fading_out:
+		fade_out()
+	
+	if trail_following:
+		main_trail.add_point(global_position)
+		if main_trail.get_point_count() > 10:
+			main_trail.remove_point(0)
 
 func hit(direction: Vector2, force: float):
 	linear_velocity = Vector2.ZERO
@@ -19,6 +44,7 @@ func hit(direction: Vector2, force: float):
 
 func serve():
 	served = true
+	show_trail()
 	await get_tree().create_timer(0.1).timeout
 	hit(Vector2.UP, 15000)
 	
@@ -42,4 +68,26 @@ func request_serve(id):
 
 func _enter_tree():
 	set_multiplayer_authority(1) 
+
+func fade_in():
+	#main_trail.modulate.a = 0.0
+	fading_out = false
+	var tween = create_tween()
+	tween.tween_property(main_trail, "modulate:a", 1.0, 0.3)
+
+func fade_out():
+	fading_out = true
+	var tween = create_tween()
+	tween.tween_property(main_trail, "modulate:a", 0.0, 0.3)
+	tween.tween_callback(fade_out_finished)
 	
+func fade_out_finished():
+	trail_following = false
+	fading_out = false
+	main_trail.clear_points()
+
+func show_trail():
+	main_trail.visible = true
+
+func hide_trail():
+	main_trail.visible = false

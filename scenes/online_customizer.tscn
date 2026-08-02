@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://4qyedsg6jpgx" path="res://assets/sprites/player2-red.png" id="7_3ymrx"]
 [ext_resource type="Texture2D" uid="uid://x73sjo0s0q82" path="res://assets/sprites/player2-yellow2.png" id="7_lb8ma"]
 [ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="8_lnf02"]
-[ext_resource type="Texture2D" uid="uid://dfgacro1ac278" path="res://assets/sprites/boton_seleccion-export.png" id="9_uhwid"]
+[ext_resource type="Texture2D" uid="uid://bjdxhf5nwiim" path="res://assets/sprites/boton_seleccion2_final.png" id="10_3ymrx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h1xhg"]
 animations = [{
@@ -93,20 +93,20 @@ theme_override_font_sizes/font_size = 59
 text = "Colour:"
 
 [node name="Left_button" type="TextureButton" parent="CanvasLayer"]
-offset_left = 1377.0
-offset_top = 584.0
-offset_right = 1737.0
-offset_bottom = 954.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("9_uhwid")
+offset_left = 1382.0
+offset_top = 568.0
+offset_right = 1614.0
+offset_bottom = 698.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("10_3ymrx")
 
 [node name="right_button" type="TextureButton" parent="CanvasLayer"]
-offset_left = 1565.0
-offset_top = 585.0
-offset_right = 1925.0
-offset_bottom = 955.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("9_uhwid")
+offset_left = 1563.0
+offset_top = 569.0
+offset_right = 1793.0
+offset_bottom = 697.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("10_3ymrx")
 flip_h = true
 
 [connection signal="pressed" from="CanvasLayer/Left_button" to="." method="_on_left_button_pressed"]

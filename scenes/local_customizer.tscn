@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b00cb1bld81in" path="res://assets/sprites/player2-rosa.png" id="7_hy00t"]
 [ext_resource type="Texture2D" uid="uid://x73sjo0s0q82" path="res://assets/sprites/player2-yellow2.png" id="8_boa0n"]
 [ext_resource type="Texture2D" uid="uid://4qyedsg6jpgx" path="res://assets/sprites/player2-red.png" id="8_uk2xi"]
-[ext_resource type="Texture2D" uid="uid://dfgacro1ac278" path="res://assets/sprites/boton_seleccion-export.png" id="9_we8cw"]
+[ext_resource type="Texture2D" uid="uid://bjdxhf5nwiim" path="res://assets/sprites/boton_seleccion2_final.png" id="10_ol8ii"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p87vx"]
 animations = [{
@@ -120,20 +120,20 @@ sprite_frames = SubResource("SpriteFrames_p87vx")
 animation = &"red_1"
 
 [node name="Left_button" type="TextureButton" parent="Player1_canvas"]
-offset_left = 1276.0
+offset_left = 1264.0
 offset_top = 366.0
-offset_right = 1636.0
-offset_bottom = 736.0
-scale = Vector2(0.2, 0.2)
-texture_normal = ExtResource("9_we8cw")
+offset_right = 1494.0
+offset_bottom = 495.99988
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("10_ol8ii")
 
 [node name="right_button" type="TextureButton" parent="Player1_canvas"]
-offset_left = 1464.0
-offset_top = 367.0
-offset_right = 1824.0
-offset_bottom = 737.0
-scale = Vector2(0.2, 0.2)
-texture_normal = ExtResource("9_we8cw")
+offset_left = 1441.0
+offset_top = 366.0
+offset_right = 1673.0
+offset_bottom = 494.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("10_ol8ii")
 flip_h = true
 
 [node name="Name_label" type="Label" parent="Player1_canvas"]
@@ -175,20 +175,20 @@ sprite_frames = SubResource("SpriteFrames_p87vx")
 animation = &"red"
 
 [node name="Left_button" type="TextureButton" parent="Player2_canvas"]
-offset_left = 1276.0
+offset_left = 1266.0
 offset_top = 677.0
-offset_right = 1636.0
-offset_bottom = 1047.0
-scale = Vector2(0.2, 0.2)
-texture_normal = ExtResource("9_we8cw")
+offset_right = 1496.0
+offset_bottom = 807.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("10_ol8ii")
 
 [node name="right_button" type="TextureButton" parent="Player2_canvas"]
-offset_left = 1464.0
-offset_top = 679.0
-offset_right = 1824.0
-offset_bottom = 1049.0
-scale = Vector2(0.2, 0.2)
-texture_normal = ExtResource("9_we8cw")
+offset_left = 1442.0
+offset_top = 677.0
+offset_right = 1674.0
+offset_bottom = 805.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("10_ol8ii")
 flip_h = true
 
 [connection signal="text_changed" from="Player1_canvas/Player1_name" to="." method="_on_player_1_name_text_changed"]

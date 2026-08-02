@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://80hwckapaok1"]
+[gd_scene load_steps=14 format=3 uid="uid://80hwckapaok1"]
 
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://ckirk23gwa5mm" path="res://scenes/player.tscn" id="2_lbhrr"]
@@ -25,6 +25,14 @@ size = Vector2(30, 180)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(16.99974, 533.22815)
+
+[sub_resource type="Curve" id="Curve_lbhrr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_iywne"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Game" type="Node2D"]
 
@@ -104,3 +112,21 @@ position = Vector2(562, 903)
 
 [node name="SpawnClient" type="Marker2D" parent="."]
 position = Vector2(1373, 903)
+
+[node name="Trail" type="Line2D" parent="."]
+visible = false
+show_behind_parent = true
+top_level = true
+texture_filter = 1
+width = 20.0
+width_curve = SubResource("Curve_lbhrr")
+default_color = Color(1, 1, 1, 0.63529414)
+
+[node name="Trail3" type="Line2D" parent="."]
+visible = false
+show_behind_parent = true
+top_level = true
+texture_filter = 1
+width = 20.0
+width_curve = SubResource("Curve_iywne")
+default_color = Color(1, 1, 1, 0.63529414)

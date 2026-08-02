@@ -12,15 +12,18 @@ var player_online = preload("res://scenes/player-online.tscn")
 var score1 = 0
 var score2 = 0
 var active_ball
-var game_active = false
 var playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_tree().paused = false
+	
 	NetworkManager.votes_updated.connect(update_votes)
 	multiplayer.peer_disconnected.connect(player_disconnected)
 	
+	$Pause.process_mode = Node.PROCESS_MODE_ALWAYS
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	$Label.text = ""
 	$Play_again_button.texture_normal = preload("res://assets/sprites/boton1-play_again.png")
 	label_player.set("theme_override_colors/font_color", Color(1.0, 1.0, 1.0, 1.0))
@@ -54,7 +57,6 @@ func _ready() -> void:
 		start_game()
 
 func start_game():
-	game_active = true
 	decide_serve()
 	create_ball.rpc()
 	print("Game on")
@@ -92,7 +94,7 @@ func _on_score_counter_body_entered(body: RigidBody2D) -> void:
 	else:
 		score1 += 1
 		NetworkManager.player1_serves = true
-			
+	
 	play_score_sound.rpc()
 	sync_state.rpc(score1, score2, NetworkManager.player1_serves)
 	reset_ball()
@@ -141,13 +143,19 @@ func show_score():
 
 @rpc("authority", "call_local")
 func show_victory():
-	await get_tree().create_timer(0.1)
-	
 	if score1 == 10:
-		$Winner_label.text = player1.get_node("Name").text  + " wins !"
+		if !player1.get_node("Name").text == "":
+			$Winner_label.text = player1.get_node("Name").text  + " wins !"
+		else:
+			$Winner_label.text = "Player 1 wins !"
 	else:
-		$Winner_label.text = player2.get_node("Name").text  + " wins !"
+		if !player2.get_node("Name").text == "":
+			$Winner_label.text = player2.get_node("Name").text  + " wins !"
+		else:
+			$Winner_label.text = "Player 2 wins !"
 	
+	$Pause.process_mode = Node.PROCESS_MODE_DISABLED
+	active_ball.hide_trail()
 	$Victory_sound.play()
 	get_tree().paused = true
 	show_score()
@@ -347,6 +355,7 @@ func button_press_animation(button: Control):
 	var tween = create_tween()
 	var original_position = button.position
 	
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(button, "position", original_position + Vector2(0, 10), 0.15)
 	tween.tween_property(button, "position", original_position, 0.15)
 	

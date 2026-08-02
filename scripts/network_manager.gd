@@ -10,7 +10,7 @@ signal lobby_updated(id)
 
 const PORT = 8890
 
-var noray_adress = "tomfol.io"
+var noray_adress = "51.170.42.210"
 var players = {}
 var player_name : String
 var player_skin : String

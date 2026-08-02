@@ -107,6 +107,7 @@ func _on_start_local_jam_button_pressed() -> void:
 	$Click_sound.play()
 	await button_press_animation($Local_menu_jam/Start_local_jam_button)
 	await $Click_sound.finished
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().change_scene_to_file("res://scenes/local_jam.tscn")
 
 func _on_lan_jam_button_pressed() -> void:
@@ -518,12 +519,12 @@ func request_online_scored_host():
 
 func _on_noray_server_check_button_toggled(toggled_on: bool) -> void:
 	if !toggled_on:
-		NetworkManager.noray_adress = "tomfol.io"
+		NetworkManager.noray_adress = "51.170.42.210"
 		await NetworkManager.reset_noray()
 		$Online_menu_jam/OID_input.text = NetworkManager.noray_copy
 		$Online_menu_scored/OID_input.text = NetworkManager.noray_copy
 	else:
-		NetworkManager.noray_adress = "51.170.42.210"
+		NetworkManager.noray_adress = "tomfol.io"
 		await NetworkManager.reset_noray()
 		$Online_menu_jam/OID_input.text = NetworkManager.noray_copy
 		$Online_menu_scored/OID_input.text = NetworkManager.noray_copy
