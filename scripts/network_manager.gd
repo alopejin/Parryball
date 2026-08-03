@@ -238,10 +238,12 @@ func reset_noray():
 		noray_copy = Noray.oid
 		noray_copied = true
 		
-		lobby_updated.emit(-1)
+		#lobby_updated.emit(-1)
 		notifications.noray_restarted_N()
 	else:
 		notifications.server_down_N()
+	
+	lobby_updated.emit(-1)
 
 func reset_connections():
 	reset_enet()

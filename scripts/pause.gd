@@ -8,6 +8,13 @@ var playing = false
 func _ready() -> void:
 	await get_tree().process_frame
 	parent = get_parent().name
+	
+	if !AudioServer.is_bus_mute(0):
+		$CanvasLayer/Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3.png")
+		sound_on = true
+	else:
+		$CanvasLayer/Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3_silenciado.png")
+		sound_on = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
@@ -52,11 +59,11 @@ func _on_sound_button_pressed() -> void:
 	$Click_sound.play()
 	
 	if sound_on:
-		AudioServer.set_bus_mute(1, true)
-		$CanvasLayer/Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido2-ajustado.png")
+		AudioServer.set_bus_mute(0, true)
+		$CanvasLayer/Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3_silenciado.png")
 	else:
-		AudioServer.set_bus_mute(1, false)
-		$CanvasLayer/Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido1-ajustado.png")
+		AudioServer.set_bus_mute(0, false)
+		$CanvasLayer/Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3.png")
 	
 	sound_on = !sound_on
 

@@ -27,6 +27,13 @@ func _ready() -> void:
 	disable_start_buttons()
 	$Music.play()
 	
+	if !AudioServer.is_bus_mute(0):
+		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3.png")
+		sound_on = true
+	else:
+		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3_silenciado.png")
+		sound_on = false
+	
 	$Background.texture = preload("res://assets/sprites/fondo1-con-titulo3-aplanado3.png")
 	
 	await NetworkManager.noray_connected
@@ -438,11 +445,11 @@ func _on_scored_menu_back_button_pressed() -> void:
 
 func _on_sound_button_pressed() -> void:
 	if sound_on:
-		AudioServer.set_bus_mute(1, true)
-		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido2-ajustado.png")
+		AudioServer.set_bus_mute(0, true)
+		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3_silenciado.png")
 	else:
-		AudioServer.set_bus_mute(1, false)
-		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido1-ajustado.png")
+		AudioServer.set_bus_mute(0, false)
+		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3.png")
 	
 	sound_on = !sound_on
 

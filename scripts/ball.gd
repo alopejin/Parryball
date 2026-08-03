@@ -60,7 +60,7 @@ func _on_body_entered(body: Node) -> void:
 func request_serve(id):
 	if !is_multiplayer_authority() or served:
 		return
-		
+	
 	if !served:
 		served = true
 		apply_impulse(Vector2.UP * 150000)
