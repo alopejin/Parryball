@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bklvii2g3to55"]
+[gd_scene load_steps=13 format=3 uid="uid://bklvii2g3to55"]
 
 [ext_resource type="Script" uid="uid://b2xmeya6krhxs" path="res://scripts/local_customizer.gd" id="1_ol8ii"]
 [ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="2_uk2xi"]
@@ -9,7 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://b00cb1bld81in" path="res://assets/sprites/player2-rosa.png" id="7_hy00t"]
 [ext_resource type="Texture2D" uid="uid://x73sjo0s0q82" path="res://assets/sprites/player2-yellow2.png" id="8_boa0n"]
 [ext_resource type="Texture2D" uid="uid://4qyedsg6jpgx" path="res://assets/sprites/player2-red.png" id="8_uk2xi"]
-[ext_resource type="Texture2D" uid="uid://bjdxhf5nwiim" path="res://assets/sprites/boton_seleccion2_final.png" id="10_ol8ii"]
+[ext_resource type="Texture2D" uid="uid://bmc7nmkss7fbp" path="res://assets/sprites/boton_seleccion3_izquierda.png" id="10_uk2xi"]
+[ext_resource type="Texture2D" uid="uid://bv7lddloxdoic" path="res://assets/sprites/boton_seleccion3_derecha.png" id="11_ex87b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p87vx"]
 animations = [{
@@ -125,16 +126,15 @@ offset_top = 366.0
 offset_right = 1494.0
 offset_bottom = 495.99988
 scale = Vector2(0.5, 0.5)
-texture_normal = ExtResource("10_ol8ii")
+texture_normal = ExtResource("10_uk2xi")
 
-[node name="right_button" type="TextureButton" parent="Player1_canvas"]
+[node name="Right_button" type="TextureButton" parent="Player1_canvas"]
 offset_left = 1441.0
 offset_top = 366.0
 offset_right = 1673.0
 offset_bottom = 494.0
 scale = Vector2(0.5, 0.5)
-texture_normal = ExtResource("10_ol8ii")
-flip_h = true
+texture_normal = ExtResource("11_ex87b")
 
 [node name="Name_label" type="Label" parent="Player1_canvas"]
 texture_filter = 1
@@ -180,7 +180,7 @@ offset_top = 677.0
 offset_right = 1496.0
 offset_bottom = 807.0
 scale = Vector2(0.5, 0.5)
-texture_normal = ExtResource("10_ol8ii")
+texture_normal = ExtResource("10_uk2xi")
 
 [node name="right_button" type="TextureButton" parent="Player2_canvas"]
 offset_left = 1442.0
@@ -188,12 +188,11 @@ offset_top = 677.0
 offset_right = 1674.0
 offset_bottom = 805.0
 scale = Vector2(0.5, 0.5)
-texture_normal = ExtResource("10_ol8ii")
-flip_h = true
+texture_normal = ExtResource("11_ex87b")
 
 [connection signal="text_changed" from="Player1_canvas/Player1_name" to="." method="_on_player_1_name_text_changed"]
 [connection signal="pressed" from="Player1_canvas/Left_button" to="." method="_on_player1_left_button_pressed"]
-[connection signal="pressed" from="Player1_canvas/right_button" to="." method="_on_player1_right_button_pressed"]
+[connection signal="pressed" from="Player1_canvas/Right_button" to="." method="_on_player1_right_button_pressed"]
 [connection signal="text_changed" from="Player2_canvas/Player2_name" to="." method="_on_player_2_name_text_changed"]
 [connection signal="pressed" from="Player2_canvas/Left_button" to="." method="_on_player2_left_button_pressed"]
 [connection signal="pressed" from="Player2_canvas/right_button" to="." method="_on_player2_right_button_pressed"]

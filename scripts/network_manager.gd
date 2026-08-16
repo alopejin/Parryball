@@ -34,7 +34,6 @@ var join_attempt = 0
 var client_id = 0
 
 func _ready() -> void:
-	
 	Noray.on_connect_to_host.connect(on_noray_connected)
 	Noray.on_connect_nat.connect(handle_nat_connection)
 	Noray.on_connect_relay.connect(handle_relay_connection)

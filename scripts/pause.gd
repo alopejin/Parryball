@@ -40,6 +40,7 @@ func _on_resume_button_pressed() -> void:
 	
 	if parent == "Local_jam" or parent == "Local_multiplayer":
 		get_tree().paused = !get_tree().paused
+	
 	$CanvasLayer.visible = !$CanvasLayer.visible
 
 func _on_exit_button_pressed() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://oi5chmlyvjhf"]
+[gd_scene load_steps=22 format=3 uid="uid://oi5chmlyvjhf"]
 
 [ext_resource type="Script" uid="uid://cr275u412xcyx" path="res://scripts/LAN_scored.gd" id="1_wgth5"]
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="2_yw0f4"]
@@ -10,12 +10,16 @@
 [ext_resource type="AudioStream" uid="uid://bse3ojjqgy2jd" path="res://assets/sounds/floraphonic-classic-game-action-positive-5-224402.mp3" id="8_nej07"]
 [ext_resource type="AudioStream" uid="uid://dua5oxiidrf5n" path="res://assets/sounds/moodmode-level-iii-294428.mp3" id="9_6tdhf"]
 [ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="10_njiu7"]
+[ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="10_yw0f4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(50, 930)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(1920, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgth5"]
+size = Vector2(30, 158)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
 size = Vector2(1921, 150)
@@ -57,6 +61,10 @@ shape = SubResource("RectangleShape2D_lbhrr")
 [node name="Top" type="CollisionShape2D" parent="Border"]
 position = Vector2(968, -13)
 shape = SubResource("RectangleShape2D_iywne")
+
+[node name="Bottom_wall" type="CollisionShape2D" parent="Border"]
+position = Vector2(969, 1001)
+shape = SubResource("RectangleShape2D_wgth5")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 collision_layer = 8
@@ -166,11 +174,13 @@ texture_normal = ExtResource("6_gga77")
 [node name="Victory_sound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("7_k1ei4")
+bus = &"SFX"
 
 [node name="Score_sound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("8_nej07")
 volume_db = -15.0
+bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -179,6 +189,11 @@ volume_db = -15.0
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="Click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_yw0f4")
+volume_db = -18.0
+bus = &"SFX"
 
 [node name="Pause" parent="." instance=ExtResource("10_njiu7")]
 

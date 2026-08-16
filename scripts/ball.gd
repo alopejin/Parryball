@@ -9,7 +9,7 @@ var served = false
 var trail_active = false
 var trail_fast = false
 var trail_following = false
-var trail_min_speed = 800.0
+var trail_min_speed = 1500.0
 var fading_out = false
 
 # Called when the node enters the scene tree for the first time.
@@ -19,10 +19,17 @@ func _ready() -> void:
 	main_trail.clear_points()
 	#left_trail.clear_points()
 	#right_trail.clear_points()
+	
+	if !Global.ball_trail_on:
+		main_trail.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	print(str(Global.ball_trail_on))
 	freeze = !served
+	
+	if !Global.ball_trail_on:
+		return
 	
 	trail_fast = linear_velocity.length() > trail_min_speed
 	

@@ -1,0 +1,760 @@
+[gd_scene load_steps=14 format=3 uid="uid://dwa37bv2lh8ef"]
+
+[ext_resource type="Script" uid="uid://dkcutk2bt1o7" path="res://scripts/settings.gd" id="1_es4n0"]
+[ext_resource type="Texture2D" uid="uid://cacgy0wcyae7r" path="res://assets/sprites/boton1-game.png" id="2_gis3k"]
+[ext_resource type="Texture2D" uid="uid://cgs6q5cbfkal3" path="res://assets/sprites/boton1-sound.png" id="3_83j8s"]
+[ext_resource type="Texture2D" uid="uid://5mufbfwrliec" path="res://assets/sprites/boton1-back.png" id="4_gjs24"]
+[ext_resource type="Texture2D" uid="uid://cwjccgvmbh3be" path="res://assets/sprites/boton1-controls.png" id="5_4ppmf"]
+[ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="5_am25x"]
+[ext_resource type="Texture2D" uid="uid://dlt3u4mtuet52" path="res://assets/sprites/grabber2.png" id="6_83j8s"]
+[ext_resource type="Texture2D" uid="uid://rlf8wec0ftug" path="res://assets/sprites/fondo1-con-titulo3-aplanado3.png" id="6_gis3k"]
+[ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="8_gjs24"]
+[ext_resource type="PackedScene" uid="uid://bc8wc5m07q833" path="res://scenes/notifications.tscn" id="10_4ppmf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_es4n0"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.14767182, 0.14767179, 0.14767179, 1)
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_am25x"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_color = Color(0.14901961, 0.14901961, 0.14901961, 1)
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gjs24"]
+
+[node name="Settings" type="Node"]
+script = ExtResource("1_es4n0")
+
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2, 0)
+texture = ExtResource("6_gis3k")
+centered = false
+
+[node name="Menu" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Game_button" type="TextureButton" parent="Menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 379.0
+offset_right = 2471.0
+offset_bottom = 789.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("2_gis3k")
+
+[node name="Sound_button" type="TextureButton" parent="Menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 536.0
+offset_right = 2471.0
+offset_bottom = 946.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("3_83j8s")
+
+[node name="Controls_button" type="TextureButton" parent="Menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 695.0
+offset_right = 2471.0
+offset_bottom = 1105.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("5_4ppmf")
+
+[node name="Back_button" type="TextureButton" parent="Menu"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 883.0
+offset_right = 2471.0
+offset_bottom = 1293.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("4_gjs24")
+
+[node name="Menu_game" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="HSlider_Brightness" type="HSlider" parent="Menu_game"]
+texture_filter = 1
+offset_left = 775.0
+offset_top = 408.0
+offset_right = 943.0
+offset_bottom = 424.0
+scale = Vector2(2.2, 2.2)
+theme_override_constants/center_grabber = 1
+theme_override_constants/grabber_offset = -1
+theme_override_icons/grabber = ExtResource("6_83j8s")
+theme_override_icons/grabber_highlight = ExtResource("6_83j8s")
+theme_override_icons/grabber_disabled = ExtResource("6_83j8s")
+theme_override_styles/slider = SubResource("StyleBoxFlat_es4n0")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_am25x")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_am25x")
+min_value = 0.5
+max_value = 1.5
+step = 0.01
+value = 1.0
+
+[node name="Label" type="Label" parent="Menu_game/HSlider_Brightness"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.090912
+offset_top = -33.181816
+offset_right = 100.09091
+offset_bottom = -17.181816
+scale = Vector2(1.7, 1.7)
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "Brightness"
+horizontal_alignment = 1
+
+[node name="CheckBox_point_effect" type="CheckBox" parent="Menu_game"]
+texture_filter = 1
+offset_left = 773.0
+offset_top = 467.0
+offset_right = 913.0
+offset_bottom = 498.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
+button_pressed = true
+text = "Point effect"
+
+[node name="CheckBox_ball_trail" type="CheckBox" parent="Menu_game"]
+texture_filter = 1
+offset_left = 773.0
+offset_top = 586.0
+offset_right = 913.0
+offset_bottom = 617.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
+button_pressed = true
+text = "Show ball trail"
+
+[node name="CheckBox_window_mode" type="CheckBox" parent="Menu_game"]
+texture_filter = 1
+offset_left = 773.0
+offset_top = 705.0
+offset_right = 913.0
+offset_bottom = 736.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
+text = "Window mode"
+
+[node name="Back_button" type="TextureButton" parent="Menu_game"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 836.0
+offset_right = 2471.0
+offset_bottom = 1246.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("4_gjs24")
+
+[node name="Menu_sound" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="HSlider_Master" type="HSlider" parent="Menu_sound"]
+texture_filter = 1
+offset_left = 774.99994
+offset_top = 422.0
+offset_right = 942.99994
+offset_bottom = 438.0
+scale = Vector2(2.2, 2.2)
+theme_override_constants/center_grabber = 1
+theme_override_constants/grabber_offset = -1
+theme_override_icons/grabber = ExtResource("6_83j8s")
+theme_override_icons/grabber_highlight = ExtResource("6_83j8s")
+theme_override_icons/grabber_disabled = ExtResource("6_83j8s")
+theme_override_styles/slider = SubResource("StyleBoxFlat_es4n0")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_am25x")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_am25x")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Label" type="Label" parent="Menu_sound/HSlider_Master"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 45.00003
+offset_top = -33.181816
+offset_right = 100.00003
+offset_bottom = -17.181816
+scale = Vector2(1.7, 1.7)
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "Master"
+horizontal_alignment = 1
+
+[node name="HSlider_Music" type="HSlider" parent="Menu_sound"]
+texture_filter = 1
+offset_left = 774.99994
+offset_top = 565.99994
+offset_right = 942.99994
+offset_bottom = 581.99994
+scale = Vector2(2.2, 2.2)
+theme_override_constants/center_grabber = 1
+theme_override_constants/grabber_offset = -1
+theme_override_icons/grabber = ExtResource("6_83j8s")
+theme_override_icons/grabber_highlight = ExtResource("6_83j8s")
+theme_override_icons/grabber_disabled = ExtResource("6_83j8s")
+theme_override_styles/slider = SubResource("StyleBoxFlat_es4n0")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_am25x")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_am25x")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Label" type="Label" parent="Menu_sound/HSlider_Music"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 40.681824
+offset_top = -33.454514
+offset_right = 95.68182
+offset_bottom = -17.454514
+scale = Vector2(1.7, 1.7)
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "Music"
+horizontal_alignment = 1
+
+[node name="HSlider_SFX" type="HSlider" parent="Menu_sound"]
+texture_filter = 1
+offset_left = 774.99994
+offset_top = 723.0
+offset_right = 942.99994
+offset_bottom = 739.0
+scale = Vector2(2.2, 2.2)
+theme_override_constants/center_grabber = 1
+theme_override_constants/grabber_offset = -1
+theme_override_icons/grabber = ExtResource("6_83j8s")
+theme_override_icons/grabber_highlight = ExtResource("6_83j8s")
+theme_override_icons/grabber_disabled = ExtResource("6_83j8s")
+theme_override_styles/slider = SubResource("StyleBoxFlat_es4n0")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_am25x")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_am25x")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Label" type="Label" parent="Menu_sound/HSlider_SFX"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 37.499847
+offset_top = -33.45456
+offset_right = 99.49985
+offset_bottom = -17.45456
+scale = Vector2(1.7, 1.7)
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="Back_button" type="TextureButton" parent="Menu_sound"]
+texture_filter = 1
+offset_left = 701.0
+offset_top = 836.00006
+offset_right = 2471.0
+offset_bottom = 1246.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("4_gjs24")
+
+[node name="Menu_controls" type="CanvasLayer" parent="."]
+
+[node name="Back_button" type="TextureButton" parent="Menu_controls"]
+texture_filter = 1
+offset_left = 653.0
+offset_top = 836.0
+offset_right = 2423.0
+offset_bottom = 1246.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("4_gjs24")
+
+[node name="Label_Player1_Local" type="Label" parent="Menu_controls"]
+texture_filter = 1
+offset_left = 81.0
+offset_top = 373.0
+offset_right = 201.0
+offset_bottom = 389.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "Player 1 - Local"
+horizontal_alignment = 1
+
+[node name="Label_controls" type="Label" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_top = 37.666664
+offset_right = 120.0
+offset_bottom = 53.666664
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "Move left: 
+Move right:
+Jump:
+Parry
+Serve:"
+
+[node name="Reset_left_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.0
+offset_top = 37.666664
+offset_right = 225.0
+offset_bottom = 65.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_left_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33334
+offset_top = 37.666664
+offset_right = 173.33334
+offset_bottom = 65.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_right_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.0
+offset_top = 57.333336
+offset_right = 225.0
+offset_bottom = 85.333336
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_right_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33334
+offset_top = 57.333336
+offset_right = 173.33334
+offset_bottom = 85.333336
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_jump_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.0
+offset_top = 76.666664
+offset_right = 225.0
+offset_bottom = 104.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_jump_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33334
+offset_top = 76.666664
+offset_right = 173.33334
+offset_bottom = 104.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_parry_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.0
+offset_top = 96.33333
+offset_right = 225.0
+offset_bottom = 124.33333
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_parry_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33334
+offset_top = 96.33333
+offset_right = 173.33334
+offset_bottom = 124.33333
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_serve_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.0
+offset_top = 114.66666
+offset_right = 225.0
+offset_bottom = 142.66664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_serve_action_button" type="Button" parent="Menu_controls/Label_Player1_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33334
+offset_top = 114.66666
+offset_right = 173.33334
+offset_bottom = 142.66664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Label_Player2_Local" type="Label" parent="Menu_controls"]
+texture_filter = 1
+offset_left = 687.0
+offset_top = 373.0
+offset_right = 809.0
+offset_bottom = 389.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "Player 2 - Local"
+horizontal_alignment = 1
+
+[node name="Label_controls" type="Label" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -2.0
+offset_top = 37.666664
+offset_right = 118.0
+offset_bottom = 129.66666
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "Move left: 
+Move right:
+Jump:
+Parry
+Serve:"
+
+[node name="Reset_left_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.66666
+offset_top = 37.666664
+offset_right = 225.66666
+offset_bottom = 65.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_left_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 145.0
+offset_top = 37.666664
+offset_right = 174.0
+offset_bottom = 65.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_right_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.66666
+offset_top = 57.333336
+offset_right = 225.66666
+offset_bottom = 85.333336
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_right_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 145.0
+offset_top = 57.333336
+offset_right = 174.0
+offset_bottom = 85.333336
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_jump_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.66666
+offset_top = 76.666664
+offset_right = 225.66666
+offset_bottom = 104.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_jump_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 145.0
+offset_top = 76.666664
+offset_right = 174.0
+offset_bottom = 104.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_parry_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.66666
+offset_top = 96.33333
+offset_right = 225.66666
+offset_bottom = 124.33333
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_parry_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 145.0
+offset_top = 96.33333
+offset_right = 174.0
+offset_bottom = 124.33333
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_serve_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.66666
+offset_top = 114.66666
+offset_right = 225.66666
+offset_bottom = 142.66664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_serve_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 145.0
+offset_top = 114.66666
+offset_right = 174.0
+offset_bottom = 142.66664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Label_Multiplayer" type="Label" parent="Menu_controls"]
+texture_filter = 1
+offset_left = 1285.0
+offset_top = 373.0
+offset_right = 1407.0
+offset_bottom = 389.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "LAN/Online"
+
+[node name="Label_controls" type="Label" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 0.3333435
+offset_top = 37.666664
+offset_right = 120.33334
+offset_bottom = 129.66666
+theme_override_fonts/font = ExtResource("5_am25x")
+text = "Move left: 
+Move right:
+Jump:
+Parry
+Serve:"
+
+[node name="Reset_left_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.00018
+offset_top = 37.666664
+offset_right = 225.00018
+offset_bottom = 65.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_left_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33353
+offset_top = 37.666664
+offset_right = 173.33353
+offset_bottom = 65.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_right_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.00018
+offset_top = 57.333336
+offset_right = 225.00018
+offset_bottom = 85.333336
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_right_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33353
+offset_top = 57.333336
+offset_right = 173.33353
+offset_bottom = 85.333336
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_jump_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.00018
+offset_top = 76.666664
+offset_right = 225.00018
+offset_bottom = 104.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_jump_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33353
+offset_top = 76.666664
+offset_right = 173.33353
+offset_bottom = 104.666664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_parry_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.00018
+offset_top = 96.33333
+offset_right = 225.00018
+offset_bottom = 124.33333
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_parry_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33353
+offset_top = 96.33333
+offset_right = 173.33353
+offset_bottom = 124.33333
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Reset_serve_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 162.00018
+offset_top = 114.66666
+offset_right = 225.00018
+offset_bottom = 142.66664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = " Reset "
+
+[node name="New_serve_action_button" type="Button" parent="Menu_controls/Label_Multiplayer"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 144.33353
+offset_top = 114.66666
+offset_right = 173.33353
+offset_bottom = 142.66664
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="Click_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_gjs24")
+volume_db = -18.0
+bus = &"SFX"
+
+[node name="Notifications" parent="." instance=ExtResource("10_4ppmf")]
+
+[connection signal="pressed" from="Menu/Game_button" to="." method="_on_game_button_pressed"]
+[connection signal="pressed" from="Menu/Sound_button" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="Menu/Controls_button" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="Menu/Back_button" to="." method="_on_back_button_pressed"]
+[connection signal="value_changed" from="Menu_game/HSlider_Brightness" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="toggled" from="Menu_game/CheckBox_point_effect" to="." method="toggle_point_effect"]
+[connection signal="toggled" from="Menu_game/CheckBox_ball_trail" to="." method="toggle_ball_trail"]
+[connection signal="toggled" from="Menu_game/CheckBox_window_mode" to="." method="window_mode"]
+[connection signal="pressed" from="Menu_game/Back_button" to="." method="_on_game_button_pressed"]
+[connection signal="value_changed" from="Menu_sound/HSlider_Master" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="Menu_sound/HSlider_Music" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Menu_sound/HSlider_SFX" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Menu_sound/Back_button" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="Menu_controls/Back_button" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/Reset_left_action_button" to="." method="_on_button_reset_action_leftp1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/New_left_action_button" to="." method="_on_button_new_action_leftp1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/Reset_right_action_button" to="." method="_on_button_reset_action_rightp1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/New_right_action_button" to="." method="_on_button_new_action_rightp1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/Reset_jump_action_button" to="." method="_on_button_reset_action_jumpp1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/New_jump_action_button" to="." method="_on_button_new_action_jumpp1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/Reset_parry_action_button" to="." method="_on_button_reset_action_parryp1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/New_parry_action_button" to="." method="_on_button_new_action_parryp1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/Reset_serve_action_button" to="." method="_on_button_reset_action_servep1_pressed"]
+[connection signal="replacing_by" from="Menu_controls/Label_Player1_Local/Reset_serve_action_button" to="." method="_on_button_reset_action_servep1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player1_Local/New_serve_action_button" to="." method="_on_button_new_action_servep1_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/Reset_left_action_button" to="." method="_on_button_reset_action_leftp2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/New_left_action_button" to="." method="_on_button_new_action_leftp2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/Reset_right_action_button" to="." method="_on_button_reset_action_rightp2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/New_right_action_button" to="." method="_on_button_new_action_rightp2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/Reset_jump_action_button" to="." method="_on_button_reset_action_jumpp2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/New_jump_action_button" to="." method="_on_button_new_action_jumpp2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/Reset_parry_action_button" to="." method="_on_button_reset_action_parryp2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/New_parry_action_button" to="." method="_on_button_new_action_parryp2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/Reset_serve_action_button" to="." method="_on_button_reset_action_servep2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Player2_Local/New_serve_action_button" to="." method="_on_button_new_action_servep2_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/Reset_left_action_button" to="." method="_on_button_reset_action_left_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/New_left_action_button" to="." method="_on_button_new_action_left_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/Reset_right_action_button" to="." method="_on_button_reset_action_right_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/New_right_action_button" to="." method="_on_button_new_action_right_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/Reset_jump_action_button" to="." method="_on_button_reset_action_jump_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/New_jump_action_button" to="." method="_on_button_new_action_jump_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/Reset_parry_action_button" to="." method="_on_button_reset_action_parry_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/New_parry_action_button" to="." method="_on_button_new_action_parry_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/Reset_serve_action_button" to="." method="_on_button_reset_action_serve_pressed"]
+[connection signal="pressed" from="Menu_controls/Label_Multiplayer/New_serve_action_button" to="." method="_on_button_new_action_serve_pressed"]

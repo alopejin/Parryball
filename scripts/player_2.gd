@@ -1,8 +1,6 @@
 extends CharacterBody2D
 
 
-#@onready var ball = get_parent().get_node("Ball")
-
 const SPEED = 600.0
 const JUMP_VELOCITY = -1200.0
 

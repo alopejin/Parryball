@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c7ptu66x3wpxi"]
+[gd_scene load_steps=23 format=3 uid="uid://c7ptu66x3wpxi"]
 
 [ext_resource type="Script" uid="uid://dpo2lqw01hrdr" path="res://scripts/local_multiplayer.gd" id="1_ukc0w"]
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="1_yr7aq"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://4u42glwsrwnn" path="res://assets/sounds/eaglaxle-gaming-victory-464016.mp3" id="9_oaywk"]
 [ext_resource type="AudioStream" uid="uid://bse3ojjqgy2jd" path="res://assets/sounds/floraphonic-classic-game-action-positive-5-224402.mp3" id="10_rckw6"]
 [ext_resource type="AudioStream" uid="uid://dua5oxiidrf5n" path="res://assets/sounds/moodmode-level-iii-294428.mp3" id="11_ad65b"]
+[ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="12_7jns5"]
 [ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="12_r1k2h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
@@ -20,7 +21,7 @@ size = Vector2(50, 930)
 size = Vector2(1920, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1k2h"]
-size = Vector2(50, 158)
+size = Vector2(30, 158)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
 size = Vector2(1921, 150)
@@ -180,11 +181,13 @@ texture_normal = ExtResource("8_oaywk")
 [node name="Victory_sound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("9_oaywk")
+bus = &"SFX"
 
 [node name="Score_sound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("10_rckw6")
 volume_db = -15.0
+bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -193,6 +196,12 @@ volume_db = -25.0
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="Click_sound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("12_7jns5")
+volume_db = -18.0
+bus = &"SFX"
 
 [node name="Pause" parent="." instance=ExtResource("12_r1k2h")]
 

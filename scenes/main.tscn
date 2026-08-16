@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bklgr2fwnq6n"]
+[gd_scene load_steps=25 format=3 uid="uid://bklgr2fwnq6n"]
 
 [ext_resource type="Texture2D" uid="uid://rlf8wec0ftug" path="res://assets/sprites/fondo1-con-titulo3-aplanado3.png" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://b1rn24m7csdld" path="res://scripts/main.gd" id="1_tbgi4"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://231i85ierli7" path="res://assets/sprites/boton1-start-blocked.png" id="16_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://bc8wc5m07q833" path="res://scenes/notifications.tscn" id="20_jscy8"]
 [ext_resource type="Texture2D" uid="uid://csfutdfspgb43" path="res://assets/sprites/boton_sonido4_alternativo3.png" id="23_pm3ni"]
+[ext_resource type="PackedScene" uid="uid://dwa37bv2lh8ef" path="res://scenes/settings.tscn" id="24_og1vs"]
 [ext_resource type="PackedScene" uid="uid://cblrjm7do50w4" path="res://scenes/lobby_ui.tscn" id="24_y6deb"]
 
 [node name="Main" type="Node2D"]
@@ -755,11 +756,18 @@ theme_override_fonts/font = ExtResource("14_muem4")
 text = "Waiting for the host to start"
 horizontal_alignment = 1
 
-[node name="Notifications" parent="." instance=ExtResource("20_jscy8")]
+[node name="Sound_button" type="TextureButton" parent="."]
+offset_left = 106.0
+offset_top = 891.0
+offset_right = 355.0
+offset_bottom = 1081.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("23_pm3ni")
 
 [node name="Click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_85g3d")
 volume_db = -18.0
+bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_choun")
@@ -782,15 +790,11 @@ autowrap_mode = 3
 
 [node name="Online_customizer" parent="." instance=ExtResource("15_muem4")]
 
+[node name="Notifications" parent="." instance=ExtResource("20_jscy8")]
+
 [node name="Lobby_UI" parent="." instance=ExtResource("24_y6deb")]
 
-[node name="Sound_button" type="TextureButton" parent="."]
-offset_left = 106.0
-offset_top = 891.0
-offset_right = 355.0
-offset_bottom = 1081.0
-scale = Vector2(0.5, 0.5)
-texture_normal = ExtResource("23_pm3ni")
+[node name="Settings" parent="." instance=ExtResource("24_og1vs")]
 
 [connection signal="pressed" from="Main_menu/Play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main_menu/Settings_button" to="." method="_on_settings_button_pressed"]

@@ -14,20 +14,20 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump-p1") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 			
-	if Input.is_action_just_released("jump") and velocity.y < 0:
+	if Input.is_action_just_released("jump-p1") and velocity.y < 0:
 		await get_tree().create_timer(0.1).timeout
 		velocity.y *= 0
 
-	var direction := Input.get_axis("left", "right")
+	var direction := Input.get_axis("left-p1", "right-p1")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	if Input.is_action_just_pressed("parry") and !is_on_floor():
+	if Input.is_action_just_pressed("parry-p1") and !is_on_floor():
 		parry_on = true
 			
 		if global_position.x > get_parent().get_node("Net/Sprite2D").global_position.x:
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("serve"):
+	if Input.is_action_just_pressed("serve-p1"):
 		if get_parent().name == "Local_multiplayer":
 			var ball = get_parent().active_ball
 			if ball and !ball.served and get_parent().player1_serves:

@@ -53,6 +53,7 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("5_r1fnm")
 
 [node name="Click_sound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("7_wen6a")
 volume_db = -18.0
 

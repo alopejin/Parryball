@@ -109,6 +109,32 @@ func hosting_N():
 	
 	playing = false
 
+func change_key_N():
+	while playing:
+		if !is_inside_tree():
+			return
+		await get_tree().process_frame
+	
+	playing = true
+	
+	show_panel()
+	
+	label1.text = "Press the new key"
+	animation.play("fade-in")
+	await animation.animation_finished
+	
+	while Global.setting_key:
+		if !is_inside_tree():
+			return
+		await get_tree().process_frame
+	
+	animation.play("fade-out")
+	await animation.animation_finished
+	
+	hide_panel()
+	
+	playing = false
+
 func connection_join_error_N():
 	var text = "You can't join your own OID"
 	standard_notification(text)

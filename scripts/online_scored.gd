@@ -308,6 +308,7 @@ func _on_exit_button_pressed() -> void:
 	get_tree().paused = false
 	$Click_sound.play()
 	await button_press_animation($Exit_button)
+	await $Click_sound.finished
 	
 	await get_tree().create_timer(0.1).timeout
 	

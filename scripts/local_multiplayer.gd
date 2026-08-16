@@ -10,6 +10,8 @@ var score2 = 0
 var player1_serves = true
 var active_ball
 
+var playing = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -105,9 +107,36 @@ func enable_buttons():
 	$Exit_button.visible = true
 
 func _on_play_again_button_pressed() -> void:
+	$Click_sound.play()
+	await button_press_animation($Play_again_button)
+	await $Click_sound.finished
+	
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _on_exit_button_pressed() -> void:
+	$Click_sound.play()
+	await button_press_animation($Exit_button)
+	await $Click_sound.finished
+	
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
+
+func button_press_animation(button: Control):
+	while playing:
+		if !is_inside_tree():
+			return
+		await get_tree().process_frame
+	
+	playing = true
+	
+	var tween = create_tween()
+	var original_position = button.position
+	
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(button, "position", original_position + Vector2(0, 10), 0.15)
+	tween.tween_property(button, "position", original_position, 0.15)
+	
+	await tween.finished
+	
+	playing = false

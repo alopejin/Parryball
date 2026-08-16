@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dryb4rrpdaejb"]
+[gd_scene load_steps=16 format=3 uid="uid://dryb4rrpdaejb"]
 
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="1_aram4"]
 [ext_resource type="PackedScene" uid="uid://ckirk23gwa5mm" path="res://scenes/player.tscn" id="2_cn35k"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://fbowbyxqkch" path="res://assets/sprites/valla4-recortada.png" id="4_cujyl"]
 [ext_resource type="PackedScene" uid="uid://0cg3joh34hra" path="res://scenes/player2.tscn" id="5_n5sex"]
 [ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="6_cn35k"]
+[ext_resource type="AudioStream" uid="uid://buxtd20e728hn" path="res://assets/sounds/arnodefacq-8-bit-leaving-yoshi-slow-105bpm-loopable-442981.mp3" id="7_fhj6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(50, 930)
@@ -111,3 +112,11 @@ position = Vector2(1373, 903)
 position = Vector2(1374, 903)
 
 [node name="Pause" parent="." instance=ExtResource("6_cn35k")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_fhj6h")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true

@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var notifications = $Notifications
 @onready var lobby_ui = $Lobby_UI
+@onready var settings = $Settings
 
 var is_host = false
 var player1_skin = Global.local_player1_skin[Global.index]
@@ -22,6 +23,8 @@ func _ready() -> void:
 	
 	multiplayer.peer_connected.connect(player_joined) 
 	multiplayer.peer_disconnected.connect(player_disconnected)
+	
+	settings.out_of_settings.connect(alternate_main_menu)
 	
 	enable_join_buttons()
 	disable_start_buttons()
@@ -62,8 +65,6 @@ func alternate_scored_menu():
 
 func _on_play_button_pressed() -> void:
 	$Click_sound.play()
-	#$Main_menu/Play_button/AnimationPlayer.play("pressed")
-	#await $Main_menu/Play_button/AnimationPlayer.animation_finished
 	await button_press_animation($Main_menu/Play_button)
 	alternate_main_menu()
 	alternate_play_menu()
@@ -71,6 +72,9 @@ func _on_play_button_pressed() -> void:
 func _on_settings_button_pressed() -> void:
 	$Click_sound.play()
 	await button_press_animation($Main_menu/Settings_button)
+	
+	alternate_main_menu()
+	settings.alternate_main_menu()
 
 func _on_exit_button_pressed() -> void:
 	$Click_sound.play()
@@ -173,7 +177,7 @@ func _on_start_lan_jam_game_button_pressed() -> void:
 		await button_press_animation($LAN_menu_jam/Start_game_button)
 		await $Click_sound.finished
 	
-	if !multiplayer.is_server() or LANNetworkManager.players.size() != 2: # or multiplayer.get_peers().size() != 2
+	if !multiplayer.is_server() or LANNetworkManager.players.size() != 2:
 		return
 	LANNetworkManager.start_lan_jam.rpc()
 
