@@ -4,6 +4,7 @@ extends Node
 var playing = false
 
 func _ready() -> void:
+	Global.skin_changed.connect(show_skin)
 	$Player1_canvas/Player1_name.text = Global.local_player1_name
 	$Player2_canvas/Player2_name.text = Global.local_player2_name
 	show_skin()
@@ -22,6 +23,8 @@ func _on_player1_left_button_pressed() -> void:
 	else:
 		Global.index = Global.local_player1_skin.size() - 1
 		show_skin()
+	
+	Global.skin_changed.emit()
 
 func _on_player1_right_button_pressed() -> void:
 	button_press_animation($Player1_canvas/Right_button)
@@ -32,6 +35,8 @@ func _on_player1_right_button_pressed() -> void:
 	else:
 		Global.index = 0
 		show_skin()
+	
+	Global.skin_changed.emit()
 
 func _on_player2_left_button_pressed() -> void:
 	button_press_animation($Player2_canvas/Left_button)

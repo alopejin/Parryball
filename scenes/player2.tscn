@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://0cg3joh34hra"]
+[gd_scene load_steps=18 format=3 uid="uid://0cg3joh34hra"]
 
 [ext_resource type="Script" uid="uid://c7ygyhlhcdj04" path="res://scripts/player_2.gd" id="1_c08b3"]
 [ext_resource type="Texture2D" uid="uid://cexlf068w0avc" path="res://assets/sprites/player2-black.png" id="2_8l1to"]
@@ -100,30 +100,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Hitbox/CollisionShape2D:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Hitbox/CollisionShape2D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-6.666666, -2.1666684)]
-}
 
 [sub_resource type="Animation" id="Animation_g2els"]
 resource_name = "dash"
@@ -155,34 +131,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hitbox/CollisionShape2D:rotation")
+tracks/2/path = NodePath("Skins:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.23333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 1.5692239, -0.00092196465]
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Skins:position")
+tracks/3/path = NodePath("Skins:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.23333333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Skins:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.23333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -207,50 +171,38 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hitbox/CollisionShape2D:rotation")
+tracks/1/path = NodePath("Skins:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.23333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -1.4748254, 0.00017809868]
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hitbox/CollisionShape2D:position")
+tracks/2/path = NodePath("Skins:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.13333334, 0.23333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-6.666666, -2.1666684), Vector2(7.1519753e-07, -7.166669)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Skins:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.23333333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Skins:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.23333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, -1.4619514, 0.000923872]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-1.1175871e-08, 0.13333333, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -1.4748254, 0.00017809868]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qhqgy"]
@@ -259,6 +211,9 @@ _data = {
 &"parry": SubResource("Animation_g2els"),
 &"parry_reverse": SubResource("Animation_dqkch")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24gv0"]
+size = Vector2(188.33334, 38.333332)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.6, 0.6)
@@ -291,11 +246,13 @@ libraries = {
 position = Vector2(0, -103.66666)
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-6.666666, -2.1666684)
-scale = Vector2(0.8, 0.8)
-shape = SubResource("RectangleShape2D_g2els")
+position = Vector2(-4.166665, -9.166667)
+rotation = 0.00017809868
+shape = SubResource("RectangleShape2D_24gv0")
 
 [node name="Name" type="Label" parent="."]
 texture_filter = 1
@@ -307,6 +264,11 @@ theme_override_fonts/font = ExtResource("9_24gv0")
 theme_override_font_sizes/font_size = 47
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="Glow" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_24gv0")
 
 [connection signal="timeout" from="Timer_jump" to="." method="allow_jump"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

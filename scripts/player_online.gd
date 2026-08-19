@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 
-const SPEED = 600.0
+const SPEED = 700.0
 const JUMP_VELOCITY = -1200.0
 
 var parry_on = false
 
 func _ready() -> void:
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	play_breathing_glow()
 
 func _physics_process(delta: float) -> void:
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
@@ -16,7 +17,7 @@ func _physics_process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
-				
+			
 		if Input.is_action_just_released("jump") and velocity.y < 0:
 			await get_tree().create_timer(0.1).timeout
 			velocity.y *= 0
@@ -43,16 +44,38 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		if Input.is_action_just_pressed("serve"):
-			
 			var ball = get_parent().active_ball
 			if ball and !ball.served:
 				ball.request_serve.rpc_id(1, multiplayer.get_unique_id())
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
+	if !Global.easy_hit_on:
+		return
+	
 	if body.name == "Ball" and parry_on:
-		var dir = transform.x.normalized()
+		var facing 
+		var angle_rad = deg_to_rad(35)
+		
+		if global_position.x > get_parent().get_node("Net/Sprite2D").global_position.x:
+			facing = -1
+		else:
+			facing = 1
+		
+		var dir = Vector2(cos(angle_rad) * facing, -sin(angle_rad)).normalized()
 		var ball = get_parent().active_ball
-		ball.hit(dir, 20000)
+		var force = 10000 + int(velocity.length()) * 10
+		
+		ball.request_hit.rpc_id(1, dir, force)
+
+func play_breathing_glow():
+	$Glow.modulate.a = 0.0
+
+	var tween = create_tween()
+	
+	tween.set_loops()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property($Glow, "modulate:a", 0.1, 0.4)
+	tween.tween_property($Glow, "modulate:a", 0.0, 0.4)
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())

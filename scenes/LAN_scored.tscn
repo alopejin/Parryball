@@ -179,7 +179,7 @@ bus = &"SFX"
 [node name="Score_sound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("8_nej07")
-volume_db = -15.0
+volume_db = -20.0
 bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

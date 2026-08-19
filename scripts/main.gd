@@ -114,12 +114,14 @@ func _on_local_jam_back_button_pressed() -> void:
 	$Label_gamemode.visible = true
 	alternate_jam_menu()
 
-func _on_start_local_jam_button_pressed() -> void: 
+func _on_start_local_jam_button_pressed() -> void:
 	$Click_sound.play()
 	await button_press_animation($Local_menu_jam/Start_local_jam_button)
 	await $Click_sound.finished
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	get_tree().change_scene_to_file("res://scenes/local_jam.tscn")
+	
+	if is_inside_tree(): 
+		get_tree().change_scene_to_file("res://scenes/local_jam.tscn")
 
 func _on_lan_jam_button_pressed() -> void:
 	$Click_sound.play()
@@ -212,6 +214,11 @@ func _on_online_jam_join_button_pressed():
 		$Click_sound.play()
 		await button_press_animation($Online_menu_jam/Join_button)
 	
+	if $Online_menu_scored/OID_input.text == Noray.oid:
+		print("Own OID error")
+		notifications.connection_join_error_N()
+		return
+	
 	if NetworkManager.noray_copy == "":
 		print("Noray server is down")
 		notifications.server_down_N()
@@ -295,7 +302,9 @@ func _on_start_local_scored_button_pressed() -> void:
 	$Click_sound.play()
 	await button_press_animation($Local_menu_scored/Start_game_button)
 	await $Click_sound.finished
-	get_tree().change_scene_to_file("res://scenes/local_multiplayer.tscn")
+	
+	if is_inside_tree(): 
+		get_tree().change_scene_to_file("res://scenes/local_multiplayer.tscn")
 
 func _on_lan_scored_button_pressed() -> void:
 	$Click_sound.play()

@@ -175,13 +175,17 @@ func send_player_info(name, skin, id):
 func start_online_jam():
 	votes = 0
 	has_voted = false
-	get_tree().change_scene_to_file("res://scenes/online_jam.tscn")
+	
+	if is_inside_tree(): 
+		get_tree().change_scene_to_file("res://scenes/online_jam.tscn")
 
 @rpc("authority", "call_local")
 func start_online_scored():
 	votes = 0
 	has_voted = false
-	get_tree().change_scene_to_file("res://scenes/online_scored.tscn")
+	
+	if is_inside_tree(): 
+		get_tree().change_scene_to_file("res://scenes/online_scored.tscn")
 
 func receive_player_info(n : String, s : String):
 	player_name = n

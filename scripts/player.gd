@@ -1,14 +1,17 @@
 extends CharacterBody2D
 
 
-const SPEED = 600.0
+const SPEED = 700.0
 const JUMP_VELOCITY = -1200.0
 
 var parry_on = false
 
+var playing = false
+
 func _ready() -> void:
 	$Skins.play(Global.local_player1_skin[Global.index])
 	$Name.text = Global.local_player1_name
+	play_breathing_glow()
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -51,10 +54,35 @@ func _input(event: InputEvent) -> void:
 				get_parent().get_node("Ball").serve()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
+	if !Global.easy_hit_on:
+		return
+	
 	if body.name == "Ball" and parry_on:
-		var dir = transform.x.normalized()
-		var ball = get_parent().active_ball
-		ball.hit(dir, 20000)
+		var facing 
+		var angle_rad = deg_to_rad(35)
+		
+		if global_position.x > get_parent().get_node("Net/Sprite2D").global_position.x:
+			facing = -1
+		else:
+			facing = 1
+		
+		var dir = Vector2(cos(angle_rad) * facing, -sin(angle_rad)).normalized()
+		var force = 10000 + int(velocity.length()) * 10
+		var ball
+		
+		if !get_parent().name == "Local_jam":
+			ball = get_parent().active_ball
+		else:
+			ball = get_parent().get_node("Ball")
+		
+		ball.hit(dir, force)
 
-func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
+func play_breathing_glow():
+	$Glow.modulate.a = 0.0
+
+	var tween = create_tween()
+	
+	tween.set_loops()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property($Glow, "modulate:a", 0.1, 0.4)
+	tween.tween_property($Glow, "modulate:a", 0.0, 0.4)

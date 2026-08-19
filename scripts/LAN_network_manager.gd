@@ -53,13 +53,15 @@ func _on_client_connected():
 	send_player_info.rpc_id(1, player_name, player_skin, multiplayer.get_unique_id())
 	
 
-@rpc("any_peer", "call_local")
+@rpc("authority", "call_local")
 func start_lan_jam():
-	get_tree().change_scene_to_file("res://scenes/LAN_jam.tscn")
+	if is_inside_tree(): 
+		get_tree().change_scene_to_file("res://scenes/LAN_jam.tscn")
 
-@rpc("any_peer", "call_local")
+@rpc("authority", "call_local")
 func start_lan_scored():
-	get_tree().change_scene_to_file("res://scenes/LAN_scored.tscn")
+	if is_inside_tree(): 
+		get_tree().change_scene_to_file("res://scenes/LAN_scored.tscn")
 
 @rpc("any_peer")
 func send_player_info(name, skin, id):
@@ -76,4 +78,6 @@ func send_player_info(name, skin, id):
 
 func quit_game(id = 1):
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	
+	if is_inside_tree(): 
+		get_tree().change_scene_to_file("res://scenes/main.tscn")

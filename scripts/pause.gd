@@ -3,6 +3,7 @@ extends Node
 
 var parent = null
 var sound_on = true
+
 var playing = false
 
 func _ready() -> void:
@@ -35,6 +36,7 @@ func _input(event: InputEvent) -> void:
 		
 
 func _on_resume_button_pressed() -> void:
+	$CanvasLayer/Resume_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($CanvasLayer/Resume_button)
 	
@@ -42,19 +44,20 @@ func _on_resume_button_pressed() -> void:
 		get_tree().paused = !get_tree().paused
 	
 	$CanvasLayer.visible = !$CanvasLayer.visible
+	$CanvasLayer/Resume_button.disabled = false
 
 func _on_exit_button_pressed() -> void:
 	$Click_sound.play()
 	await button_press_animation($CanvasLayer/Exit_button)
 	await $Click_sound.finished
 	
-	get_tree().paused = false
-	
 	if !parent == "Local_jam" and !parent == "Local_multiplayer":
 		NetworkManager.reset_connections()
 		NetworkManager.join_available.emit()
 	
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	if is_inside_tree(): 
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_sound_button_pressed() -> void:
 	$Click_sound.play()

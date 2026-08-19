@@ -54,6 +54,8 @@ func serve():
 	
 func spawn(position: Vector2):
 	global_position = position
+	if multiplayer.is_server():
+		play_start_effect.rpc()
 
 func _on_body_entered(body: Node) -> void:
 	$Hit_sound.play()
@@ -77,6 +79,12 @@ func request_serve(id):
 	elif get_parent().name == "Online_scored":
 		if (id == 1 and NetworkManager.player1_serves) or (id != 1 and !NetworkManager.player1_serves):
 			serve()
+
+@rpc("any_peer", "call_local")
+func request_hit(direction: Vector2, force: float):
+	if !is_multiplayer_authority():
+		return
+	hit(direction, force)
 
 @rpc("authority", "call_local")
 func sync_served(value):
@@ -103,3 +111,12 @@ func show_trail():
 
 func hide_trail():
 	main_trail.visible = false
+
+@rpc("authority","call_local")
+func play_start_effect():
+	var tween = create_tween()
+	var scale = $Sprite2D.scale
+	
+	$Sprite2D.scale = Vector2(0.001, 0.001)
+	
+	tween.tween_property($Sprite2D, "scale", scale, 0.2)

@@ -166,16 +166,18 @@ func _on_play_again_button_pressed() -> void:
 	await button_press_animation($Play_again_button)
 	await $Click_sound.finished
 	
-	get_tree().paused = false
-	get_tree().reload_current_scene()
+	if is_inside_tree():
+		get_tree().paused = false
+		get_tree().reload_current_scene()
 
 func _on_exit_button_pressed() -> void:
 	$Click_sound.play()
 	await button_press_animation($Exit_button)
 	await $Click_sound.finished
 	
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	if is_inside_tree(): 
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func button_press_animation(button: Control):
 	while playing:

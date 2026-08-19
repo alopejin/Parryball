@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c1ps0dy86kwu8"]
+[gd_scene load_steps=30 format=3 uid="uid://c1ps0dy86kwu8"]
 
 [ext_resource type="Script" uid="uid://x4bbloao61cl" path="res://scripts/online_scored.gd" id="1_ga6be"]
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="2_4royq"]
@@ -12,6 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://dua5oxiidrf5n" path="res://assets/sounds/moodmode-level-iii-294428.mp3" id="11_hgvh5"]
 [ext_resource type="PackedScene" uid="uid://bc8wc5m07q833" path="res://scenes/notifications.tscn" id="12_0mfhe"]
 [ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="12_43vk7"]
+[ext_resource type="Texture2D" uid="uid://m1ige0lmaw0s" path="res://assets/sprites/spark2.png" id="13_4royq"]
+[ext_resource type="Texture2D" uid="uid://dfp5m2ei14mty" path="res://assets/sprites/spark_cuadrado2.png" id="14_50ahl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(50, 930)
@@ -33,6 +35,43 @@ size = Vector2(10, 198)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
 size = Vector2(30, 180)
+
+[sub_resource type="Animation" id="Animation_asqlk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7jns5"]
+resource_name = "score"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwjh1"]
+_data = {
+&"RESET": SubResource("Animation_asqlk"),
+&"score": SubResource("Animation_7jns5")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(16.99974, 533.22815)
@@ -142,6 +181,11 @@ theme_override_fonts/font = ExtResource("5_mjx1w")
 theme_override_font_sizes/font_size = 75
 text = "0"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Score_P1"]
+libraries = {
+&"": SubResource("AnimationLibrary_bwjh1")
+}
+
 [node name="Score_P2" type="Label" parent="."]
 texture_filter = 1
 offset_left = 1726.0
@@ -151,6 +195,11 @@ offset_bottom = 248.0
 theme_override_fonts/font = ExtResource("5_mjx1w")
 theme_override_font_sizes/font_size = 75
 text = "0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Score_P2"]
+libraries = {
+&"": SubResource("AnimationLibrary_bwjh1")
+}
 
 [node name="Air_wall" type="StaticBody2D" parent="."]
 position = Vector2(969.00006, 545)
@@ -175,17 +224,18 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score_counter"]
-position = Vector2(937, 1008)
+position = Vector2(937, 958)
 shape = SubResource("RectangleShape2D_ukc0w")
 
 [node name="Winner_label" type="Label" parent="."]
 process_mode = 3
-offset_left = 743.0
+offset_left = 712.0
 offset_top = 150.0
-offset_right = 1257.0
+offset_right = 1259.0
 offset_bottom = 226.0
 theme_override_fonts/font = ExtResource("5_mjx1w")
 theme_override_font_sizes/font_size = 76
+horizontal_alignment = 1
 
 [node name="Play_again_button" type="TextureButton" parent="."]
 process_mode = 3
@@ -239,7 +289,7 @@ bus = &"SFX"
 [node name="Score_sound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("10_84ocs")
-volume_db = -15.0
+volume_db = -20.0
 bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
@@ -258,6 +308,70 @@ volume_db = -18.0
 
 [node name="Notifications" parent="." instance=ExtResource("12_0mfhe")]
 process_mode = 3
+
+[node name="Sparks" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="SparkN" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(217, 887.00006)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_4royq")
+
+[node name="SparkS" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(217, 927)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_4royq")
+
+[node name="SparkW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(197, 907)
+rotation = -1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_4royq")
+
+[node name="SparkE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(237, 907)
+rotation = 1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_4royq")
+
+[node name="SparkNW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(202, 892)
+rotation = 2.3561945
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_4royq")
+
+[node name="SparkNE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(232, 892)
+rotation = 0.7853982
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_4royq")
+
+[node name="SparkSW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(202, 922)
+rotation = 0.7853982
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_4royq")
+
+[node name="SparkSE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(232, 922)
+rotation = 2.3561945
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_4royq")
+
+[node name="Marker2D" type="Marker2D" parent="Sparks"]
+position = Vector2(217, 907)
+
+[node name="Lateral_spark" type="Sprite2D" parent="."]
+position = Vector2(10, 1070)
+texture = ExtResource("14_50ahl")
 
 [connection signal="body_entered" from="Score_counter" to="." method="_on_score_counter_body_entered"]
 [connection signal="pressed" from="Play_again_button" to="." method="_on_play_again_button_pressed"]

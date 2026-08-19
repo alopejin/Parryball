@@ -29,9 +29,9 @@ texture_normal = ExtResource("2_wen6a")
 process_mode = 3
 texture_filter = 1
 offset_left = 1035.0
-offset_top = 474.0
+offset_top = 476.00003
 offset_right = 2805.0
-offset_bottom = 884.0
+offset_bottom = 886.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("3_cml1b")
 

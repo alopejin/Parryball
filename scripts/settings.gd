@@ -34,6 +34,11 @@ func _ready() -> void:
 		$Menu_game/CheckBox_point_effect.button_pressed = true
 	else:
 		$Menu_game/CheckBox_point_effect.button_pressed = false
+	
+	if Global.easy_hit_on:
+		$Menu_game/CheckBox_easy_hit.button_pressed = true
+	else:
+		$Menu_game/CheckBox_easy_hit.button_pressed = false
 
 func alternate_main_menu():
 	$Menu.visible = !$Menu.visible
@@ -101,6 +106,12 @@ func _on_music_slider_value_changed(value: float) -> void:
 
 func _on_sfx_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(value))
+
+func toggle_easy_hit(toggled_on: bool) -> void:
+	if toggled_on:
+		Global.easy_hit_on = true
+	else:
+		Global.easy_hit_on = false
 
 func toggle_ball_trail(toggled_on: bool) -> void:
 	if toggled_on:
@@ -389,9 +400,9 @@ func _input(event: InputEvent) -> void:
 			
 			InputMap.action_erase_events(action)
 			InputMap.action_add_event(action, event)
-				
+			
 			Global.setting_key = false
-				
+			
 			show_controls()
 		elif event is InputEventMouseButton:
 			InputMap.action_erase_events(action)

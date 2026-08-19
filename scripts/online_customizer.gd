@@ -4,6 +4,7 @@ extends Node
 var playing
 
 func _ready() -> void:
+	Global.skin_changed.connect(show_skin)
 	show_skin()
 	hide()
 
@@ -20,6 +21,8 @@ func _on_left_button_pressed() -> void:
 		Global.index = Global.local_player1_skin.size() - 1
 		show_skin()
 	
+	Global.skin_changed.emit()
+
 func _on_right_button_pressed() -> void:
 	button_press_animation($CanvasLayer/right_button)
 	
@@ -29,6 +32,8 @@ func _on_right_button_pressed() -> void:
 	else:
 		Global.index = 0
 		show_skin()
+	
+	Global.skin_changed.emit()
 
 func show():
 	$CanvasLayer.visible = true

@@ -79,7 +79,6 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("4_gjs24")
 
 [node name="Menu_game" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="HSlider_Brightness" type="HSlider" parent="Menu_game"]
 texture_filter = 1
@@ -113,12 +112,24 @@ theme_override_fonts/font = ExtResource("5_am25x")
 text = "Brightness"
 horizontal_alignment = 1
 
+[node name="CheckBox_easy_hit" type="CheckBox" parent="Menu_game"]
+texture_filter = 1
+offset_left = 773.00006
+offset_top = 460.0
+offset_right = 913.00006
+offset_bottom = 491.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("5_am25x")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
+button_pressed = true
+text = "Easy hit"
+
 [node name="CheckBox_point_effect" type="CheckBox" parent="Menu_game"]
 texture_filter = 1
-offset_left = 773.0
-offset_top = 467.0
-offset_right = 913.0
-offset_bottom = 498.0
+offset_left = 773.00006
+offset_top = 542.0
+offset_right = 913.00006
+offset_bottom = 573.0
 scale = Vector2(3, 3)
 theme_override_fonts/font = ExtResource("5_am25x")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
@@ -127,10 +138,10 @@ text = "Point effect"
 
 [node name="CheckBox_ball_trail" type="CheckBox" parent="Menu_game"]
 texture_filter = 1
-offset_left = 773.0
-offset_top = 586.0
-offset_right = 913.0
-offset_bottom = 617.0
+offset_left = 773.00006
+offset_top = 627.0
+offset_right = 913.00006
+offset_bottom = 658.0
 scale = Vector2(3, 3)
 theme_override_fonts/font = ExtResource("5_am25x")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
@@ -139,10 +150,10 @@ text = "Show ball trail"
 
 [node name="CheckBox_window_mode" type="CheckBox" parent="Menu_game"]
 texture_filter = 1
-offset_left = 773.0
-offset_top = 705.0
-offset_right = 913.0
-offset_bottom = 736.0
+offset_left = 773.00006
+offset_top = 706.0
+offset_right = 913.00006
+offset_bottom = 737.0
 scale = Vector2(3, 3)
 theme_override_fonts/font = ExtResource("5_am25x")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
@@ -263,6 +274,7 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("4_gjs24")
 
 [node name="Menu_controls" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Back_button" type="TextureButton" parent="Menu_controls"]
 texture_filter = 1
@@ -718,6 +730,7 @@ bus = &"SFX"
 [connection signal="pressed" from="Menu/Controls_button" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="Menu/Back_button" to="." method="_on_back_button_pressed"]
 [connection signal="value_changed" from="Menu_game/HSlider_Brightness" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="toggled" from="Menu_game/CheckBox_easy_hit" to="." method="toggle_easy_hit"]
 [connection signal="toggled" from="Menu_game/CheckBox_point_effect" to="." method="toggle_point_effect"]
 [connection signal="toggled" from="Menu_game/CheckBox_ball_trail" to="." method="toggle_ball_trail"]
 [connection signal="toggled" from="Menu_game/CheckBox_window_mode" to="." method="window_mode"]

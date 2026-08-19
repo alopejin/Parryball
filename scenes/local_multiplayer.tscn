@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c7ptu66x3wpxi"]
+[gd_scene load_steps=28 format=3 uid="uid://c7ptu66x3wpxi"]
 
 [ext_resource type="Script" uid="uid://dpo2lqw01hrdr" path="res://scripts/local_multiplayer.gd" id="1_ukc0w"]
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="1_yr7aq"]
@@ -13,6 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://dua5oxiidrf5n" path="res://assets/sounds/moodmode-level-iii-294428.mp3" id="11_ad65b"]
 [ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="12_7jns5"]
 [ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="12_r1k2h"]
+[ext_resource type="Texture2D" uid="uid://m1ige0lmaw0s" path="res://assets/sprites/spark2.png" id="14_bwjh1"]
+[ext_resource type="Texture2D" uid="uid://dfp5m2ei14mty" path="res://assets/sprites/spark_cuadrado2.png" id="16_g1dru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(50, 930)
@@ -34,6 +36,43 @@ size = Vector2(10, 198)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
 size = Vector2(30, 180)
+
+[sub_resource type="Animation" id="Animation_asqlk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7jns5"]
+resource_name = "score"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwjh1"]
+_data = {
+&"RESET": SubResource("Animation_asqlk"),
+&"score": SubResource("Animation_7jns5")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(16.99974, 533.22815)
@@ -110,6 +149,11 @@ theme_override_fonts/font = ExtResource("5_ukc0w")
 theme_override_font_sizes/font_size = 75
 text = "0"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Score_P1"]
+libraries = {
+&"": SubResource("AnimationLibrary_bwjh1")
+}
+
 [node name="Score_P2" type="Label" parent="."]
 texture_filter = 1
 offset_left = 1726.0
@@ -119,6 +163,11 @@ offset_bottom = 248.0
 theme_override_fonts/font = ExtResource("5_ukc0w")
 theme_override_font_sizes/font_size = 75
 text = "0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Score_P2"]
+libraries = {
+&"": SubResource("AnimationLibrary_bwjh1")
+}
 
 [node name="Air_wall" type="StaticBody2D" parent="."]
 position = Vector2(969.00006, 545)
@@ -146,7 +195,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score_counter"]
-position = Vector2(937, 1008)
+position = Vector2(937, 958)
 shape = SubResource("RectangleShape2D_ukc0w")
 
 [node name="Winner_label" type="Label" parent="."]
@@ -186,7 +235,7 @@ bus = &"SFX"
 [node name="Score_sound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("10_rckw6")
-volume_db = -15.0
+volume_db = -20.0
 bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
@@ -204,6 +253,70 @@ volume_db = -18.0
 bus = &"SFX"
 
 [node name="Pause" parent="." instance=ExtResource("12_r1k2h")]
+
+[node name="Sparks" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="SparkN" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(217, 887.00006)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_bwjh1")
+
+[node name="SparkS" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(217, 927)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_bwjh1")
+
+[node name="SparkW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(197, 907)
+rotation = -1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_bwjh1")
+
+[node name="SparkE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(237, 907)
+rotation = 1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_bwjh1")
+
+[node name="SparkNW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(202, 892)
+rotation = 2.3561945
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_bwjh1")
+
+[node name="SparkNE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(232, 892)
+rotation = 0.7853982
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_bwjh1")
+
+[node name="SparkSW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(202, 922)
+rotation = 0.7853982
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_bwjh1")
+
+[node name="SparkSE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(232, 922)
+rotation = 2.3561945
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_bwjh1")
+
+[node name="Marker2D" type="Marker2D" parent="Sparks"]
+position = Vector2(217, 907)
+
+[node name="Lateral_spark" type="Sprite2D" parent="."]
+position = Vector2(10, 1070)
+texture = ExtResource("16_g1dru")
 
 [connection signal="body_entered" from="Score_counter" to="." method="_on_score_counter_body_entered"]
 [connection signal="pressed" from="Play_again_button" to="." method="_on_play_again_button_pressed"]

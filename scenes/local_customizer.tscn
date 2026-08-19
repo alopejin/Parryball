@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bklvii2g3to55"]
+[gd_scene load_steps=14 format=3 uid="uid://bklvii2g3to55"]
 
 [ext_resource type="Script" uid="uid://b2xmeya6krhxs" path="res://scripts/local_customizer.gd" id="1_ol8ii"]
 [ext_resource type="FontFile" uid="uid://bsey5wk0w5hj0" path="res://assets/fonts/aseprite.ttf" id="2_uk2xi"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://4qyedsg6jpgx" path="res://assets/sprites/player2-red.png" id="8_uk2xi"]
 [ext_resource type="Texture2D" uid="uid://bmc7nmkss7fbp" path="res://assets/sprites/boton_seleccion3_izquierda.png" id="10_uk2xi"]
 [ext_resource type="Texture2D" uid="uid://bv7lddloxdoic" path="res://assets/sprites/boton_seleccion3_derecha.png" id="11_ex87b"]
+[ext_resource type="Texture2D" uid="uid://rlf8wec0ftug" path="res://assets/sprites/fondo1-con-titulo3-aplanado3.png" id="12_ex87b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p87vx"]
 animations = [{
@@ -189,6 +190,12 @@ offset_right = 1674.0
 offset_bottom = 805.0
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("11_ex87b")
+
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2, 0)
+texture = ExtResource("12_ex87b")
+centered = false
 
 [connection signal="text_changed" from="Player1_canvas/Player1_name" to="." method="_on_player_1_name_text_changed"]
 [connection signal="pressed" from="Player1_canvas/Left_button" to="." method="_on_player1_left_button_pressed"]

@@ -796,6 +796,16 @@ autowrap_mode = 3
 
 [node name="Settings" parent="." instance=ExtResource("24_og1vs")]
 
+[node name="Label_credits" type="Label" parent="."]
+texture_filter = 1
+offset_left = 1718.0
+offset_top = 1006.0
+offset_right = 1810.0
+offset_bottom = 1029.0
+scale = Vector2(1.5, 1.5)
+theme_override_fonts/font = ExtResource("14_muem4")
+text = "by  alopejin"
+
 [connection signal="pressed" from="Main_menu/Play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main_menu/Settings_button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Main_menu/Main_exit_button" to="." method="_on_exit_button_pressed"]
