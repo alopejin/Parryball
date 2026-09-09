@@ -79,6 +79,7 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("4_gjs24")
 
 [node name="Menu_game" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HSlider_Brightness" type="HSlider" parent="Menu_game"]
 texture_filter = 1
@@ -139,9 +140,9 @@ text = "Point effect"
 [node name="CheckBox_ball_trail" type="CheckBox" parent="Menu_game"]
 texture_filter = 1
 offset_left = 773.00006
-offset_top = 627.0
+offset_top = 628.0
 offset_right = 913.00006
-offset_bottom = 658.0
+offset_bottom = 659.0
 scale = Vector2(3, 3)
 theme_override_fonts/font = ExtResource("5_am25x")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
@@ -151,9 +152,9 @@ text = "Show ball trail"
 [node name="CheckBox_window_mode" type="CheckBox" parent="Menu_game"]
 texture_filter = 1
 offset_left = 773.00006
-offset_top = 706.0
+offset_top = 708.0
 offset_right = 913.00006
-offset_bottom = 737.0
+offset_bottom = 739.0
 scale = Vector2(3, 3)
 theme_override_fonts/font = ExtResource("5_am25x")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gjs24")
@@ -274,13 +275,12 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("4_gjs24")
 
 [node name="Menu_controls" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Back_button" type="TextureButton" parent="Menu_controls"]
 texture_filter = 1
-offset_left = 653.0
+offset_left = 701.0
 offset_top = 836.0
-offset_right = 2423.0
+offset_right = 2471.0
 offset_bottom = 1246.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("4_gjs24")
@@ -431,9 +431,9 @@ text = "+"
 
 [node name="Label_Player2_Local" type="Label" parent="Menu_controls"]
 texture_filter = 1
-offset_left = 687.0
+offset_left = 684.0
 offset_top = 373.0
-offset_right = 809.0
+offset_right = 806.0
 offset_bottom = 389.0
 scale = Vector2(3, 3)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -443,9 +443,9 @@ horizontal_alignment = 1
 [node name="Label_controls" type="Label" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -2.0
+offset_left = -1.0
 offset_top = 37.666664
-offset_right = 118.0
+offset_right = 119.0
 offset_bottom = 129.66666
 theme_override_fonts/font = ExtResource("5_am25x")
 text = "Move left: 
@@ -457,9 +457,9 @@ Serve:"
 [node name="Reset_left_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 162.66666
+offset_left = 163.66666
 offset_top = 37.666664
-offset_right = 225.66666
+offset_right = 226.66666
 offset_bottom = 65.666664
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -469,9 +469,9 @@ text = " Reset "
 [node name="New_left_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 145.0
+offset_left = 146.0
 offset_top = 37.666664
-offset_right = 174.0
+offset_right = 175.0
 offset_bottom = 65.666664
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -481,9 +481,9 @@ text = "+"
 [node name="Reset_right_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 162.66666
+offset_left = 163.66666
 offset_top = 57.333336
-offset_right = 225.66666
+offset_right = 226.66666
 offset_bottom = 85.333336
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -493,9 +493,9 @@ text = " Reset "
 [node name="New_right_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 145.0
+offset_left = 146.0
 offset_top = 57.333336
-offset_right = 174.0
+offset_right = 175.0
 offset_bottom = 85.333336
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -505,9 +505,9 @@ text = "+"
 [node name="Reset_jump_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 162.66666
+offset_left = 163.66666
 offset_top = 76.666664
-offset_right = 225.66666
+offset_right = 226.66666
 offset_bottom = 104.666664
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -517,9 +517,9 @@ text = " Reset "
 [node name="New_jump_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 145.0
+offset_left = 146.0
 offset_top = 76.666664
-offset_right = 174.0
+offset_right = 175.0
 offset_bottom = 104.666664
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -529,9 +529,9 @@ text = "+"
 [node name="Reset_parry_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 162.66666
+offset_left = 163.66666
 offset_top = 96.33333
-offset_right = 225.66666
+offset_right = 226.66666
 offset_bottom = 124.33333
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -541,9 +541,9 @@ text = " Reset "
 [node name="New_parry_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 145.0
+offset_left = 146.0
 offset_top = 96.33333
-offset_right = 174.0
+offset_right = 175.0
 offset_bottom = 124.33333
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -553,9 +553,9 @@ text = "+"
 [node name="Reset_serve_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 162.66666
+offset_left = 163.66666
 offset_top = 114.66666
-offset_right = 225.66666
+offset_right = 226.66666
 offset_bottom = 142.66664
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")
@@ -565,9 +565,9 @@ text = " Reset "
 [node name="New_serve_action_button" type="Button" parent="Menu_controls/Label_Player2_Local"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 145.0
+offset_left = 146.0
 offset_top = 114.66666
-offset_right = 174.0
+offset_right = 175.0
 offset_bottom = 142.66664
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("5_am25x")

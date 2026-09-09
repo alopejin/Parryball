@@ -77,7 +77,7 @@ script = ExtResource("1_ewh4m")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Skins" type="AnimatedSprite2D" parent="CanvasLayer"]
-position = Vector2(1531, 563)
+position = Vector2(1533, 563)
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_h1xhg")
 animation = &"red"

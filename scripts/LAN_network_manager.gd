@@ -13,6 +13,14 @@ var player1_serves : bool
 #var is_hosting = false
 var connecting : bool = false
 
+var votes = 0
+var has_voted = false
+
+var notifications = null
+var join_attempt = 0
+
+var client_id = 0
+
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	#multiplayer.connected_to_server.connect(_on_client_connected)

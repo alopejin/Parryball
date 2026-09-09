@@ -303,6 +303,7 @@ parameters/looping = true
 [node name="Click_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_5hvj8")
 volume_db = -18.0
+bus = &"SFX"
 
 [node name="Pause" parent="." instance=ExtResource("12_43vk7")]
 

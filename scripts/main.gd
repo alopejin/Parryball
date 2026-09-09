@@ -64,39 +64,50 @@ func alternate_scored_menu():
 	$Mode_menu_scored.visible = !$Mode_menu_scored.visible
 
 func _on_play_button_pressed() -> void:
+	$Main_menu/Play_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Main_menu/Play_button)
 	alternate_main_menu()
 	alternate_play_menu()
+	$Main_menu/Play_button.disabled = false
 
 func _on_settings_button_pressed() -> void:
+	$Main_menu/Settings_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Main_menu/Settings_button)
 	
 	alternate_main_menu()
 	settings.alternate_main_menu()
+	$Main_menu/Settings_button.disabled = false
 
 func _on_exit_button_pressed() -> void:
+	$Main_menu/Main_exit_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Main_menu/Main_exit_button)
 	await $Click_sound.finished
 	#await get_tree().create_timer(0.2)
 	get_tree().quit()
+	$Main_menu/Main_exit_button.disabled = false
 
 func _on_play_back_button_pressed() -> void:
+	$Play_menu/Back_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Play_menu/Back_button)
 	alternate_main_menu()
 	alternate_play_menu()
+	$Play_menu/Back_button.disabled = false
 
 func _on_jam_button_pressed() -> void:
+	$Play_menu/Jam_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Play_menu/Jam_button)
 	alternate_play_menu()
 	alternate_jam_menu()
 	$Label_gamemode.text = "Jam:"
+	$Play_menu/Jam_button.disabled = false
 
 func _on_local_jam_button_pressed() -> void:
+	$Mode_menu_jam/Local_jam_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_jam/Local_jam_button)
 	$Label_gamemode.visible = false
@@ -104,8 +115,10 @@ func _on_local_jam_button_pressed() -> void:
 	$Local_menu_jam.visible = !$Local_menu_jam.visible
 	$Local_customizer.show()
 	alternate_jam_menu()
+	$Mode_menu_jam/Local_jam_button.disabled = false
 
 func _on_local_jam_back_button_pressed() -> void:
+	$Local_menu_jam/Back_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Local_menu_jam/Back_button)
 	$Local_menu_jam.visible = !$Local_menu_jam.visible
@@ -113,8 +126,10 @@ func _on_local_jam_back_button_pressed() -> void:
 	$Background.texture = load("res://assets/sprites/fondo1-con-titulo3-aplanado3.png")
 	$Label_gamemode.visible = true
 	alternate_jam_menu()
+	$Local_menu_jam/Back_button.disabled = false
 
 func _on_start_local_jam_button_pressed() -> void:
+	$Local_menu_jam/Start_local_jam_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Local_menu_jam/Start_local_jam_button)
 	await $Click_sound.finished
@@ -122,15 +137,20 @@ func _on_start_local_jam_button_pressed() -> void:
 	
 	if is_inside_tree(): 
 		get_tree().change_scene_to_file("res://scenes/local_jam.tscn")
+	
+	$Local_menu_jam/Start_local_jam_button.disabled = false
 
 func _on_lan_jam_button_pressed() -> void:
+	$Mode_menu_jam/LAN_jam_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_jam/LAN_jam_button)
 	alternate_jam_lan_menu()
 	alternate_jam_menu()
 	$Online_customizer.show()
+	$Mode_menu_jam/LAN_jam_button.disabled = false
 
 func _on_lan_jam_menu_back_button_pressed() -> void:
+	$LAN_menu_jam/Back_button.disabled = true
 	is_host = false
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_jam/Back_button)
@@ -140,8 +160,10 @@ func _on_lan_jam_menu_back_button_pressed() -> void:
 	alternate_jam_lan_menu()
 	alternate_jam_menu()
 	$Online_customizer.hide()
+	$LAN_menu_jam/Back_button.disabled = false
 
 func _on_lan_jam_host_button_pressed() -> void:
+	$LAN_menu_jam/Host_button.disabled = true
 	is_host = true
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_jam/Host_button)
@@ -156,9 +178,12 @@ func _on_lan_jam_host_button_pressed() -> void:
 	
 	#LANNetworkManager.is_hosting = true
 	LANNetworkManager.host_game($LAN_menu_jam/Ip_adress.text, $LAN_menu_jam/Port.text)
+	
+	$LAN_menu_jam/Host_button.disabled = false
 
 
 func _on_lan_jam_join_button_pressed() -> void:
+	$LAN_menu_jam/Join_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_jam/Join_button)
 	
@@ -172,9 +197,11 @@ func _on_lan_jam_join_button_pressed() -> void:
 		$LAN_menu_jam/Port.text = "22022"
 	
 	LANNetworkManager.join_game($LAN_menu_jam/Ip_adress.text, $LAN_menu_jam/Port.text)
+	
+	$LAN_menu_jam/Join_button.disabled = false
 
 func _on_start_lan_jam_game_button_pressed() -> void:
-	if !$LAN_menu_jam/Start_game_button.disabled:
+	if $LAN_menu_jam/Start_game_button.disabled:
 		$Click_sound.play()
 		await button_press_animation($LAN_menu_jam/Start_game_button)
 		await $Click_sound.finished
@@ -182,8 +209,11 @@ func _on_start_lan_jam_game_button_pressed() -> void:
 	if !multiplayer.is_server() or LANNetworkManager.players.size() != 2:
 		return
 	LANNetworkManager.start_lan_jam.rpc()
+	
+	$LAN_menu_jam/Start_game_button.disabled = false
 
 func _on_online_jam_button_pressed() -> void:
+	$Mode_menu_jam/Online_jam_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_jam/Online_jam_button)
 	
@@ -191,8 +221,10 @@ func _on_online_jam_button_pressed() -> void:
 	$Mode_menu_jam.visible = !$Mode_menu_jam.visible
 	$Online_menu_jam.visible = !$Online_menu_jam.visible
 	$Online_customizer.show()
+	$Mode_menu_jam/Online_jam_button.disabled = false
 
 func _on_online_jam_host_button_pressed():
+	$Online_menu_jam/Host_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Online_menu_jam/Host_button)
 	
@@ -208,13 +240,14 @@ func _on_online_jam_host_button_pressed():
 	disable_start_buttons()
 	NetworkManager.receive_player_info($Online_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
 	NetworkManager.host()
+	$Online_menu_jam/Host_button.disabled = false
 
 func _on_online_jam_join_button_pressed():
 	if !$Online_menu_jam/Join_button.disabled:
 		$Click_sound.play()
 		await button_press_animation($Online_menu_jam/Join_button)
 	
-	if $Online_menu_scored/OID_input.text == Noray.oid:
+	if $Online_menu_jam/OID_input.text == Noray.oid:
 		print("Own OID error")
 		notifications.connection_join_error_N()
 		return
@@ -254,6 +287,7 @@ func _on_online_jam_menu_recover_button_pressed() -> void:
 	$Online_menu_jam/OID_input.text = NetworkManager.noray_copy
 
 func _on_online_jam_menu_back_button_pressed():
+	$Online_menu_jam/Back_button.disabled = true
 	is_host = false
 	
 	lobby_ui.reset_ui()
@@ -265,22 +299,28 @@ func _on_online_jam_menu_back_button_pressed():
 	$Mode_menu_jam.visible = !$Mode_menu_jam.visible
 	$Online_menu_jam.visible = !$Online_menu_jam.visible
 	$Online_customizer.hide()
+	$Online_menu_jam/Back_button.disabled = false
 
 func _on_jam_menu_back_button_pressed() -> void:
+	$Mode_menu_jam/Back_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_jam/Back_button)
 	alternate_jam_menu()
 	alternate_play_menu()
 	$Label_gamemode.text = ""
+	$Mode_menu_jam/Back_button.disabled = false
 
 func _on_scored_button_pressed() -> void:
+	$Play_menu/Scored_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Play_menu/Scored_button)
 	alternate_play_menu()
 	alternate_scored_menu()
 	$Label_gamemode.text = "Scored:"
+	$Play_menu/Scored_button.disabled = false
 
 func _on_local_scored_button_pressed() -> void:
+	$Mode_menu_scored/Local_scored_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_scored/Local_scored_button)
 	$Label_gamemode.visible = false
@@ -288,8 +328,10 @@ func _on_local_scored_button_pressed() -> void:
 	$Local_menu_scored.visible = !$Local_menu_scored.visible
 	$Local_customizer.show()
 	alternate_scored_menu()
+	$Mode_menu_scored/Local_scored_button.disabled = false
 
 func _on_local_scored_menu_back_button_pressed() -> void:
+	$Local_menu_scored/Back_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Local_menu_scored/Back_button)
 	$Label_gamemode.visible = true
@@ -297,23 +339,30 @@ func _on_local_scored_menu_back_button_pressed() -> void:
 	$Local_menu_scored.visible = !$Local_menu_scored.visible
 	$Local_customizer.hide()
 	alternate_scored_menu()
+	$Local_menu_scored/Back_button.disabled = false
 
 func _on_start_local_scored_button_pressed() -> void:
+	$Local_menu_scored/Start_game_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Local_menu_scored/Start_game_button)
 	await $Click_sound.finished
 	
 	if is_inside_tree(): 
 		get_tree().change_scene_to_file("res://scenes/local_multiplayer.tscn")
+	
+	$Local_menu_scored/Start_game_button.disabled = true
 
 func _on_lan_scored_button_pressed() -> void:
+	$Mode_menu_scored/Lan_scored_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_scored/Lan_scored_button)
 	alternate_scored_menu()
 	$LAN_menu_scored.visible = !$LAN_menu_scored.visible
 	$Online_customizer.show()
+	$Mode_menu_scored/Lan_scored_button.disabled = false
 
 func _on_lan_scored_menu_back_button_pressed() -> void:
+	$LAN_menu_scored/Back_button.disabled = true
 	is_host = false
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_scored/Back_button)
@@ -323,8 +372,10 @@ func _on_lan_scored_menu_back_button_pressed() -> void:
 	alternate_scored_menu()
 	$LAN_menu_scored.visible = !$LAN_menu_scored.visible
 	$Online_customizer.hide()
+	$LAN_menu_scored/Back_button.disabled = false
 
 func _on_lan_scored_host_button_pressed() -> void:
+	$LAN_menu_scored/Host_button.disabled = true
 	is_host = true
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_scored/Host_button)
@@ -338,9 +389,10 @@ func _on_lan_scored_host_button_pressed() -> void:
 		$LAN_menu_scored/Port.text = "22022"
 	
 	LANNetworkManager.host_game($LAN_menu_scored/Ip_adress.text, $LAN_menu_scored/Port.text)
-
+	$LAN_menu_scored/Host_button.disabled = false
 
 func _on_lan_scored_join_button_pressed() -> void:
+	$LAN_menu_scored/Join_button.disabled = true
 	is_host = false
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_scored/Join_button)
@@ -353,6 +405,7 @@ func _on_lan_scored_join_button_pressed() -> void:
 		$LAN_menu_scored/Port.text = "22022"
 	
 	LANNetworkManager.join_game($LAN_menu_scored/Ip_adress.text, $LAN_menu_scored/Port.text)
+	$LAN_menu_scored/Join_button.disabled = false
 
 func _on_start_lan_scored_game_button_pressed() -> void:
 	if !$Online_menu_scored/Start_game_button.disabled:
@@ -362,17 +415,21 @@ func _on_start_lan_scored_game_button_pressed() -> void:
 	
 	if !multiplayer.is_server() or LANNetworkManager.players.size() != 2:
 		return
+	
 	LANNetworkManager.start_lan_scored.rpc()
 
 func _on_online_scored_button_pressed() -> void:
+	$Mode_menu_scored/Online_scored_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_scored/Online_scored_button)
 	$Online_menu_scored/OID_input.text = NetworkManager.noray_copy
 	$Mode_menu_scored.visible = !$Mode_menu_scored.visible
 	$Online_menu_scored.visible = !$Online_menu_scored.visible
 	$Online_customizer.show()
+	$Mode_menu_scored/Online_scored_button.disabled = false
 
 func _on_online_scored_host_button_pressed() -> void:
+	$Online_menu_scored/Host_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Online_menu_scored/Host_button)
 	
@@ -383,6 +440,7 @@ func _on_online_scored_host_button_pressed() -> void:
 	
 	notifications.hosting_N()
 	request_online_scored_host()
+	$Online_menu_scored/Host_button.disabled = false
 
 func _on_online_scored_join_button_pressed() -> void:
 	if !$Online_menu_scored/Join_button.disabled:
@@ -434,6 +492,7 @@ func _on_online_scored_menu_recover_button_pressed() -> void:
 	$Online_menu_scored/OID_input.text = NetworkManager.noray_copy
 
 func _on_online_scored_menu_back_button_pressed() -> void:
+	$Online_menu_scored/Back_button.disabled = true
 	is_host = false
 	online_scored = false
 
@@ -448,15 +507,20 @@ func _on_online_scored_menu_back_button_pressed() -> void:
 	$Mode_menu_scored.visible = !$Mode_menu_scored.visible
 	$Online_menu_scored.visible = !$Online_menu_scored.visible
 	$Online_customizer.hide()
+	$Online_menu_scored/Back_button.disabled = false
 
 func _on_scored_menu_back_button_pressed() -> void:
+	$Mode_menu_scored/Back_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_scored/Back_button)
 	alternate_scored_menu()
 	alternate_play_menu()
 	$Label_gamemode.text = ""
+	$Mode_menu_scored/Back_button.disabled = false
 
 func _on_sound_button_pressed() -> void:
+	$Sound_button.disabled = true
+	
 	if sound_on:
 		AudioServer.set_bus_mute(0, true)
 		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3_silenciado.png")
@@ -465,6 +529,7 @@ func _on_sound_button_pressed() -> void:
 		$Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3.png")
 	
 	sound_on = !sound_on
+	$Sound_button.disabled = false
 
 func ready_to_start():
 	if is_host:

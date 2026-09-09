@@ -170,6 +170,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [0.0, 1.5705343, 0.0]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Glow:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.23333336),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5705343, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_dqkch"]
 resource_name = "parry_reverse"
@@ -210,6 +222,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0, -1.4619514, 0.000923872]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-7.450581e-09, 0.13333334, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -1.4619514, 0.000923872]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Glow:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -1.4619514, 0.000923872]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qhqgy"]
 _data = {
@@ -228,7 +264,6 @@ collision_mask = 13
 script = ExtResource("1_g2els")
 
 [node name="Skins" type="AnimatedSprite2D" parent="."]
-rotation = 0.000923872
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_jej6c")
 
@@ -270,7 +305,6 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Glow" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("4_ur7pv")
 

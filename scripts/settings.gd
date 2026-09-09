@@ -53,6 +53,8 @@ func alternate_controls_menu():
 	$Menu_controls.visible = !$Menu_controls.visible 
 
 func _on_game_button_pressed():
+	$Menu/Game_button.disabled = true
+	$Menu_game/Back_button.disabled = true
 	$Click_sound.play()
 	
 	if !$Menu_game.visible:
@@ -62,8 +64,12 @@ func _on_game_button_pressed():
 	
 	alternate_main_menu()
 	alternate_game_menu()
+	$Menu/Game_button.disabled = false
+	$Menu_game/Back_button.disabled = false
 
 func _on_sound_button_pressed():
+	$Menu/Sound_button.disabled = true
+	$Menu_sound/Back_button.disabled = true
 	$Click_sound.play()
 	
 	if !$Menu_sound.visible:
@@ -73,8 +79,12 @@ func _on_sound_button_pressed():
 	
 	alternate_main_menu()
 	alternate_sound_menu()
+	$Menu/Sound_button.disabled = false
+	$Menu_sound/Back_button.disabled = false
 
 func _on_controls_button_pressed():
+	$Menu/Controls_button.disabled = true
+	$Menu_controls/Back_button.disabled = true
 	$Click_sound.play()
 	
 	if !$Menu_controls.visible:
@@ -84,8 +94,11 @@ func _on_controls_button_pressed():
 	
 	alternate_main_menu()
 	alternate_controls_menu()
+	$Menu/Controls_button.disabled = false
+	$Menu_controls/Back_button.disabled = false
 
 func _on_back_button_pressed():
+	$Menu/Back_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Menu/Back_button)
 	
@@ -94,6 +107,7 @@ func _on_back_button_pressed():
 	$Menu_sound.visible = false
 	
 	out_of_settings.emit()
+	$Menu/Back_button.disabled = false
 
 func _on_brightness_slider_value_changed(value: float) -> void:
 	GlobalWorldEnvironment.environment.adjustment_brightness = value
@@ -312,7 +326,7 @@ func _on_button_new_action_servep2_pressed() -> void:
 func _on_button_reset_action_servep2_pressed() -> void:
 	var event = InputEventKey.new()
 	
-	event.physical_keycode = KEY_MINUS
+	event.physical_keycode = KEY_SLASH
 	InputMap.action_erase_events("serve-p2")
 	InputMap.action_add_event("serve-p2", event)
 	

@@ -13,7 +13,6 @@ script = ExtResource("1_r1fnm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 
 [node name="Resume_button" type="TextureButton" parent="CanvasLayer"]
 process_mode = 3
@@ -36,13 +35,14 @@ scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("3_cml1b")
 
 [node name="Pause_label" type="Label" parent="CanvasLayer"]
-offset_left = 743.0
+offset_left = 707.0
 offset_top = 150.0
-offset_right = 1257.0
+offset_right = 1259.0
 offset_bottom = 226.0
 theme_override_fonts/font = ExtResource("4_1xtef")
 theme_override_font_sizes/font_size = 76
-text = "Game paused"
+text = "Game   paused"
+horizontal_alignment = 1
 
 [node name="Sound_button" type="TextureButton" parent="CanvasLayer"]
 offset_left = 106.0
@@ -56,6 +56,7 @@ texture_normal = ExtResource("5_r1fnm")
 process_mode = 3
 stream = ExtResource("7_wen6a")
 volume_db = -18.0
+bus = &"SFX"
 
 [connection signal="pressed" from="CanvasLayer/Resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Exit_button" to="." method="_on_exit_button_pressed"]

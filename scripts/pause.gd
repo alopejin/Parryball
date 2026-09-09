@@ -7,6 +7,7 @@ var sound_on = true
 var playing = false
 
 func _ready() -> void:
+	$CanvasLayer.visible = false
 	await get_tree().process_frame
 	parent = get_parent().name
 	
@@ -23,7 +24,7 @@ func _input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		else:
 			if parent == "Local_jam" or parent == "Local_multiplayer":
-				$CanvasLayer/Pause_label.text = "Game paused"
+				$CanvasLayer/Pause_label.text = "Game  paused"
 			else:
 				$CanvasLayer/Pause_label.text = ""
 			
@@ -36,6 +37,7 @@ func _input(event: InputEvent) -> void:
 		
 
 func _on_resume_button_pressed() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$CanvasLayer/Resume_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($CanvasLayer/Resume_button)
@@ -47,6 +49,7 @@ func _on_resume_button_pressed() -> void:
 	$CanvasLayer/Resume_button.disabled = false
 
 func _on_exit_button_pressed() -> void:
+	$CanvasLayer/Exit_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($CanvasLayer/Exit_button)
 	await $Click_sound.finished
@@ -60,6 +63,7 @@ func _on_exit_button_pressed() -> void:
 		get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _on_sound_button_pressed() -> void:
+	$CanvasLayer/Sound_button.disabled = true
 	$Click_sound.play()
 	
 	if sound_on:
@@ -70,6 +74,7 @@ func _on_sound_button_pressed() -> void:
 		$CanvasLayer/Sound_button.texture_normal = preload("res://assets/sprites/boton_sonido4_alternativo3.png")
 	
 	sound_on = !sound_on
+	$CanvasLayer/Sound_button.disabled = false
 
 func button_press_animation(button: Control):
 	while playing:
