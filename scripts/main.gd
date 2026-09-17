@@ -10,13 +10,16 @@ var player1_skin = Global.local_player1_skin[Global.index]
 var player2_skin = Global.local_player2_skin[Global.index]
 var sound_on = true
 
-var online_scored = false
 var playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	NetworkManager.notifications = notifications
-
+	
+	LANNetworkManager.client_ready.connect(ready_to_start)
+	LANNetworkManager.join_available.connect(enable_join_buttons)
+	LANNetworkManager.lobby_updated.connect(update_lobby)
+	
 	NetworkManager.client_ready.connect(ready_to_start)
 	NetworkManager.join_available.connect(enable_join_buttons)
 	NetworkManager.lobby_updated.connect(update_lobby)
@@ -142,6 +145,8 @@ func _on_start_local_jam_button_pressed() -> void:
 
 func _on_lan_jam_button_pressed() -> void:
 	$Mode_menu_jam/LAN_jam_button.disabled = true
+	Global.lan_scored = false
+	Global.lan_jam = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_jam/LAN_jam_button)
 	alternate_jam_lan_menu()
@@ -151,14 +156,20 @@ func _on_lan_jam_button_pressed() -> void:
 
 func _on_lan_jam_menu_back_button_pressed() -> void:
 	$LAN_menu_jam/Back_button.disabled = true
+	Global.lan_jam = false
 	is_host = false
 	$Click_sound.play()
+	
 	await button_press_animation($LAN_menu_jam/Back_button)
 	$LAN_menu_jam/Start_game_button/Label.text = ""
-	NetworkManager.reset_connections()
+	
+	lobby_ui.reset_ui()
+	LANNetworkManager.reset_connections()
+	
 	disable_start_buttons()
 	alternate_jam_lan_menu()
 	alternate_jam_menu()
+	
 	$Online_customizer.hide()
 	$LAN_menu_jam/Back_button.disabled = false
 
@@ -167,6 +178,9 @@ func _on_lan_jam_host_button_pressed() -> void:
 	is_host = true
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_jam/Host_button)
+	
+	#LANNetworkManager.reset_connections()
+	disable_start_buttons()
 	notifications.hosting_N()
 	LANNetworkManager.receive_player_info($LAN_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
 	
@@ -214,6 +228,7 @@ func _on_start_lan_jam_game_button_pressed() -> void:
 
 func _on_online_jam_button_pressed() -> void:
 	$Mode_menu_jam/Online_jam_button.disabled = true
+	Global.online_jam = true
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_jam/Online_jam_button)
 	
@@ -227,6 +242,7 @@ func _on_online_jam_host_button_pressed():
 	$Online_menu_jam/Host_button.disabled = true
 	$Click_sound.play()
 	await button_press_animation($Online_menu_jam/Host_button)
+	disable_start_buttons()
 	
 	if NetworkManager.noray_copy == "":
 		print("Noray server is down")
@@ -235,7 +251,7 @@ func _on_online_jam_host_button_pressed():
 		
 	notifications.hosting_N()
 	is_host = true
-	online_scored = false
+	Global.online_scored = false
 
 	disable_start_buttons()
 	NetworkManager.receive_player_info($Online_menu_jam/Player_name.text, Global.local_player1_skin[Global.index])
@@ -288,14 +304,17 @@ func _on_online_jam_menu_recover_button_pressed() -> void:
 
 func _on_online_jam_menu_back_button_pressed():
 	$Online_menu_jam/Back_button.disabled = true
+	Global.online_jam = false
 	is_host = false
 	
 	lobby_ui.reset_ui()
 	NetworkManager.reset_connections()
 	disable_start_buttons()
 	enable_join_buttons()
+	
 	$Click_sound.play()
 	await button_press_animation($Online_menu_jam/Back_button)
+	
 	$Mode_menu_jam.visible = !$Mode_menu_jam.visible
 	$Online_menu_jam.visible = !$Online_menu_jam.visible
 	$Online_customizer.hide()
@@ -353,23 +372,32 @@ func _on_start_local_scored_button_pressed() -> void:
 	$Local_menu_scored/Start_game_button.disabled = true
 
 func _on_lan_scored_button_pressed() -> void:
+	Global.lan_scored = true
 	$Mode_menu_scored/Lan_scored_button.disabled = true
+	
 	$Click_sound.play()
 	await button_press_animation($Mode_menu_scored/Lan_scored_button)
 	alternate_scored_menu()
+	
 	$LAN_menu_scored.visible = !$LAN_menu_scored.visible
 	$Online_customizer.show()
 	$Mode_menu_scored/Lan_scored_button.disabled = false
 
 func _on_lan_scored_menu_back_button_pressed() -> void:
+	Global.lan_scored = false
 	$LAN_menu_scored/Back_button.disabled = true
 	is_host = false
+	
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_scored/Back_button)
 	$LAN_menu_scored/Start_game_button/Label.text = ""
-	NetworkManager.reset_connections()
+	
+	lobby_ui.reset_ui()
+	LANNetworkManager.reset_connections()
+	
 	disable_start_buttons()
 	alternate_scored_menu()
+	
 	$LAN_menu_scored.visible = !$LAN_menu_scored.visible
 	$Online_customizer.hide()
 	$LAN_menu_scored/Back_button.disabled = false
@@ -379,6 +407,9 @@ func _on_lan_scored_host_button_pressed() -> void:
 	is_host = true
 	$Click_sound.play()
 	await button_press_animation($LAN_menu_scored/Host_button)
+	
+	#LANNetworkManager.reset_connections()
+	disable_start_buttons()
 	notifications.hosting_N()
 	LANNetworkManager.receive_player_info($LAN_menu_scored/Player_name.text, Global.local_player1_skin[Global.index])
 	
@@ -433,6 +464,8 @@ func _on_online_scored_host_button_pressed() -> void:
 	$Click_sound.play()
 	await button_press_animation($Online_menu_scored/Host_button)
 	
+	disable_start_buttons()
+	
 	if NetworkManager.noray_copy == "":
 		print("Noray server is down")
 		notifications.server_down_N()
@@ -458,7 +491,7 @@ func _on_online_scored_join_button_pressed() -> void:
 		return
 	
 	is_host = false
-	online_scored = true
+	Global.online_scored = true
 	
 	lobby_ui.reset_ui()
 	disable_join_buttons()
@@ -466,11 +499,6 @@ func _on_online_scored_join_button_pressed() -> void:
 	
 	NetworkManager.receive_player_info($Online_menu_scored/Player_name.text, Global.local_player1_skin[Global.index])
 	NetworkManager.join($Online_menu_scored/OID_input.text)
-	#print("Awaiting connected_to_server...")
-	#await multiplayer.connected_to_server
-	#print("Conected!")
-	
-	#NetworkManager.send_player_info.rpc($Online_menu_scored/Player_name.text, Global.local_player1_skin[Global.index], multiplayer.get_unique_id())
 
 func _on_online_scored_start_button_pressed() -> void:
 	if !$Online_menu_scored/Start_game_button.disabled:
@@ -494,7 +522,7 @@ func _on_online_scored_menu_recover_button_pressed() -> void:
 func _on_online_scored_menu_back_button_pressed() -> void:
 	$Online_menu_scored/Back_button.disabled = true
 	is_host = false
-	online_scored = false
+	Global.online_scored = false
 
 	$Click_sound.play()
 	await button_press_animation($Online_menu_scored/Back_button)
@@ -532,26 +560,52 @@ func _on_sound_button_pressed() -> void:
 	$Sound_button.disabled = false
 
 func ready_to_start():
-	if is_host:
-		if online_scored:
-			$Online_menu_scored/Start_game_button.disabled = false
-			$Online_menu_scored/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-ready.png")
-			$Online_menu_scored/Label_start.text = "Ready to start!"
+	if NetworkManager.players.size() == 2:
+		if is_host:
+			if Global.online_scored:
+				$Online_menu_scored/Start_game_button.disabled = false
+				$Online_menu_scored/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-ready.png")
+				$Online_menu_scored/Label_start.text = "Ready to start!"
+			else:
+				$Online_menu_jam/Start_game_button.disabled = false
+				$Online_menu_jam/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-ready.png")
+				$Online_menu_jam/Label_start.text = "Ready to start!"
 		else:
-			$Online_menu_jam/Start_game_button.disabled = false
-			$Online_menu_jam/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-ready.png")
-			$Online_menu_jam/Label_start.text = "Ready to start!"
+			if Global.online_scored:
+				$Online_menu_scored/Label_start.text = "Waiting for the host to start"
+			else:
+				$Online_menu_jam/Label_start.text = "Waiting for the host to start"
+		
+	elif LANNetworkManager.players.size() == 2:
+		if is_host:
+			if Global.lan_scored:
+				$LAN_menu_scored/Start_game_button.disabled = false
+				$LAN_menu_scored/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-ready.png")
+				$LAN_menu_scored/Label_start.text = "Ready to start!"
+			else:
+				$LAN_menu_jam/Start_game_button.disabled = false
+				$LAN_menu_jam/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-ready.png")
+				$LAN_menu_jam/Label_start .text = "Ready to start!"
+		else:
+			if Global.lan_scored:
+				$LAN_menu_scored/Label_start.text = "Waiting for the host to start"
+			else:
+				$LAN_menu_jam/Label_start.text = "Waiting for the host to start"
+	
 	else:
-		if online_scored:
-			$Online_menu_scored/Label_start.text = "Waiting for the host to start"
-		else:
-			$Online_menu_jam/Label_start.text = "Waiting for the host to start"
+		return
 
 func disable_start_buttons():
+	$LAN_menu_jam/Start_game_button.disabled = true
+	$LAN_menu_scored/Start_game_button.disabled = true
 	$Online_menu_jam/Start_game_button.disabled = true
 	$Online_menu_scored/Start_game_button.disabled = true
+	$LAN_menu_jam/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-blocked.png")
+	$LAN_menu_scored/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-blocked.png")
 	$Online_menu_jam/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-blocked.png")
 	$Online_menu_scored/Start_game_button.texture_normal = preload("res://assets/sprites/boton1-start-blocked.png")
+	$LAN_menu_jam/Label_start.text = ""
+	$LAN_menu_scored/Label_start.text = ""
 	$Online_menu_jam/Label_start.text = ""
 	$Online_menu_scored/Label_start.text = ""
 
@@ -596,7 +650,7 @@ func update_lobby(id):
 
 func request_online_scored_host():
 	is_host = true
-	online_scored = true
+	Global.online_scored = true
 
 	disable_start_buttons()
 	NetworkManager.receive_player_info($Online_menu_scored/Player_name.text, Global.local_player1_skin[Global.index])

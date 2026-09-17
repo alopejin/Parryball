@@ -17,8 +17,6 @@ func _ready() -> void:
 	main_trail.modulate.a = 0.0
 	freeze = true
 	main_trail.clear_points()
-	#left_trail.clear_points()
-	#right_trail.clear_points()
 	
 	if !Global.ball_trail_on:
 		main_trail.visible = false
@@ -46,7 +44,6 @@ func _physics_process(delta: float) -> void:
 func hit(direction: Vector2, force: float):
 	linear_velocity = Vector2.ZERO
 	apply_impulse(direction.normalized() * force)
-	#apply_impulse(Vector2(300, 0), Vector2(0, 20))
 
 func serve():
 	served = true
@@ -77,7 +74,6 @@ func _enter_tree():
 	set_multiplayer_authority(1) 
 
 func fade_in():
-	#main_trail.modulate.a = 0.0
 	fading_out = false
 	var tween = create_tween()
 	tween.tween_property(main_trail, "modulate:a", 1.0, 0.3)

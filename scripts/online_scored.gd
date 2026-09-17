@@ -101,14 +101,12 @@ func decide_serve():
 func _process(delta: float) -> void:
 	show_score()
 	
-	if multiplayer.is_server() and active_ball != null:
+	if active_ball != null:
 		if !active_ball.served:
 			if NetworkManager.player1_serves:
-				active_ball.global_position = player1.global_position + Vector2(0, -50)
-				#active_ball.spawn(player1.global_position + Vector2(0, -50))
+				active_ball.global_position = player1.global_position + Vector2(0, -65)
 			else:
-				active_ball.global_position = player2.global_position + Vector2(0, -50)
-				#active_ball.spawn(player2.global_position + Vector2(0, -50))
+				active_ball.global_position = player2.global_position + Vector2(0, -65)
 
 func _on_score_counter_body_entered(body: RigidBody2D) -> void:
 	if !multiplayer.is_server():
@@ -265,6 +263,7 @@ func show_victory():
 			$Winner_label.text = "Player 2 wins !"
 	
 	$Pause.process_mode = Node.PROCESS_MODE_DISABLED
+	active_ball.visible = false
 	active_ball.hide_trail()
 	$Victory_sound.play()
 	$Sparks.visible = false

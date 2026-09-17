@@ -107,6 +107,7 @@ theme_override_font_sizes/font_size = 30
 max_length = 7
 
 [node name="Player1_label" type="Label" parent="Player1_canvas"]
+texture_filter = 1
 offset_left = 333.0
 offset_top = 267.0
 offset_right = 622.0
@@ -160,7 +161,8 @@ theme_override_fonts/font = ExtResource("2_uk2xi")
 theme_override_font_sizes/font_size = 30
 max_length = 7
 
-[node name="Player1_label2" type="Label" parent="Player2_canvas"]
+[node name="Player2_label" type="Label" parent="Player2_canvas"]
+texture_filter = 1
 offset_left = 333.0
 offset_top = 582.0
 offset_right = 631.0

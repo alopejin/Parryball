@@ -229,6 +229,7 @@ shape = SubResource("RectangleShape2D_ukc0w")
 
 [node name="Winner_label" type="Label" parent="."]
 process_mode = 3
+texture_filter = 1
 offset_left = 712.0
 offset_top = 150.0
 offset_right = 1259.0
@@ -259,6 +260,7 @@ texture_normal = ExtResource("8_l3mx0")
 
 [node name="Label_player" type="Label" parent="."]
 process_mode = 3
+texture_filter = 1
 offset_left = 386.0
 offset_top = 386.99997
 offset_right = 1384.0
@@ -268,6 +270,7 @@ theme_override_font_sizes/font_size = 40
 
 [node name="Label" type="Label" parent="."]
 process_mode = 3
+texture_filter = 1
 offset_left = 504.0
 offset_top = 387.0
 offset_right = 1502.0

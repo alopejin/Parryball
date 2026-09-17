@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://oi5chmlyvjhf"]
+[gd_scene load_steps=30 format=3 uid="uid://oi5chmlyvjhf"]
 
 [ext_resource type="Script" uid="uid://cr275u412xcyx" path="res://scripts/LAN_scored.gd" id="1_wgth5"]
 [ext_resource type="Texture2D" uid="uid://b6v05xgyad8ir" path="res://assets/sprites/fondo1-con-bordes.png" id="2_yw0f4"]
@@ -11,6 +11,9 @@
 [ext_resource type="AudioStream" uid="uid://dua5oxiidrf5n" path="res://assets/sounds/moodmode-level-iii-294428.mp3" id="9_6tdhf"]
 [ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="10_njiu7"]
 [ext_resource type="AudioStream" uid="uid://qhn5omx50uob" path="res://assets/sounds/dragon-studio-mouse-click-4-393911.mp3" id="10_yw0f4"]
+[ext_resource type="PackedScene" uid="uid://bc8wc5m07q833" path="res://scenes/notifications.tscn" id="12_uje23"]
+[ext_resource type="Texture2D" uid="uid://m1ige0lmaw0s" path="res://assets/sprites/spark2.png" id="13_gga77"]
+[ext_resource type="Texture2D" uid="uid://dfp5m2ei14mty" path="res://assets/sprites/spark_cuadrado2.png" id="14_k1ei4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
 size = Vector2(50, 930)
@@ -33,13 +36,84 @@ size = Vector2(10, 198)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
 size = Vector2(30, 180)
 
+[sub_resource type="Animation" id="Animation_asqlk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7jns5"]
+resource_name = "score"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwjh1"]
+_data = {
+&"RESET": SubResource("Animation_asqlk"),
+&"score": SubResource("Animation_7jns5")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tnpc"]
 size = Vector2(16.99974, 533.22815)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukc0w"]
 size = Vector2(2182, 118)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wgth5"]
+[sub_resource type="Animation" id="Animation_4royq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label_player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(386, 386.99997)]
+}
+
+[sub_resource type="Animation" id="Animation_0mfhe"]
+resource_name = "rematch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label_player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.5, 0.73333335, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(386, 386.99997), Vector2(386, 250), Vector2(386, 386.99997), Vector2(386, 250), Vector2(386, 386.99997)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_50ahl"]
+_data = {
+&"RESET": SubResource("Animation_4royq"),
+&"rematch": SubResource("Animation_0mfhe")
+}
 
 [node name="LAN_scored" type="Node2D"]
 script = ExtResource("1_wgth5")
@@ -107,6 +181,11 @@ theme_override_fonts/font = ExtResource("4_n7qrd")
 theme_override_font_sizes/font_size = 75
 text = "0"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Score_P1"]
+libraries = {
+&"": SubResource("AnimationLibrary_bwjh1")
+}
+
 [node name="Score_P2" type="Label" parent="."]
 texture_filter = 1
 offset_left = 1726.0
@@ -116,6 +195,11 @@ offset_bottom = 248.0
 theme_override_fonts/font = ExtResource("4_n7qrd")
 theme_override_font_sizes/font_size = 75
 text = "0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Score_P2"]
+libraries = {
+&"": SubResource("AnimationLibrary_bwjh1")
+}
 
 [node name="Air_wall" type="StaticBody2D" parent="."]
 position = Vector2(969.00006, 545)
@@ -140,16 +224,17 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score_counter"]
-position = Vector2(937, 1008)
+position = Vector2(937, 958)
 shape = SubResource("RectangleShape2D_ukc0w")
 
 [node name="Winner_label" type="Label" parent="."]
-offset_left = 743.0
+offset_left = 732.0
 offset_top = 150.0
-offset_right = 1257.0
+offset_right = 1284.0
 offset_bottom = 226.0
 theme_override_fonts/font = ExtResource("4_n7qrd")
 theme_override_font_sizes/font_size = 76
+horizontal_alignment = 1
 
 [node name="Play_again_button" type="TextureButton" parent="."]
 process_mode = 3
@@ -197,14 +282,104 @@ bus = &"SFX"
 
 [node name="Pause" parent="." instance=ExtResource("10_njiu7")]
 
+[node name="Notifications" parent="." instance=ExtResource("12_uje23")]
+process_mode = 3
+
 [node name="0" type="Marker2D" parent="." groups=["Spawn"]]
 position = Vector2(562, 903)
 
 [node name="1" type="Marker2D" parent="." groups=["Spawn"]]
 position = Vector2(1373, 903)
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_wgth5")
+[node name="Sparks" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="SparkN" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(217, 887.00006)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_gga77")
+
+[node name="SparkS" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(217, 927)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_gga77")
+
+[node name="SparkW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(197, 907)
+rotation = -1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_gga77")
+
+[node name="SparkE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(237, 907)
+rotation = 1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_gga77")
+
+[node name="SparkNW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(202, 892)
+rotation = 2.3561945
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_gga77")
+
+[node name="SparkNE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(232, 892)
+rotation = 0.7853982
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_gga77")
+
+[node name="SparkSW" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(202, 922)
+rotation = 0.7853982
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_gga77")
+
+[node name="SparkSE" type="Sprite2D" parent="Sparks"]
+texture_filter = 1
+position = Vector2(232, 922)
+rotation = 2.3561945
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("13_gga77")
+
+[node name="Marker2D" type="Marker2D" parent="Sparks"]
+position = Vector2(217, 907)
+
+[node name="Lateral_spark" type="Sprite2D" parent="."]
+position = Vector2(10, 1070)
+texture = ExtResource("14_k1ei4")
+
+[node name="Label_player" type="Label" parent="."]
+process_mode = 3
+texture_filter = 1
+offset_left = 386.0
+offset_top = 386.99997
+offset_right = 1384.0
+offset_bottom = 462.99985
+theme_override_fonts/font = ExtResource("4_n7qrd")
+theme_override_font_sizes/font_size = 40
+
+[node name="Label" type="Label" parent="."]
+process_mode = 3
+texture_filter = 1
+offset_left = 504.0
+offset_top = 387.0
+offset_right = 1502.0
+offset_bottom = 463.0
+theme_override_fonts/font = ExtResource("4_n7qrd")
+theme_override_font_sizes/font_size = 40
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_50ahl")
+}
 
 [connection signal="body_entered" from="Score_counter" to="." method="_on_score_counter_body_entered"]
 [connection signal="pressed" from="Play_again_button" to="." method="_on_play_again_button_pressed"]

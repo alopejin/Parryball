@@ -54,9 +54,11 @@ func _on_exit_button_pressed() -> void:
 	await button_press_animation($CanvasLayer/Exit_button)
 	await $Click_sound.finished
 	
-	if !parent == "Local_jam" and !parent == "Local_multiplayer":
-		NetworkManager.reset_connections()
-		NetworkManager.join_available.emit()
+	LANNetworkManager.reset_connections()
+	
+	#if !parent == "Local_jam" and !parent == "Local_multiplayer":
+	NetworkManager.reset_connections()
+	NetworkManager.join_available.emit()
 	
 	if is_inside_tree(): 
 		get_tree().paused = false

@@ -54,39 +54,59 @@ func connection_failed_N():
 	standard_notification(text)
 
 func player_connected_N(id):
-	while !NetworkManager.players.has(id):
+	var manager
+	
+	if Global.online_scored or Global.online_jam:
+		manager = NetworkManager
+	elif Global.lan_scored or Global.lan_jam:
+		manager = LANNetworkManager
+	else:
+		return
+	
+	while !manager.players.has(id):
 		if !is_inside_tree():
 			return
 		await get_tree().process_frame
 	
 	var text
 	
-	if id == 1:
-		if !NetworkManager.players[id].name == "":
-			text = " You joined " + NetworkManager.players[id].name + "!"
+	if manager.players.has(id):
+		if id == 1:
+			if !manager.players[id].name != "":
+				text = " You joined " + manager.players[id].name + "!"
+			else:
+				text = " You joined Player 1!"
 		else:
-			text = " You joined Player 1!"
-	else:
-		if !NetworkManager.players[id].name == "":
-			text = NetworkManager.players[id].name + " has joined!"
-		else:
-			text = "Player 2 has joined!"
+			if manager.players[id].name != "":
+				text = manager.players[id].name + " has joined!"
+			else:
+				text = "Player 2 has joined!"
 	
 	standard_notification(text)
 
 func player_disconnected_N(id):
-	var text
+	var text = "Player has disconnected"
 	
-	if id == 1:
-		if !NetworkManager.players[id].name == "":
-			text = NetworkManager.players[id].name + " has disconected"
-		else:
-			text = "Player 1 has disconected"
+	var manager
+	
+	if Global.online_scored or Global.online_jam:
+		manager = NetworkManager
+	elif Global.lan_scored or Global.lan_jam:
+		manager = LANNetworkManager
 	else:
-		if !NetworkManager.players[id].name == "":
-			text = NetworkManager.players[id].name + " has disconected"
+		return
+		
+	if manager.players.has(id):
+		if id == 1:
+			if manager.players[id].name != "":
+				text = manager.players[id].name + " has disconected"
+			else:
+				text = "Player 1 has disconected"
 		else:
-			text = "Player 2 has disconected"
+			if manager.players[id].name != "":
+				text = manager.players[id].name + " has disconected"
+			else:
+				text = "Player 2 has disconected"
 	
 	await standard_notification(text)
 

@@ -9,6 +9,11 @@ var point_effect_on = true
 var setting_key = false
 var easy_hit_on = true
 
+var lan_scored = false
+var online_scored = false
+var lan_jam = false
+var online_jam = false
+
 var index = 0
 var index_player2 = 0
 

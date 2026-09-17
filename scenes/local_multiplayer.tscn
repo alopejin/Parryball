@@ -199,6 +199,7 @@ position = Vector2(937, 958)
 shape = SubResource("RectangleShape2D_ukc0w")
 
 [node name="Winner_label" type="Label" parent="."]
+texture_filter = 1
 offset_left = 730.0
 offset_top = 150.0
 offset_right = 1258.0

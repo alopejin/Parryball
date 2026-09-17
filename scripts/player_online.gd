@@ -4,11 +4,16 @@ extends CharacterBody2D
 const SPEED = 700.0
 const JUMP_VELOCITY = -1200.0
 
+var taunts = ["Nice one !", "Thank you !", "Where are your hands?", "Ooops", "gg"]
+
 var parry_on = false
+
+var playing = false
 
 func _ready() -> void:
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	play_breathing_glow()
+	$Taunt.text = ""
 
 func _physics_process(delta: float) -> void:
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
@@ -47,6 +52,17 @@ func _input(event: InputEvent) -> void:
 			var ball = get_parent().active_ball
 			if ball and !ball.served:
 				ball.request_serve.rpc_id(1, multiplayer.get_unique_id())
+		
+		elif Input.is_action_just_pressed("taunt-1"):
+			show_taunt.rpc(0)
+		elif Input.is_action_just_pressed("taunt-2"):
+			show_taunt.rpc(1)
+		elif Input.is_action_just_pressed("taunt-3"):
+			show_taunt.rpc(2)
+		elif Input.is_action_just_pressed("taunt-4"):
+			show_taunt.rpc(3)
+		elif Input.is_action_just_pressed("taunt-5"):
+			show_taunt.rpc(4)
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if !Global.easy_hit_on:
@@ -76,6 +92,28 @@ func play_breathing_glow():
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property($Glow, "modulate:a", 0.1, 0.4)
 	tween.tween_property($Glow, "modulate:a", 0.0, 0.4)
+
+@rpc("any_peer", "call_local")
+func show_taunt(taunt: int):
+	if playing:
+		return
+	
+	playing = true
+	
+	$Taunt.modulate.a = 0.0
+	$Taunt.text = taunts[taunt]
+	
+	var tween = create_tween()
+	
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property($Taunt, "modulate:a", 1.0, 0.4)
+	tween.tween_interval(1.0)
+	tween.tween_property($Taunt, "modulate:a", 0.0, 0.4)
+	
+	await tween.finished
+	
+	$Taunt.text = ""
+	playing = false
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())

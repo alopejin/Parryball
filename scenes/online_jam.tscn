@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c14krmla1ky4m" path="res://scripts/online_jam.gd" id="1_oj7v2"]
 [ext_resource type="Texture2D" uid="uid://fbowbyxqkch" path="res://assets/sprites/valla4-recortada.png" id="4_u0xcr"]
 [ext_resource type="PackedScene" uid="uid://d2vpux6fnnj6t" path="res://scenes/pause.tscn" id="5_bhsmp"]
-[ext_resource type="PackedScene" uid="uid://cftlyhb3flg5u" path="res://scenes/network_manager.tscn" id="6_koleo"]
+[ext_resource type="PackedScene" uid="uid://bc8wc5m07q833" path="res://scenes/notifications.tscn" id="5_oj7v2"]
 [ext_resource type="AudioStream" uid="uid://buxtd20e728hn" path="res://assets/sounds/arnodefacq-8-bit-leaving-yoshi-slow-105bpm-loopable-442981.mp3" id="6_oj7v2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
@@ -102,9 +102,10 @@ position = Vector2(562, 903)
 [node name="1" type="Marker2D" parent="." groups=["Spawn"]]
 position = Vector2(1373, 903)
 
-[node name="NetworkManager" parent="." instance=ExtResource("6_koleo")]
-
 [node name="Pause" parent="." instance=ExtResource("5_bhsmp")]
+
+[node name="Notifications" parent="." instance=ExtResource("5_oj7v2")]
+process_mode = 3
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3

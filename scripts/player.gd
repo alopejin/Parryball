@@ -6,8 +6,6 @@ const JUMP_VELOCITY = -1200.0
 
 var parry_on = false
 
-var playing = false
-
 func _ready() -> void:
 	$Skins.play(Global.local_player1_skin[Global.index])
 	$Name.text = Global.local_player1_name

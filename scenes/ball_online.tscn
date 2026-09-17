@@ -62,6 +62,7 @@ replication_config = SubResource("SceneReplicationConfig_cxlvu")
 [node name="Hit_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_cs6rs")
 volume_db = -15.0
+bus = &"SFX"
 
 [node name="Main_trail" type="Line2D" parent="."]
 show_behind_parent = true

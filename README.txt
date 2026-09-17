@@ -34,21 +34,23 @@ Player 1:
 
 Move and jump: keys "A", "D" and "W"
 Serve: key "E"
-Parry: key "E", "T" or left mouse click
+Parry: key "T"
 
 Player 2:
 
 Move and jump: keys "left_arrow", "right_arrow" and "up_arrow"
-Serve: key "-"
+Serve: key "-/Slash"
 Parry: key "Intro"
 
 
-Controls for online games:
+Controls for LAN/online games:
 
 Move and jump: keys "A", "D" and "W"
 Serve: key "E"
-Parry: key "E", "T" or left mouse click
+Parry: left mouse click
+Taunts: numbers 1 to 5.
 
+You can customize them in settings/game menu (except taunts).
 
 References:
 
@@ -61,3 +63,7 @@ https://www.youtube.com/watch?v=jff9oxO8v1s
 https://www.youtube.com/watch?v=HKAcbawukTo
 https://www.youtube.com/watch?v=YzWsmsrNCEU
 https://www.youtube.com/watch?v=9pEBq6hLCzQ
+
+
+
+In memory of Claudia Tacoronte

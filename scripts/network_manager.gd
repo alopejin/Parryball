@@ -5,7 +5,6 @@ signal noray_connected
 signal client_ready
 signal join_available
 signal votes_updated(v)
-#signal player_disconnected(id)
 signal lobby_updated(id)
 
 const PORT = 8890
@@ -234,7 +233,6 @@ func reset_noray():
 	noray_copy = ""
 	client_id = ""
 	Noray.connect_to_host(noray_adress, PORT)
-	#await noray_connected
 	await get_tree().create_timer(1.25).timeout
 	
 	if connected_noray:
@@ -253,7 +251,6 @@ func reset_connections():
 
 func peer_disconnected(id = 1):
 	print("Peer " + str(id) + " disconnected")
-	#player_disconnected.emit(id)
 
 func _on_client_connected():
 	print("Connected to server")

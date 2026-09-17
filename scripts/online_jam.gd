@@ -1,6 +1,6 @@
 extends Node2D
 
-
+@onready var notifications = $Notifications
 @onready var ball = preload("res://scenes/ball_online.tscn")
 
 var player1_serves
@@ -13,6 +13,7 @@ var player_online = preload("res://scenes/player-online.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	multiplayer.peer_disconnected.connect(player_disconnected)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var index = 0
 	
@@ -36,51 +37,61 @@ func _ready() -> void:
 		index += 1
 	
 	print("Players size: " + str(NetworkManager.players.size()))
-	#if NetworkManager.players.size() == 2:
-	start_game.rpc()
+	
+	if NetworkManager.players.size() == 2 and multiplayer.is_server():
+		start_game()
 
-@rpc("any_peer")
 func start_game():
-	active_ball = ball.instantiate()
-	add_child(active_ball)
-	#if multiplayer.is_server():
+	decide_serve()
+	create_ball.rpc()
 	print("Game on")
 	
 	game_active = true
-	decide_serve.rpc()
 
-@rpc("any_peer")
 func decide_serve():
 	if randf() > 0.5:
-		active_ball.spawn(player2.global_position + Vector2(0, -50))
 		NetworkManager.player1_serves = false
-		#p2_serves.rpc()
 	else:
-		active_ball.spawn(player1.global_position + Vector2(0, -50))
 		NetworkManager.player1_serves = true
-		#p1_serves.rpc()
 	
 	if is_multiplayer_authority():
 		sync_serve.rpc(NetworkManager.player1_serves)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#if game_active and $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		#if !active_ball.served:
-		#	if player1_serves:
-		#		active_ball.global_position = player1.global_position
-		#	else:
-		#		active_ball.global_position = player2.global_position
-		pass
-
-@rpc("any_peer")
+@rpc("authority")
 func sync_serve(value):
 	NetworkManager.player1_serves = value
 
-@rpc("any_peer")
-func p1_serves():
-	NetworkManager.player1_serves = true
+@rpc("authority", "call_local")
+func create_ball():
+	var b = ball.instantiate()
+	b.name = "Ball"
+	add_child(b)
+	active_ball = b
+	
+	if multiplayer.is_server():
+		reset_ball()
 
-@rpc("any_peer")
-func p2_serves():
-	NetworkManager.player1_serves = false
+func reset_ball():
+	if !multiplayer.is_server():
+		return
+	if active_ball == null:
+		return
+		
+	active_ball.sync_served.rpc(false)
+	active_ball.linear_velocity = Vector2.ZERO
+	active_ball.angular_velocity = 0.0
+	
+	if NetworkManager.player1_serves:
+		active_ball.spawn(player1.global_position + Vector2(0, -50))
+	else:
+		active_ball.spawn(player2.global_position + Vector2(0, -50))
+
+
+func player_disconnected(id):
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	await notifications.player_disconnected_N(id)
+	NetworkManager.reset_connections()
+	
+	if is_inside_tree(): 
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/main.tscn")

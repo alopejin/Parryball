@@ -242,8 +242,7 @@ script = ExtResource("1_i2ct5")
 rotation = 0.000923872
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_ewcdd")
-animation = &"green"
-frame_progress = 0.1361862
+animation = &"blue"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
@@ -280,6 +279,17 @@ theme_override_fonts/font = ExtResource("3_ml2dy")
 theme_override_font_sizes/font_size = 47
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="Taunt" type="Label" parent="."]
+texture_filter = 1
+offset_left = -260.0001
+offset_top = -149.99992
+offset_right = 262.9999
+offset_bottom = -101.99992
+theme_override_fonts/font = ExtResource("3_ml2dy")
+theme_override_font_sizes/font_size = 47
+text = "Nice one!"
+horizontal_alignment = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_i5xcf")
